@@ -77,38 +77,56 @@ export default function Hero() {
     return () => window.clearInterval(id);
   }, [isPaused, goNext]);
 
-  // Smooth tween-based slide variants (no spring overshoot)
+  // Carousel transition duration (keep in sync across all panels)
+  const transitionDuration = 0.6;
+  const transitionEase = [0.4, 0, 0.2, 1] as const;
+
+  // Center panel slide variants - full slide in/out
   const slideVariants = {
     enter: (dir: number) => ({
       x: dir > 0 ? "100%" : "-100%",
-      opacity: 0,
-      scale: 1,
+      opacity: 0.5,
     }),
     center: {
       x: 0,
       opacity: 1,
-      scale: 1,
       transition: {
-        x: { type: "tween" as const, duration: 0.5, ease: [0.32, 0.72, 0, 1] as const },
-        opacity: { duration: 0.3, ease: [0, 0, 0.2, 1] as const },
+        x: { type: "tween" as const, duration: transitionDuration, ease: transitionEase },
+        opacity: { duration: transitionDuration * 0.5, ease: transitionEase },
       },
     },
     exit: (dir: number) => ({
       x: dir > 0 ? "-100%" : "100%",
-      opacity: 0,
-      scale: 1,
+      opacity: 0.5,
       transition: {
-        x: { type: "tween" as const, duration: 0.5, ease: [0.32, 0.72, 0, 1] as const },
-        opacity: { duration: 0.3, ease: [0.4, 0, 1, 1] as const },
+        x: { type: "tween" as const, duration: transitionDuration, ease: transitionEase },
+        opacity: { duration: transitionDuration * 0.5, ease: transitionEase },
       },
     }),
   };
 
-  // Simple fade for side panels (no complex sliding to avoid conflicts)
-  const sideFadeVariants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 0.8, transition: { duration: 0.4, ease: [0, 0, 0.2, 1] as const } },
-    exit: { opacity: 0, transition: { duration: 0.3, ease: [0.4, 0, 1, 1] as const } },
+  // Side panels slide in the same direction - creates connected carousel feel
+  const sideSlideVariants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? "60%" : "-60%",
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        x: { type: "tween" as const, duration: transitionDuration, ease: transitionEase },
+        opacity: { duration: transitionDuration * 0.6, ease: transitionEase },
+      },
+    },
+    exit: (dir: number) => ({
+      x: dir > 0 ? "-60%" : "60%",
+      opacity: 0,
+      transition: {
+        x: { type: "tween" as const, duration: transitionDuration, ease: transitionEase },
+        opacity: { duration: transitionDuration * 0.4, ease: transitionEase },
+      },
+    }),
   };
 
   const logoVariants = {
@@ -158,12 +176,13 @@ export default function Hero() {
               whileHover={prefersReducedMotion ? {} : { scale: 1.05, opacity: 1 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
             >
-              <AnimatePresence initial={false} mode="popLayout">
+              <AnimatePresence initial={false} custom={direction} mode="sync">
                 <motion.div
                   key={prevIndex}
-                  variants={prefersReducedMotion ? undefined : sideFadeVariants}
-                  initial="initial"
-                  animate="animate"
+                  custom={direction}
+                  variants={prefersReducedMotion ? undefined : sideSlideVariants}
+                  initial="enter"
+                  animate="center"
                   exit="exit"
                   className="absolute inset-0"
                 >
@@ -188,7 +207,7 @@ export default function Hero() {
               transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] as const }}
               whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
             >
-              <AnimatePresence initial={false} custom={direction} mode="popLayout">
+              <AnimatePresence initial={false} custom={direction} mode="sync">
                 <motion.div
                   key={activeIndex}
                   custom={direction}
@@ -197,6 +216,7 @@ export default function Hero() {
                   animate="center"
                   exit="exit"
                   className="absolute inset-0"
+                  style={{ zIndex: 1 }}
                 >
                   <Image
                     src={slides[activeIndex].src}
@@ -223,12 +243,13 @@ export default function Hero() {
               whileHover={prefersReducedMotion ? {} : { scale: 1.05, opacity: 1 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
             >
-              <AnimatePresence initial={false} mode="popLayout">
+              <AnimatePresence initial={false} custom={direction} mode="sync">
                 <motion.div
                   key={nextIndex}
-                  variants={prefersReducedMotion ? undefined : sideFadeVariants}
-                  initial="initial"
-                  animate="animate"
+                  custom={direction}
+                  variants={prefersReducedMotion ? undefined : sideSlideVariants}
+                  initial="enter"
+                  animate="center"
                   exit="exit"
                   className="absolute inset-0"
                 >
@@ -262,12 +283,13 @@ export default function Hero() {
             onClick={goPrev}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const, delay: 0.2 }}
           >
-            <AnimatePresence initial={false} mode="popLayout">
+            <AnimatePresence initial={false} custom={direction} mode="sync">
               <motion.div
                 key={prevIndex}
-                variants={prefersReducedMotion ? undefined : sideFadeVariants}
-                initial="initial"
-                animate="animate"
+                custom={direction}
+                variants={prefersReducedMotion ? undefined : sideSlideVariants}
+                initial="enter"
+                animate="center"
                 exit="exit"
                 className="absolute inset-0"
               >
@@ -292,7 +314,7 @@ export default function Hero() {
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] as const }}
             whileHover={prefersReducedMotion ? {} : { scale: 1.01 }}
           >
-            <AnimatePresence initial={false} custom={direction} mode="popLayout">
+            <AnimatePresence initial={false} custom={direction} mode="sync">
               <motion.div
                 key={activeIndex}
                 custom={direction}
@@ -301,6 +323,7 @@ export default function Hero() {
                 animate="center"
                 exit="exit"
                 className="absolute inset-0"
+                style={{ zIndex: 1 }}
               >
                 <Image
                   src={slides[activeIndex].src}
@@ -325,12 +348,13 @@ export default function Hero() {
             onClick={goNext}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const, delay: 0.2 }}
           >
-            <AnimatePresence initial={false} mode="popLayout">
+            <AnimatePresence initial={false} custom={direction} mode="sync">
               <motion.div
                 key={nextIndex}
-                variants={prefersReducedMotion ? undefined : sideFadeVariants}
-                initial="initial"
-                animate="animate"
+                custom={direction}
+                variants={prefersReducedMotion ? undefined : sideSlideVariants}
+                initial="enter"
+                animate="center"
                 exit="exit"
                 className="absolute inset-0"
               >
