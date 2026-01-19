@@ -17,7 +17,7 @@ export default function Sections03() {
           <div className="flex flex-col gap-6 md:gap-8">
             {/* Project 1 - Sapphire House */}
 
-          
+
 
 
             <div className="group">
@@ -25,7 +25,7 @@ export default function Sections03() {
                 <div className="overflow-hidden">
                   <ImageReveal>
                     <Image
-                      src="/hero-image/image-01.png"
+                      src="/hero-image/image-08.png"
                       alt="Sapphire House, Belgium interior"
                       width={1200}
                       height={800}
@@ -64,7 +64,7 @@ export default function Sections03() {
                 <div className="overflow-hidden">
                   <ImageReveal>
                     <Image
-                      src="/hero-image/image-03.png"
+                      src="/hero-image/image-10.png"
                       alt="Sheraton Canada hotel room"
                       width={1200}
                       height={800}
@@ -106,7 +106,7 @@ export default function Sections03() {
                 <div className="overflow-hidden">
                   <ImageReveal>
                     <Image
-                      src="/hero-image/image-02.png"
+                      src="/hero-image/image-12.png"
                       alt="MaisonArt office space"
                       width={1200}
                       height={800}
@@ -145,13 +145,13 @@ export default function Sections03() {
                 <div className="overflow-hidden">
                   <ImageReveal>
                     <Image
-                      src="/hero-image/image-02.png"
+                      src="/hero-image/image-13.png"
                       alt="JW Marriott Nairobi restaurant"
-                      width={1200}
-                      height={800}
+                      width={453}
+                      height={283}
                       sizes="(min-width: 768px) 50vw, 100vw"
                       quality={82}
-                      className="w-full h-[200px] md:h-[280px] md:rounded-0 rounded-[6px] object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-[200px] md:h-[283.3299865722656px] md:w-[453.3399963378906px] md:rounded-0 rounded-[6px] object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </ImageReveal>
                 </div>
@@ -181,15 +181,15 @@ export default function Sections03() {
         </div>
       </div>
       <Image
-                src="/ui/divider-sections.svg"
-                alt="Verunia Group"
-                width={1000}
-                height={1000}
-                sizes="100vw"
-                unoptimized
-                className="w-full h-full object-cover py-[60px] md:py-[112px] md:block hidden"
-            />
-            <Image src="/ui/gold-divider-mobile.svg" alt="Verunia Group" width={1000} height={1000} sizes="100vw" unoptimized className="w-full h-full object-cover pt-[64px] md:py-[112px] md:hidden block" />
+        src="/ui/divider-sections.svg"
+        alt="Verunia Group"
+        width={1000}
+        height={1000}
+        sizes="100vw"
+        unoptimized
+        className="w-full h-full object-cover py-[60px] md:py-[112px] md:block hidden"
+      />
+      <Image src="/ui/gold-divider-mobile.svg" alt="Verunia Group" width={1000} height={1000} sizes="100vw" unoptimized className="w-full h-full object-cover pt-[64px] md:py-[112px] md:hidden block" />
     </SectionContainer>
   )
 }
