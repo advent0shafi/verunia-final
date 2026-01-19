@@ -13,9 +13,7 @@ export default function Home() {
       <Header />
       <Hero />
 
-      <AnimatedSection variant="slide-up">
-        <Sections />
-      </AnimatedSection>
+      <Sections />
 
       <AnimatedSection variant="fade">
         <Sections02 />
@@ -29,9 +27,7 @@ export default function Home() {
         <GlobeDemo />
       </AnimatedSection>
 
-      <AnimatedSection variant="fade">
-        <VeruniaFooter />
-      </AnimatedSection>
+      <VeruniaFooter />
     </main>
   );
 }

@@ -125,7 +125,7 @@ export default function Sections() {
                         </div>
                         <div className="pt-4 md:pt-[277px]">
                             <p className="font-instrument font-normal not-italic text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal text-[#57534E] max-w-md">
-                                <TextReveal>Interior design and fit-out for offices, hospitality and residential spaces.</TextReveal>
+                                <TextReveal>Office furniture systems and seating for modern workplaces.</TextReveal>
                             </p>
                             <Link href="/furniture" className="mt-4 md:mt-6 border-t w-full border-b text-start py-3 border-[#523E0F] text-[#523E0F] block hover:bg-[#523E0F]/5 transition-colors">
                                 <TextReveal>Enter Verunia Furnitures →</TextReveal>
@@ -142,9 +142,13 @@ export default function Sections() {
                     <div className="px-4 md:px-[48px] py-8 md:py-0">
                         <div>
                             <h1 className="mb-4 md:mb-6 font-normal text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-fraunces">
-                                <TextReveal>Verunia</TextReveal> <br />
-                                <TextReveal>Interiors</TextReveal>
+                                <TextReveal>Al Fotivo</TextReveal>
+                            
                             </h1>
+                            <p className="font-instrument font-normal not-italic text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal text-[#57534E] max-w-md">
+
+                                <TextReveal>Luxury interiors and furniture</TextReveal>
+                            </p>
                         </div>
                         <div className="pt-4 md:pt-[277px]">
                             <p className="font-instrument font-normal not-italic text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal text-[#57534E] max-w-md">
@@ -161,7 +165,7 @@ export default function Sections() {
                     <AnimatedSection variant="parallax">
                         <ImageReveal>
                             <HoverImage
-                                defaultSrc="/hero-image/image-02.png"
+                                defaultSrc="/hero-image/image-04.png"
                                 hoverSrc="/hero-image/image-03.png"
                                 alt="Verunia Interiors"
                                 width={926}

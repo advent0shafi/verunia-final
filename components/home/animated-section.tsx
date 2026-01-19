@@ -25,18 +25,6 @@ export default function AnimatedSection({
   const prefersReducedMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.8", "start 0.2"],
-  });
-
-  // Transform values based on scroll progress - improved timing and ranges
-  // Animation starts when element is 80% down viewport, completes at 20%
-  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 1]);
-  const y = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [40, 0, 0, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.94, 1, 1, 1]);
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [20, -20]);
-
   // Performance + accessibility: no animation if the user prefers reduced motion
   if (prefersReducedMotion) {
     return (
@@ -46,26 +34,63 @@ export default function AnimatedSection({
     );
   }
 
-  // Get animation styles based on variant
-  const getAnimationStyle = () => {
+  // For parallax variant, use scroll-based animation only
+  if (variant === "parallax") {
+    const { scrollYProgress } = useScroll({
+      target: ref,
+      offset: ["start end", "end start"],
+    });
+    const parallaxY = useTransform(scrollYProgress, [0, 1], [20, -20]);
+    
+    return (
+      <motion.div
+        ref={ref}
+        style={{ y: parallaxY }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    );
+  }
+
+  // For other variants, use whileInView for reliable initial visibility
+  const transition = { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const };
+  const viewport = { once: true, margin: "0px" } as const;
+
+  const getVariants = () => {
     switch (variant) {
       case "fade":
-        return { opacity };
+        return {
+          initial: { opacity: 0 },
+          whileInView: { opacity: 1 },
+        };
       case "slide-up":
-        return { opacity, y };
+        return {
+          initial: { opacity: 0, y: 40 },
+          whileInView: { opacity: 1, y: 0 },
+        };
       case "scale":
-        return { opacity, scale };
-      case "parallax":
-        return { y: parallaxY };
+        return {
+          initial: { opacity: 0, scale: 0.94 },
+          whileInView: { opacity: 1, scale: 1 },
+        };
       default:
-        return { opacity, y };
+        return {
+          initial: { opacity: 0, y: 40 },
+          whileInView: { opacity: 1, y: 0 },
+        };
     }
   };
+
+  const variants = getVariants();
 
   return (
     <motion.div
       ref={ref}
-      style={getAnimationStyle()}
+      initial={variants.initial}
+      whileInView={variants.whileInView}
+      viewport={viewport}
+      transition={transition}
       className={className}
     >
       {children}
@@ -192,7 +217,7 @@ export function TextReveal({
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.5 }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={{
         hidden: {},
         visible: {
@@ -248,7 +273,7 @@ export function ImageReveal({
       className={`overflow-hidden ${className || ""}`}
       initial={{ scale: 1.1, opacity: 0.8 }}
       whileInView={{ scale: 1, opacity: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{
         duration: 0.8,
         ease: [0.25, 0.1, 0.25, 1],
