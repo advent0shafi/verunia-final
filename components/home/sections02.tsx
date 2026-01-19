@@ -2,6 +2,10 @@ import Link from "next/link";
 import SectionContainer from "../ui/section-container";
 import Image from "next/image";
 
+import img01 from "@/public/hero-image/image-01.png";
+import img02 from "@/public/hero-image/image-02.png";
+import img03 from "@/public/hero-image/image-03.png";
+
 export default function Sections02() {
   return (
     <SectionContainer >
@@ -24,23 +28,38 @@ export default function Sections02() {
             <div className="w-full">
               <div className="flex flex-col gap-[16px]">
                 <div className="min-h-[180px] md:min-h-[231px] overflow-hidden">
-                  <img
-                    src="/hero-image/image-01.png"
+                  <Image
+                    src={img01}
                     alt="Luxury leather furniture detail"
+                    width={900}
+                    height={650}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 40vw, 100vw"
+                    placeholder="blur"
+                    quality={82}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 min-h-[180px] md:min-h-[231px]"
                   />
                 </div>
                 <div className="min-h-[180px] md:min-h-[231px] overflow-hidden">
-                  <img
-                    src="/hero-image/image-02.png"
+                  <Image
+                    src={img02}
                     alt="Tufted leather chair"
+                    width={900}
+                    height={650}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 40vw, 100vw"
+                    placeholder="blur"
+                    quality={82}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 min-h-[180px] md:min-h-[231px]"
                   />
                 </div>
                 <div className="min-h-[180px] md:min-h-[231px] overflow-hidden">
-                  <img
-                    src="/hero-image/image-03.png"
+                  <Image
+                    src={img03}
                     alt="Leather material samples"
+                    width={900}
+                    height={650}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 40vw, 100vw"
+                    placeholder="blur"
+                    quality={82}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 min-h-[180px] md:min-h-[231px]"
                   />
                 </div>
@@ -86,7 +105,15 @@ export default function Sections02() {
    
 
       {/* Bottom Logo */}
-      <Image src="/ui/divider-sections.svg" alt="Verunia Group" width={1000} height={1000} className="w-full h-full object-cover py-[60px] md:py-[112px]" />
+      <Image
+        src="/ui/divider-sections.svg"
+        alt="Verunia Group"
+        width={1000}
+        height={1000}
+        sizes="100vw"
+        unoptimized
+        className="w-full h-full object-cover py-[60px] md:py-[112px]"
+      />
 
     </SectionContainer>
   )

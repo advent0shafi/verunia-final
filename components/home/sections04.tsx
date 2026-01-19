@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { motion } from "motion/react";
 import dynamic from "next/dynamic";
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
@@ -399,25 +398,12 @@ export function GlobeDemo() {
   return (
     <div className="flex flex-row items-center  justify-center   md:h-auto dark:bg-black  relative w-full">
       <div className="md:max-w-[1440px] md:mx-auto w-full   relative overflow-hidden h-full  md:px-4">
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 1,
-          }}
-          className="div "
-        >
+        <div className="div ">
           <h1 className="text-center font-serif text-[28px] md:text-5xl lg:text-7xl mb-6 md:mb-16 leading-[1.2] md:leading-tight px-4 md:px-0">
             Delivering projects across<br />
             <span className="font-bold">GCC and beyond.</span>
           </h1>
-        </motion.div>
+        </div>
         {/* Fixed-size globe viewport (1246×589) + crop so only half the globe shows */}
         <div className="relative md:mx-auto md:mt-10 w-full  md:h-[689px] h-[330.10791015625px] overflow-hidden z-10">
           <div className="absolute  inset-x-0 -bottom-[80%] h-[190%] w-full">

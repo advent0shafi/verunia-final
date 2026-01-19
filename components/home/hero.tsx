@@ -5,12 +5,16 @@
 import Image from "next/image";
 import React, { useEffect, useMemo, useState } from "react";
 
+import hero01 from "@/public/hero-image/image-01.png";
+import hero02 from "@/public/hero-image/image-02.png";
+import hero03 from "@/public/hero-image/image-03.png";
+
 export default function Hero() {
   const slides = useMemo(
     () => [
-      { src: "/hero-image/image-01.png", alt: "Outdoor Patio" },
-      { src: "/hero-image/image-02.png", alt: "Main Living Room" },
-      { src: "/hero-image/image-03.png", alt: "Secondary Lounge" },
+      { src: hero01, alt: "Outdoor Patio" },
+      { src: hero02, alt: "Main Living Room" },
+      { src: hero03, alt: "Secondary Lounge" },
     ],
     [],
   );
@@ -67,13 +71,14 @@ export default function Hero() {
               className="w-[32%] h-[190px] overflow-hidden relative opacity-80"
             >
               <Image
-                key={slides[prevIndex].src}
                 src={slides[prevIndex].src}
                 alt={slides[prevIndex].alt}
-                width={400}
-                height={600}
+                fill
+                sizes="(min-width: 768px) 22vw, 32vw"
+                placeholder="blur"
+                quality={82}
                 className={[
-                  "w-full h-full object-cover transition-opacity duration-200",
+                  "object-cover transition-opacity duration-200",
                   isFading ? "opacity-70" : "opacity-100",
                 ].join(" ")}
               />
@@ -81,13 +86,15 @@ export default function Hero() {
 
             <div className="w-[84%] h-[230px] overflow-hidden relative">
               <Image
-                key={slides[activeIndex].src}
                 src={slides[activeIndex].src}
                 alt={slides[activeIndex].alt}
-                width={900}
-                height={900}
+                fill
+                sizes="(min-width: 768px) 56vw, 84vw"
+                placeholder="blur"
+                quality={82}
+                priority={activeIndex === 0}
                 className={[
-                  "w-full h-full object-cover transition-opacity duration-200",
+                  "object-cover transition-opacity duration-200",
                   isFading ? "opacity-80" : "opacity-100",
                 ].join(" ")}
               />
@@ -100,13 +107,14 @@ export default function Hero() {
               className="w-[32%] h-[190px] overflow-hidden relative opacity-80"
             >
               <Image
-                key={slides[nextIndex].src}
                 src={slides[nextIndex].src}
                 alt={slides[nextIndex].alt}
-                width={400}
-                height={600}
+                fill
+                sizes="(min-width: 768px) 22vw, 32vw"
+                placeholder="blur"
+                quality={82}
                 className={[
-                  "w-full h-full object-cover transition-opacity duration-200",
+                  "object-cover transition-opacity duration-200",
                   isFading ? "opacity-70" : "opacity-100",
                 ].join(" ")}
               />
@@ -139,13 +147,14 @@ export default function Hero() {
           {/* Left Panel */}
           <div className="w-[22%] h-[85%] overflow-hidden relative">
             <Image
-              key={slides[prevIndex].src}
               src={slides[prevIndex].src}
               alt={slides[prevIndex].alt}
-              width={400}
-              height={600}
+              fill
+              sizes="22vw"
+              placeholder="blur"
+              quality={82}
               className={[
-                "w-full h-full object-cover transition-opacity duration-200",
+                "object-cover transition-opacity duration-200",
                 isFading ? "opacity-70" : "opacity-100",
               ].join(" ")}
             />
@@ -154,13 +163,15 @@ export default function Hero() {
           {/* Center Panel */}
           <div className="w-[56%] h-full overflow-hidden relative">
             <Image
-              key={slides[activeIndex].src}
               src={slides[activeIndex].src}
               alt={slides[activeIndex].alt}
-              width={800}
-              height={800}
+              fill
+              sizes="56vw"
+              placeholder="blur"
+              quality={82}
+              priority={activeIndex === 0}
               className={[
-                "w-full h-full object-cover transition-opacity duration-200",
+                "object-cover transition-opacity duration-200",
                 isFading ? "opacity-80" : "opacity-100",
               ].join(" ")}
             />
@@ -205,13 +216,14 @@ export default function Hero() {
           {/* Right Panel */}
           <div className="w-[22%] h-[85%] overflow-hidden relative">
             <Image
-              key={slides[nextIndex].src}
               src={slides[nextIndex].src}
               alt={slides[nextIndex].alt}
-              width={400}
-              height={600}
+              fill
+              sizes="22vw"
+              placeholder="blur"
+              quality={82}
               className={[
-                "w-full h-full object-cover transition-opacity duration-200",
+                "object-cover transition-opacity duration-200",
                 isFading ? "opacity-70" : "opacity-100",
               ].join(" ")}
             />
@@ -220,7 +232,14 @@ export default function Hero() {
 
         <div className="relative z-20 mt-6 md:-mt-24 text-center ">
           <div className="font-serif text-[14vw] flex items-center justify-center gap-2 ng-none tracking-widest text-[#e2b84b] md:text-[10rem]">
-            <Image src="/logo/verunia-svg.svg" alt="Verunia" width={100} height={184} className="w-auto h-[100px] md:h-[184px] object-contain" />
+            <Image
+              src="/logo/verunia-svg.svg"
+              alt="Verunia"
+              width={100}
+              height={184}
+              unoptimized
+              className="w-auto h-[100px] md:h-[184px] object-contain"
+            />
           </div>
           {/* <p className="mt-4 text-sm tracking-wide text-[#7a7a7a]">
           Furniture And Interiors For Modern Work And Living
@@ -237,15 +256,12 @@ export default function Hero() {
       <div className="flex items-center justify-center px-4 md:px-8 py-[40px] md:py-[200px]">
         <div className="max-w-[1200px] mx-auto">
           <h2
-            className="text-[#523e0f] font-fraunces text-[28px] md:text-[48px] leading-[36px] md:leading-[60px] text-center max-w-[900px] mx-auto"
-            style={{
-              letterSpacing: "-0.02em",
-            }}
+            className="font-fraunces font-normal text-[48px] leading-[60px] text-center max-w-[900px] mx-auto text-[#523e0f] [-letter-spacing:--0.02em]"
           >
-            <span className="font-bold">Verunia Group</span>{" "}
-            <span className="font-light">
+            Verunia Group <span className="font-light">
               brings together dedicated brands in office furniture, interior design and luxury interiors,
-              delivering projects and products across the region and beyond.</span>
+              delivering projects and products across the region and beyond.
+            </span>
           </h2>
         </div>
       </div>

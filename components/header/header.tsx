@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import mainLogo from "@/public/logo/main_logo.png";
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,10 +45,12 @@ export default function Header() {
       <header className="flex  items-center justify-between max-w-[1440px]  mx-auto py-4 px-4 md:px-6">
         <Link href="/">
           <Image
-            src="/logo/main_logo.png"
+            src={mainLogo}
             alt="Verunia"
             width={100}
             height={100}
+            sizes="40px"
+            priority
             className="w-10 h-10 object-contain"
           />
         </Link>

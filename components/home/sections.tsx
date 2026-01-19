@@ -23,7 +23,14 @@ export default function Sections() {
                 </div>
                 <div className="w-full md:w-[65%] h-full order-1 md:order-2">
                     <Image
-                        src="/hero-image/image-03.png" alt="Al Fotivo" width={926} height={600} className="w-full h-full object-cover min-h-[300px] md:min-h-[600px]" />
+                        src="/hero-image/image-03.png"
+                        alt="Al Fotivo"
+                        width={926}
+                        height={600}
+                        sizes="(min-width: 768px) 65vw, 100vw"
+                        quality={82}
+                        className="w-full h-full object-cover min-h-[300px] md:min-h-[600px]"
+                      />
                 </div>
 
             </div>
@@ -31,7 +38,14 @@ export default function Sections() {
             <div className="w-full h-full flex flex-col md:flex-row py-[60px] md:py-[112px]">
             <div className="w-full md:w-[65%] h-full">
                     <Image
-                        src="/hero-image/image-03.png" alt="Al Fotivo" width={926} height={600} className="w-full h-full object-cover min-h-[300px] md:min-h-[600px]" />
+                        src="/hero-image/image-03.png"
+                        alt="Al Fotivo"
+                        width={926}
+                        height={600}
+                        sizes="(min-width: 768px) 65vw, 100vw"
+                        quality={82}
+                        className="w-full h-full object-cover min-h-[300px] md:min-h-[600px]"
+                      />
                 </div>
                 <div className="w-full md:w-[35%] h-full">
                     <div className="px-4 md:px-[48px] py-8 md:py-0">
@@ -71,11 +85,26 @@ export default function Sections() {
                 </div>
                 <div className="w-full md:w-[65%] h-full order-1 md:order-2">
                     <Image
-                        src="/hero-image/image-03.png" alt="Al Fotivo" width={926} height={600} className="w-full h-full object-cover min-h-[300px] md:min-h-[600px]" />
+                        src="/hero-image/image-03.png"
+                        alt="Al Fotivo"
+                        width={926}
+                        height={600}
+                        sizes="(min-width: 768px) 65vw, 100vw"
+                        quality={82}
+                        className="w-full h-full object-cover min-h-[300px] md:min-h-[600px]"
+                      />
                 </div>
 
             </div>
-            <Image src="/ui/divider-sections.svg" alt="Verunia Group" width={1000} height={1000} className="w-full h-full object-cover py-[60px] md:py-[112px]" />
+            <Image
+              src="/ui/divider-sections.svg"
+              alt="Verunia Group"
+              width={1000}
+              height={1000}
+              sizes="100vw"
+              unoptimized
+              className="w-full h-full object-cover py-[60px] md:py-[112px]"
+            />
 
           
         </SectionContainer>

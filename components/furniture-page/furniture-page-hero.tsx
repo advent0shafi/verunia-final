@@ -4,6 +4,7 @@ import { Armchair, Box, Package, Search, Sofa, Sparkles, Table } from "lucide-re
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import deskHero from "@/public/furniture-page/desk-hero.png";
 
 export default function FurniturePageHero() {
   const categories = [
@@ -130,10 +131,13 @@ export default function FurniturePageHero() {
           <div className="w-full lg:w-[55%] flex justify-center lg:justify-end">
             <div className="relative w-full max-w-[700px] lg:max-w-none">
               <Image
-                src="/furniture-page/desk-hero.png"
+                src={deskHero}
                 alt="YD & YF Models Executive Desk"
                 width={800}
                 height={500}
+                sizes="(min-width: 1024px) 55vw, 100vw"
+                placeholder="blur"
+                quality={82}
                 className="w-full h-auto object-contain"
                 priority
               />

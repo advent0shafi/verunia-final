@@ -4,7 +4,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    // Enable Next.js Image Optimization (responsive srcset, modern formats, caching)
+    formats: ["image/avif", "image/webp"],
+    // Allow SVG usage with next/image (we still mark SVGs unoptimized at call sites).
+    dangerouslyAllowSVG: true,
   },
 }
 

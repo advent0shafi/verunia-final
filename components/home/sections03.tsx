@@ -17,9 +17,13 @@ export default function Sections03() {
 
             <div className="group">
               <div className="overflow-hidden">
-                <img
+                <Image
                   src="/hero-image/image-01.png"
                   alt="Sapphire House, Belgium interior"
+                  width={1200}
+                  height={800}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  quality={82}
                   className="w-full h-[250px] md:h-[380px] object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
@@ -48,9 +52,13 @@ export default function Sections03() {
             {/* Project 3 - Sheraton Canada */}
             <div className="group">
               <div className="overflow-hidden">
-                <img
+                <Image
                   src="/hero-image/image-03.png"
                   alt="Sheraton Canada hotel room"
+                  width={1200}
+                  height={800}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  quality={82}
                   className="w-full h-[250px] md:h-[380px] object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
@@ -82,9 +90,13 @@ export default function Sections03() {
             {/* Project 2 - MaisonArt */}
             <div className="group">
               <div className="overflow-hidden">
-                <img
+                <Image
                   src="/hero-image/image-02.png"
                   alt="MaisonArt office space"
+                  width={1200}
+                  height={800}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  quality={82}
                   className="w-full h-[200px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
@@ -113,9 +125,13 @@ export default function Sections03() {
             {/* Project 4 - JW Marriott Nairobi */}
             <div className="group">
               <div className="overflow-hidden">
-                <img
+                <Image
                   src="/hero-image/image-02.png"
                   alt="JW Marriott Nairobi restaurant"
+                  width={1200}
+                  height={800}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  quality={82}
                   className="w-full h-[200px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
@@ -143,7 +159,15 @@ export default function Sections03() {
           </div>
         </div>
       </div>
-      <Image src="/ui/divider-sections.svg" alt="Verunia Group" width={1000} height={1000} className="w-full h-full object-cover py-[60px] md:py-[112px]" />
+      <Image
+        src="/ui/divider-sections.svg"
+        alt="Verunia Group"
+        width={1000}
+        height={1000}
+        sizes="100vw"
+        unoptimized
+        className="w-full h-full object-cover py-[60px] md:py-[112px]"
+      />
 
     </SectionContainer>
   )

@@ -1,14 +1,19 @@
 import Image from "next/image";
 
+import aiFotivoHero from "@/public/ai-fotivo-page/ai-fotiva02.png";
+
 export default function AiFotivoHero() {
     return (
         <section className="bg-white w-full h-screen relative">
             <Image 
-                src="/ai-fotivo-page/ai-fotiva02.png" 
+                src={aiFotivoHero} 
                 alt="Interior Hero Image" 
-                width={1000} 
-                height={1000} 
-                className="w-full h-full object-cover" 
+                fill
+                sizes="100vw"
+                priority
+                placeholder="blur"
+                quality={82}
+                className="object-cover" 
             />
             {/* Top linear gradient overlay */}
             <div
