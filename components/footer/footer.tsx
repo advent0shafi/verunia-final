@@ -33,7 +33,7 @@ export default function VeruniaFooter() {
                         {/* Navigation Links */}
                         <nav className="flex flex-col gap-3 md:gap-4 mb-8 md:mb-12">
                             <Link
-                                href="/interiors"
+                                href="/interior"
                                 className="text-white font-fraunces font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
                             >
                                 Verunia Interiors
@@ -45,7 +45,7 @@ export default function VeruniaFooter() {
                                 Verunia Furniture
                             </Link>
                             <Link
-                                href="/al-fotivo"
+                                href="/ai-fotivo"
                                 className="text-white font-fraunces font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
                             >
                                 Al Fotivo

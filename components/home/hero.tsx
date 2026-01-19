@@ -56,14 +56,14 @@ export default function Hero() {
   return (
     <section className="relative w-full overflow-hidden bg-[#FFFDFA]">
       {/* Big Title */}
-      <div className="relative min-h-[60vh] md:h-screen w-full mt-[30px] py-6 md:py-10">
+      <div className="relative md:min-h-[60vh] md:h-screen w-full mt-[30px] pt-6 md:pt-10 ">
         {/* Mobile: centered image with left/right peeks (like screenshot) */}
         <div
           className="md:hidden relative w-full overflow-hidden"
           onTouchStart={() => setIsPaused(true)}
           onTouchEnd={() => setIsPaused(false)}
         >
-          <div className="flex items-center justify-center gap-3 md:px-3">
+          <div className="flex items-center justify-center gap-3 md:px-3  ">
             <button
               type="button"
               onClick={goPrev}
@@ -253,18 +253,16 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center px-4 md:px-8 py-[40px] md:py-[200px]">
+          <div className="flex items-center justify-center px-4 md:px-8 py-[40px] md:py-[200px] ">
         <div className="max-w-[1200px] mx-auto">
           <h2
-            className="text-[#523e0f] font-fraunces text-[24px] md:text-[48px] leading-[36px] md:leading-[60px] text-center max-w-[900px] mx-auto"
-            style={{
-              letterSpacing: "-0.02em",
-            }}
+            className="font-fraunces  not-italic md:text-[48px] text-[24px] md:leading-[60px] leading-[32px] [-letter-spacing:--0.02em] text-center max-w-[900px] mx-auto text-[#523E0F]"
           >
-            <span className="font-bold">Verunia Group</span>{" "}
-            <span className="font-light">
+            <span className="font-semibold">Verunia Group</span>{" "}
+            <span className="font-extralight">
               brings together dedicated brands in office furniture, interior design and luxury interiors,
-              delivering projects and products across the region and beyond.</span>
+              delivering projects and products across the region and beyond.{" "}
+            </span>
           </h2>
         </div>
       </div>
