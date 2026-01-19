@@ -38,7 +38,7 @@ export default function Sections() {
             <div className="w-full h-full flex flex-col md:flex-row py-[60px] md:py-[112px]">
             <div className="w-full md:w-[65%] h-full">
                     <Image
-                        src="/hero-image/image-03.png"
+                        src="/hero-image/image-01.png"
                         alt="Al Fotivo"
                         width={926}
                         height={600}
@@ -85,7 +85,7 @@ export default function Sections() {
                 </div>
                 <div className="w-full md:w-[65%] h-full order-1 md:order-2">
                     <Image
-                        src="/hero-image/image-03.png"
+                        src="/hero-image/image-02.png"
                         alt="Al Fotivo"
                         width={926}
                         height={600}

@@ -27,14 +27,15 @@ export default function AnimatedSection({
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset: ["start 0.8", "start 0.2"],
   });
 
-  // Transform values based on scroll progress
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.4, 1, 1, 0.8]);
-  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [60, 0, 0, -20]);
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.95, 1, 1, 0.98]);
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  // Transform values based on scroll progress - improved timing and ranges
+  // Animation starts when element is 80% down viewport, completes at 20%
+  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0, 1, 1, 1]);
+  const y = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [40, 0, 0, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.94, 1, 1, 1]);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [20, -20]);
 
   // Performance + accessibility: no animation if the user prefers reduced motion
   if (prefersReducedMotion) {
