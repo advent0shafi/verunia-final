@@ -2,8 +2,121 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useMemo, useState, useCallback } from "react";
-import { motion, useReducedMotion, AnimatePresence } from "motion/react";
+import React, { useEffect, useMemo, useState, useCallback, useRef } from "react";
+import { motion, useReducedMotion, AnimatePresence, useScroll, useTransform, MotionValue } from "motion/react";
+
+// Scroll-reveal character component
+const ScrollChar = ({ 
+  children, 
+  progress, 
+  range 
+}: { 
+  children: string; 
+  progress: MotionValue<number>; 
+  range: [number, number];
+}) => {
+  const opacity = useTransform(progress, range, [0, 1]);
+  return (
+    <span className="relative">
+      <span className="absolute opacity-20">{children}</span>
+      <motion.span style={{ opacity }}>{children}</motion.span>
+    </span>
+  );
+};
+
+// Scroll-reveal word component
+const ScrollWord = ({ 
+  children, 
+  progress, 
+  range,
+  className 
+}: { 
+  children: string; 
+  progress: MotionValue<number>; 
+  range: [number, number];
+  className?: string;
+}) => {
+  const chars = children.split("");
+  const amount = range[1] - range[0];
+  const step = amount / chars.length;
+
+  return (
+    <span className={`relative inline-block mr-[0.25em] ${className || ""}`}>
+      {chars.map((char, i) => {
+        const start = range[0] + i * step;
+        const end = range[0] + (i + 1) * step;
+        return (
+          <ScrollChar key={`char_${i}`} progress={progress} range={[start, end]}>
+            {char}
+          </ScrollChar>
+        );
+      })}
+    </span>
+  );
+};
+
+// Scroll-reveal text section component
+const ScrollRevealText = ({ prefersReducedMotion }: { prefersReducedMotion: boolean | null }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.9", "start 0.3"]
+  });
+
+  // Define text parts with their styles
+  const titleWords = "Verunia Group".split(" ");
+  const descriptionWords = "brings together dedicated brands in office furniture, interior design and luxury interiors, delivering projects and products across the region and beyond.".split(" ");
+  
+  const allWords = [...titleWords, ...descriptionWords];
+  const totalWords = allWords.length;
+  const titleWordCount = titleWords.length;
+
+  // If reduced motion is preferred, show static text
+  if (prefersReducedMotion) {
+    return (
+      <div className="flex items-center justify-center px-4 md:px-8 py-[80px] md:py-[200px]">
+        <div className="max-w-[1200px] mx-auto">
+          <h2 className="font-fraunces not-italic md:text-[48px] text-[24px] md:leading-[60px] leading-[32px] [-letter-spacing:--0.02em] text-center max-w-[900px] mx-auto text-[#523E0F]">
+            <span className="font-semibold">Verunia Group</span>{" "}
+            <span className="font-extralight">
+              brings together dedicated brands in office furniture, interior design and luxury interiors,
+              delivering projects and products across the region and beyond.
+            </span>
+          </h2>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div 
+      ref={containerRef}
+      className="flex items-center justify-center px-4 md:px-8 py-[80px] md:py-[200px]"
+    >
+      <div className="max-w-[1200px] mx-auto">
+        <h2 className="font-fraunces not-italic md:text-[48px] text-[24px] md:leading-[60px] leading-[32px] [-letter-spacing:--0.02em] text-center max-w-[900px] mx-auto text-[#523E0F] flex flex-wrap justify-center">
+          {allWords.map((word, i) => {
+            const start = i / totalWords;
+            const end = start + 1 / totalWords;
+            const isTitleWord = i < titleWordCount;
+            
+            return (
+              <ScrollWord 
+                key={`word_${i}`} 
+                progress={scrollYProgress} 
+                range={[start, end]}
+                className={isTitleWord ? "font-semibold" : "font-extralight"}
+              >
+                {word}
+              </ScrollWord>
+            );
+          })}
+        </h2>
+      </div>
+    </div>
+  );
+};
 
 import hero01 from "@/public/hero-image/image-01.png";
 import hero02 from "@/public/hero-image/image-02.png";
@@ -418,37 +531,7 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
-      <motion.div
-        className="flex items-center justify-center px-4 md:px-8 py-[80px] md:py-[200px]"
-        initial={prefersReducedMotion ? false : "initial"}
-        animate={prefersReducedMotion || !isLoaded ? {} : "animate"}
-        variants={prefersReducedMotion ? {} : headingVariants}
-        transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] as const, delay: 0.8 }}
-      >
-        <div className="max-w-[1200px] mx-auto">
-          <h2
-            className="font-fraunces not-italic md:text-[48px] text-[24px] md:leading-[60px] leading-[32px] [-letter-spacing:--0.02em] text-center max-w-[900px] mx-auto text-[#523E0F]"
-          >
-            <motion.span
-              className="font-semibold"
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-              animate={prefersReducedMotion || !isLoaded ? {} : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const, delay: 0.9 }}
-            >
-              Verunia Group
-            </motion.span>{" "}
-            <motion.span
-              className="font-extralight"
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-              animate={prefersReducedMotion || !isLoaded ? {} : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const, delay: 1 }}
-            >
-              brings together dedicated brands in office furniture, interior design and luxury interiors,
-              delivering projects and products across the region and beyond.{" "}
-            </motion.span>
-          </h2>
-        </div>
-      </motion.div>
+      <ScrollRevealText prefersReducedMotion={prefersReducedMotion} />
     </section>
   );
 }

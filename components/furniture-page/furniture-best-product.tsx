@@ -22,30 +22,30 @@ const products: Product[] = [
   },
   {
     id: "2",
-    category: "Office Chair",
+    category: "Black Office Chair",
     name: "High Back Chair CK-858A",
     image: "/furniture-page/products/black-chair.png",
     colors: ["#ffffff", "#6b7280", "#22c55e"],
   },
   {
     id: "3",
-    category: "Desks",
+    category: "Modern Office Chair",
     name: "TY-B0124",
-    image: "/furniture-page/products/product-2.png",
+    image: "/furniture-page/products/chair-1.png",
     colors: ["#ffffff", "#6b7280"],
   },
   {
     id: "4",
-    category: "Sofa",
+    category: "Special Office Chair",
     name: "H-5252",
-    image: "/furniture-page/products/product-1.png",
+    image: "/furniture-page/products/black-chair.png",
     colors: ["#ffffff", "#6b7280", "#78716c", "#f59e0b"],
   },
   {
     id: "5",
     category: "Office Chair",
     name: "High Back Chair CK-900",
-    image: "/furniture-page/products/black-chair.png",
+    image: "/furniture-page/products/chair-1.png",
     colors: ["#1f2937", "#22c55e", "#78716c", "#f59e0b"],
   },
 ];
@@ -93,7 +93,7 @@ function ProductCard({ product }: { product: Product }) {
   );
 }
 
-export default function FurnitureProductPage() {
+export default function FurnitureBestProduct() {
   return (
     <section className="bg-white py-12 md:py-16 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
@@ -102,7 +102,7 @@ export default function FurnitureProductPage() {
           <h2
             className="font-instrument font-medium text-[44px] leading-[56px] [-letter-spacing:-0.02em] text-[#1C1917]"
           >
-            Bestsellers
+            Office Furniture
           </h2>
           <Link
             href="/furniture/bestsellers"
