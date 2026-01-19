@@ -6,16 +6,18 @@ import Image from "next/image";
 import { TextReveal, ImageReveal } from "./animated-section";
 import AnimatedSection from "./animated-section";
 
-import img01 from "@/public/hero-image/image-01.png";
-import img02 from "@/public/hero-image/image-02.png";
-import img03 from "@/public/hero-image/image-03.png";
+import img01 from "@/public/hero-image/image-07.png";
+import img02 from "@/public/hero-image/image-05.png";
+import img03 from "@/public/hero-image/image-06.png";
 
 export default function Sections02() {
   return (
     <SectionContainer >
       <div className="">
         <h2
-          className="text-black font-fraunces font-normal not-italic text-[32px] md:text-[48px] lg:text-[60px] leading-[40px] md:leading-[56px] lg:leading-[64px] [-letter-spacing:--0.02em] align-middle"
+          className="text-black font-fraunces font-normal not-italic align-middle
+            text-[32px] leading-[40px] tracking-[-0.02em]
+            md:text-[48px] md:leading-[60px]"
         >
           <TextReveal>Three expert brands.</TextReveal>
           <br />
@@ -44,9 +46,26 @@ export default function Sections02() {
                         sizes="(min-width: 1024px) 25vw, (min-width: 768px) 40vw, 100vw"
                         placeholder="blur"
                         quality={82}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 min-h-[180px] md:min-h-[231px]"
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 min-h-[180px] md:min-h-[231px] max-h-[231.336669921875px]"
                       />
                     </ImageReveal>
+                    <div className="rounded-[6px] md:hidden  border border-[#FAE09E] flex flex-col mt-[16px]  justify-between p-3 md:p-4 min-h-[130px] md:min-h-[150px] ">
+                      <div className="flex items-center gap-0 px-3 md:px-6 border-b border-[#FAE09E] py-2.5 md:py-3.5">
+                        <span className="text-[#57534E] font-instrument font-bold text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle pr-3 md:pr-5">01</span>
+                        <div className="w-px h-5 bg-[#FAE09E] mr-3 md:mr-5"></div>
+                        <h3 className="text-[#1a1a1a] font-instrument font-medium text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle">
+                          <TextReveal>Integrated offering</TextReveal>
+                        </h3>
+                      </div>
+                      <div>
+                        <p className="font-instrument font-normal not-italic text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-normal text-start align-middle text-[#57534E] px-3 md:px-6 py-2">
+                          <TextReveal>Furniture, interiors and luxury</TextReveal>
+                          <br />
+                          <TextReveal>solutions within one group.</TextReveal>
+                        </p>
+                      </div>
+
+                    </div>
                   </div>
                 </AnimatedSection>
                 <AnimatedSection variant="parallax">
@@ -60,9 +79,21 @@ export default function Sections02() {
                         sizes="(min-width: 1024px) 25vw, (min-width: 768px) 40vw, 100vw"
                         placeholder="blur"
                         quality={82}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 min-h-[180px] md:min-h-[231px]"
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 min-h-[180px] md:min-h-[231px] max-h-[231.336669921875px]"
                       />
                     </ImageReveal>
+                    <div className="rounded-[6px] md:hidden  border border-[#FAE09E] flex flex-col mt-[16px]  justify-between p-3 md:p-4 min-h-[130px] md:min-h-[150px] ">
+                <div className="flex items-center gap-0 px-3 md:px-6 border-b border-[#D4A853] py-2.5 md:py-3.5">
+                  <span className="text-[#57534E] font-instrument font-bold text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle pr-3 md:pr-5">02</span>
+                  <div className="w-px h-5 bg-[#FAE09E] mr-3 md:mr-5"></div>
+                  <h3 className="text-[#1a1a1a] font-instrument font-medium text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle">
+                    <TextReveal>Consistent quality</TextReveal>
+                  </h3>
+                </div>
+                <p className="font-instrument font-normal not-italic text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-normal text-start align-middle text-[#57534E] px-3 md:px-6 py-2">
+                  <TextReveal>Shared standards in design, materials and installation.</TextReveal>
+                </p>
+              </div>
                   </div>
                 </AnimatedSection>
                 <AnimatedSection variant="parallax">
@@ -76,49 +107,64 @@ export default function Sections02() {
                         sizes="(min-width: 1024px) 25vw, (min-width: 768px) 40vw, 100vw"
                         placeholder="blur"
                         quality={82}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 min-h-[180px] md:min-h-[231px]"
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 min-h-[180px] md:min-h-[231px] max-h-[231.336669921875px]"
                       />
                     </ImageReveal>
-                  </div>
-                </AnimatedSection>
-              </div>
-            </div>
-            <div className="w-full pt-0 md:pt-0 lg:pt-[140px] flex flex-col gap-[16px] justify-end md:gap-[20px] 0">
-              <div className="rounded-md border border-[#D4A853] p-3 md:p-4 min-h-[130px] md:min-h-[150px]">
-                <div className="flex items-center gap-0 px-3 md:px-6 border-b border-[#D4A853] py-2.5 md:py-3.5">
-                  <span className="text-[#57534E] font-instrument font-bold text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle pr-3 md:pr-5">01</span>
-                  <div className="w-px h-5 bg-[#D4A853] mr-3 md:mr-5"></div>
-                  <h3 className="text-[#1a1a1a] font-instrument font-medium text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle">
-                    <TextReveal>Integrated offering</TextReveal>
-                  </h3>
-                </div>
-                <p className="font-instrument font-normal not-italic text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-normal text-center align-middle text-[#57534E] px-3 md:px-6 py-2">
-                  <TextReveal>Furniture, interiors and luxury</TextReveal>
-                  <br />
-                  <TextReveal>solutions within one group.</TextReveal>
-                </p>
-              </div>
-              <div className="rounded-md border border-[#D4A853] p-3 md:p-4 min-h-[130px] md:min-h-[150px]">
-                <div className="flex items-center gap-0 px-3 md:px-6 border-b border-[#D4A853] py-2.5 md:py-3.5">
-                  <span className="text-[#57534E] font-instrument font-bold text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle pr-3 md:pr-5">02</span>
-                  <div className="w-px h-5 bg-[#D4A853] mr-3 md:mr-5"></div>
-                  <h3 className="text-[#1a1a1a] font-instrument font-medium text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle">
-                    <TextReveal>Consistent quality</TextReveal>
-                  </h3>
-                </div>
-                <p className="font-instrument font-normal not-italic text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-normal text-center align-middle text-[#57534E] px-3 md:px-6 py-2">
-                  <TextReveal>Shared standards in design, materials and installation.</TextReveal>
-                </p>
-              </div>
-              <div className="rounded-md border border-[#D4A853] p-3 md:p-4 min-h-[130px] md:min-h-[150px]">
-                <div className="flex items-center gap-0 px-3 md:px-6 border-b border-[#D4A853] py-2.5 md:py-3.5">
+                    <div className="rounded-[6px] md:hidden  border border-[#FAE09E] flex flex-col mt-[16px]  justify-between p-3 md:p-4 min-h-[130px] md:min-h-[150px] ">
+                <div className="flex items-center gap-0 px-3 md:px-6 border-b border-[#FAE09E] py-2.5 md:py-3.5">
                   <span className="text-[#57534E] font-instrument font-bold text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle pr-3 md:pr-5">03</span>
-                  <div className="w-px h-5 bg-[#D4A853] mr-3 md:mr-5"></div>
+                  <div className="w-px h-5 bg-[#FAE09E] mr-3 md:mr-5"></div>
                   <h3 className="text-[#1a1a1a] font-instrument font-medium text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle">
                     <TextReveal>Built around you</TextReveal>
                   </h3>
                 </div>
-                <p className="font-instrument font-normal not-italic text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-normal text-center align-middle text-[#57534E] px-3 md:px-6 py-2">
+                <p className="font-instrument font-normal not-italic text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-normal text-start align-middle text-[#57534E] px-3 md:px-6 py-2">
+                  <TextReveal>Solutions tailored to your space, budget and programme.</TextReveal>
+                </p>
+              </div>
+                  </div>
+                </AnimatedSection>
+              </div>
+            </div>
+            <div className="w-full hidden  pt-0 md:pt-0 lg:pt-[140px] md:flex flex-col gap-[16px] justify-end md:gap-[20px] 0">
+              <div className="rounded-md border border-[#FAE09E] flex flex-col justify-between p-3 md:p-4 min-h-[130px] md:min-h-[150px] ">
+                <div className="flex items-center gap-0 px-3 md:px-6 border-b border-[#FAE09E] py-2.5 md:py-3.5">
+                  <span className="text-[#57534E] font-instrument font-bold text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle pr-3 md:pr-5">01</span>
+                  <div className="w-px h-5 bg-[#FAE09E] mr-3 md:mr-5"></div>
+                  <h3 className="text-[#1a1a1a] font-instrument font-medium text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle">
+                    <TextReveal>Integrated offering</TextReveal>
+                  </h3>
+                </div>
+                <div>
+                  <p className="font-instrument font-normal not-italic text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-normal text-start align-middle text-[#57534E] px-3 md:px-6 py-2">
+                    <TextReveal>Furniture, interiors and luxury</TextReveal>
+                    <br />
+                    <TextReveal>solutions within one group.</TextReveal>
+                  </p>
+                </div>
+
+              </div>
+              <div className="rounded-md border border-[#FAE09E] p-3 md:p-4 min-h-[130px] md:min-h-[150px]">
+                <div className="flex items-center gap-0 px-3 md:px-6 border-b border-[#D4A853] py-2.5 md:py-3.5">
+                  <span className="text-[#57534E] font-instrument font-bold text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle pr-3 md:pr-5">02</span>
+                  <div className="w-px h-5 bg-[#FAE09E] mr-3 md:mr-5"></div>
+                  <h3 className="text-[#1a1a1a] font-instrument font-medium text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle">
+                    <TextReveal>Consistent quality</TextReveal>
+                  </h3>
+                </div>
+                <p className="font-instrument font-normal not-italic text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-normal text-start align-middle text-[#57534E] px-3 md:px-6 py-2">
+                  <TextReveal>Shared standards in design, materials and installation.</TextReveal>
+                </p>
+              </div>
+              <div className="rounded-md border border-[#FAE09E] p-3 md:p-4 min-h-[130px] md:min-h-[150px]">
+                <div className="flex items-center gap-0 px-3 md:px-6 border-b border-[#FAE09E] py-2.5 md:py-3.5">
+                  <span className="text-[#57534E] font-instrument font-bold text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle pr-3 md:pr-5">03</span>
+                  <div className="w-px h-5 bg-[#FAE09E] mr-3 md:mr-5"></div>
+                  <h3 className="text-[#1a1a1a] font-instrument font-medium text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle">
+                    <TextReveal>Built around you</TextReveal>
+                  </h3>
+                </div>
+                <p className="font-instrument font-normal not-italic text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-normal text-start align-middle text-[#57534E] px-3 md:px-6 py-2">
                   <TextReveal>Solutions tailored to your space, budget and programme.</TextReveal>
                 </p>
               </div>
@@ -128,18 +174,19 @@ export default function Sections02() {
           </div>
         </div>
       </div>
-   
+
 
       {/* Bottom Logo */}
       <Image
-        src="/ui/divider-sections.svg"
-        alt="Verunia Group"
-        width={1000}
-        height={1000}
-        sizes="100vw"
-        unoptimized
-        className="w-full h-full object-cover py-[60px] md:py-[112px]"
-      />
+                src="/ui/divider-sections.svg"
+                alt="Verunia Group"
+                width={1000}
+                height={1000}
+                sizes="100vw"
+                unoptimized
+                className="w-full h-full object-cover py-[60px] md:py-[112px] md:block hidden"
+            />
+            <Image src="/ui/gold-divider-mobile.svg" alt="Verunia Group" width={1000} height={1000} sizes="100vw" unoptimized className="w-full h-full object-cover pt-[64px] md:py-[112px] md:hidden block" />
 
     </SectionContainer>
   )

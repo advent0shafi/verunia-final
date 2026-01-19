@@ -31,7 +31,7 @@ export default function Sections03() {
                       height={800}
                       sizes="(min-width: 768px) 50vw, 100vw"
                       quality={82}
-                      className="w-full h-[250px] md:h-[380px] object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-[250px] md:h-[380px] md:rounded-0 rounded-[6px] object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </ImageReveal>
                 </div>
@@ -70,7 +70,7 @@ export default function Sections03() {
                       height={800}
                       sizes="(min-width: 768px) 50vw, 100vw"
                       quality={82}
-                      className="w-full h-[250px] md:h-[380px] object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-[250px] md:h-[380px] md:rounded-0 rounded-[6px] object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </ImageReveal>
                 </div>
@@ -112,7 +112,7 @@ export default function Sections03() {
                       height={800}
                       sizes="(min-width: 768px) 50vw, 100vw"
                       quality={82}
-                      className="w-full h-[200px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-[200px] md:h-[280px] md:rounded-0 rounded-[6px] object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </ImageReveal>
                 </div>
@@ -151,7 +151,7 @@ export default function Sections03() {
                       height={800}
                       sizes="(min-width: 768px) 50vw, 100vw"
                       quality={82}
-                      className="w-full h-[200px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-[200px] md:h-[280px] md:rounded-0 rounded-[6px] object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </ImageReveal>
                 </div>
@@ -181,15 +181,15 @@ export default function Sections03() {
         </div>
       </div>
       <Image
-        src="/ui/divider-sections.svg"
-        alt="Verunia Group"
-        width={1000}
-        height={1000}
-        sizes="100vw"
-        unoptimized
-        className="w-full h-full object-cover py-[60px] md:py-[112px]"
-      />
-
+                src="/ui/divider-sections.svg"
+                alt="Verunia Group"
+                width={1000}
+                height={1000}
+                sizes="100vw"
+                unoptimized
+                className="w-full h-full object-cover py-[60px] md:py-[112px] md:block hidden"
+            />
+            <Image src="/ui/gold-divider-mobile.svg" alt="Verunia Group" width={1000} height={1000} sizes="100vw" unoptimized className="w-full h-full object-cover pt-[64px] md:py-[112px] md:hidden block" />
     </SectionContainer>
   )
 }
