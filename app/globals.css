@@ -136,3 +136,18 @@ body {
     font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
   }
 }
+
+/* Skeleton shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}

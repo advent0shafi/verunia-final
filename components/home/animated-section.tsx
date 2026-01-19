@@ -1,38 +1,232 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import React from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import React, { useRef } from "react";
 
 type AnimatedSectionProps = {
   children: React.ReactNode;
   className?: string;
+  /** Animation variant: 'fade' | 'slide-up' | 'scale' | 'parallax' */
+  variant?: "fade" | "slide-up" | "scale" | "parallax";
 };
 
 /**
- * Lightweight scroll-triggered animation wrapper.
- * - Content is ALWAYS visible (no opacity:0 initial state)
- * - Adds a subtle rise effect when scrolling into view
+ * Modern scroll-triggered animation wrapper using Framer Motion.
+ * - Content is always visible (no hidden initial state)
+ * - Smooth scroll-linked animations
  * - Respects prefers-reduced-motion
- * - No delays to avoid blank page experience
+ * - Zero performance impact on LCP
  */
 export default function AnimatedSection({
   children,
   className,
+  variant = "slide-up",
 }: AnimatedSectionProps) {
   const prefersReducedMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
 
-  // Performance + accessibility: no animation if the user prefers reduced motion.
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Transform values based on scroll progress
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.4, 1, 1, 0.8]);
+  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [60, 0, 0, -20]);
+  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.95, 1, 1, 0.98]);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
+  // Performance + accessibility: no animation if the user prefers reduced motion
+  if (prefersReducedMotion) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  }
+
+  // Get animation styles based on variant
+  const getAnimationStyle = () => {
+    switch (variant) {
+      case "fade":
+        return { opacity };
+      case "slide-up":
+        return { opacity, y };
+      case "scale":
+        return { opacity, scale };
+      case "parallax":
+        return { y: parallaxY };
+      default:
+        return { opacity, y };
+    }
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      style={getAnimationStyle()}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/**
+ * Staggered children animation wrapper
+ */
+export function StaggerContainer({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const prefersReducedMotion = useReducedMotion();
+
   if (prefersReducedMotion) {
     return <div className={className}>{children}</div>;
   }
 
   return (
     <motion.div
-      initial={{ opacity: 0.92, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
       className={className}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.08,
+          },
+        },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/**
+ * Individual stagger child item
+ */
+export function StaggerItem({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      className={className}
+      variants={{
+        hidden: { opacity: 0.6, y: 20 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            duration: 0.5,
+            ease: [0.25, 0.1, 0.25, 1],
+          },
+        },
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/**
+ * Text reveal animation (word by word)
+ */
+export function TextReveal({
+  children,
+  className,
+}: {
+  children: string;
+  className?: string;
+}) {
+  const prefersReducedMotion = useReducedMotion();
+  const words = children.split(" ");
+
+  if (prefersReducedMotion) {
+    return <span className={className}>{children}</span>;
+  }
+
+  return (
+    <motion.span
+      className={className}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.03,
+          },
+        },
+      }}
+    >
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          className="inline-block"
+          variants={{
+            hidden: { opacity: 0.3, y: 8, filter: "blur(2px)" },
+            visible: {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              transition: {
+                duration: 0.4,
+                ease: [0.25, 0.1, 0.25, 1],
+              },
+            },
+          }}
+        >
+          {word}
+          {i < words.length - 1 && "\u00A0"}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
+
+/**
+ * Image reveal with scale effect
+ */
+export function ImageReveal({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      className={`overflow-hidden ${className || ""}`}
+      initial={{ scale: 1.1, opacity: 0.8 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{
+        duration: 0.8,
+        ease: [0.25, 0.1, 0.25, 1],
+      }}
     >
       {children}
     </motion.div>

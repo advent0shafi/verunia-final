@@ -13,23 +13,23 @@ export default function Home() {
       <Header />
       <Hero />
 
-      <AnimatedSection>
+      <AnimatedSection variant="slide-up">
         <Sections />
       </AnimatedSection>
 
-      <AnimatedSection>
+      <AnimatedSection variant="fade">
         <Sections02 />
       </AnimatedSection>
 
-      <AnimatedSection>
+      <AnimatedSection variant="slide-up">
         <Sections03 />
       </AnimatedSection>
 
-      <AnimatedSection>
+      <AnimatedSection variant="scale">
         <GlobeDemo />
       </AnimatedSection>
 
-      <AnimatedSection>
+      <AnimatedSection variant="fade">
         <VeruniaFooter />
       </AnimatedSection>
     </main>

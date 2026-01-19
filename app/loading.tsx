@@ -8,7 +8,7 @@ import {
 
 export default function Loading() {
   return (
-    <main className="animate-pulse">
+    <main>
       <HomeHeaderSkeleton />
       <HomeHeroSkeleton />
       <HomeSectionSkeleton rows={2} />
@@ -19,4 +19,3 @@ export default function Loading() {
     </main>
   );
 }
-

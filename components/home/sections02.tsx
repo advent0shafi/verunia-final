@@ -17,15 +17,15 @@ export default function Sections02() {
           <br />
           One Verunia vision.
         </h2>
-        <div className="pt-10 md:pt-20 w-full">
+        <div className="pt-10 md:pt-20 w-full ">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            <div className="w-full">
+            <div className="w-full ">
               <p className="font-instrument font-normal not-italic text-[16px] md:text-[18px] leading-[24px] md:leading-[28px] tracking-normal align-middle text-[#57534E] max-w-md">
                 Verunia Group brings together specialist brands in office furniture, interior design and luxury interiors. From corporate workspaces to private residences and flagship destinations, we design, supply and deliver spaces with a consistent standard of quality.
               </p>
               <button className="mt-4 md:mt-6 border-t w-full border-b text-start py-3 border-[#523E0F] text-[#523E0F]">Enter Verunia Interiors →</button>
             </div>
-            <div className="w-full">
+            <div className="w-full ">
               <div className="flex flex-col gap-[16px]">
                 <div className="min-h-[180px] md:min-h-[231px] overflow-hidden">
                   <Image
@@ -65,7 +65,7 @@ export default function Sections02() {
                 </div>
               </div>
             </div>
-            <div className="w-full pt-0 md:pt-0 lg:pt-[140px] flex flex-col gap-[16px] md:gap-[20px]">
+            <div className="w-full pt-0 md:pt-0 lg:pt-[140px] flex flex-col gap-[16px] justify-end md:gap-[20px] 0">
               <div className="rounded-md border border-[#D4A853] p-3 md:p-4 min-h-[130px] md:min-h-[150px]">
                 <div className="flex items-center gap-0 px-3 md:px-6 border-b border-[#D4A853] py-2.5 md:py-3.5">
                   <span className="text-[#57534E] font-instrument font-bold text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal align-middle pr-3 md:pr-5">01</span>

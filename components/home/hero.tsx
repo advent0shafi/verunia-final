@@ -256,12 +256,15 @@ export default function Hero() {
       <div className="flex items-center justify-center px-4 md:px-8 py-[40px] md:py-[200px]">
         <div className="max-w-[1200px] mx-auto">
           <h2
-            className="font-fraunces font-normal text-[48px] leading-[60px] text-center max-w-[900px] mx-auto text-[#523e0f] [-letter-spacing:--0.02em]"
+            className="text-[#523e0f] font-fraunces text-[24px] md:text-[48px] leading-[36px] md:leading-[60px] text-center max-w-[900px] mx-auto"
+            style={{
+              letterSpacing: "-0.02em",
+            }}
           >
-            Verunia Group <span className="font-light">
+            <span className="font-bold">Verunia Group</span>{" "}
+            <span className="font-light">
               brings together dedicated brands in office furniture, interior design and luxury interiors,
-              delivering projects and products across the region and beyond.
-            </span>
+              delivering projects and products across the region and beyond.</span>
           </h2>
         </div>
       </div>
