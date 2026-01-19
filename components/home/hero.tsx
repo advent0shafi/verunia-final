@@ -190,56 +190,87 @@ export default function Hero() {
     return () => window.clearInterval(id);
   }, [isPaused, goNext]);
 
-  // Carousel transition duration (keep in sync across all panels)
-  const transitionDuration = 0.6;
-  const transitionEase = [0.4, 0, 0.2, 1] as const;
+  // 3D Carousel settings
+  const transitionDuration = 0.7;
+  const transitionEase = [0.32, 0.72, 0, 1] as const;
+  const rotateAngle = 45; // Rotation angle for 3D effect
 
-  // Center panel slide variants - full slide in/out
-  const slideVariants = {
+  // 3D Center panel variants - rotates in/out with perspective
+  const slideVariants3D = {
     enter: (dir: number) => ({
-      x: dir > 0 ? "100%" : "-100%",
-      opacity: 0.5,
+      x: dir > 0 ? "80%" : "-80%",
+      rotateY: dir > 0 ? -rotateAngle : rotateAngle,
+      scale: 0.85,
+      opacity: 0.6,
+      z: -150,
     }),
     center: {
       x: 0,
+      rotateY: 0,
+      scale: 1,
       opacity: 1,
+      z: 0,
       transition: {
-        x: { type: "tween" as const, duration: transitionDuration, ease: transitionEase },
-        opacity: { duration: transitionDuration * 0.5, ease: transitionEase },
+        type: "tween" as const,
+        duration: transitionDuration,
+        ease: transitionEase,
       },
     },
     exit: (dir: number) => ({
-      x: dir > 0 ? "-100%" : "100%",
-      opacity: 0.5,
+      x: dir > 0 ? "-80%" : "80%",
+      rotateY: dir > 0 ? rotateAngle : -rotateAngle,
+      scale: 0.85,
+      opacity: 0.6,
+      z: -150,
       transition: {
-        x: { type: "tween" as const, duration: transitionDuration, ease: transitionEase },
-        opacity: { duration: transitionDuration * 0.5, ease: transitionEase },
+        type: "tween" as const,
+        duration: transitionDuration,
+        ease: transitionEase,
       },
     }),
   };
 
-  // Side panels slide in the same direction - creates connected carousel feel
-  const sideSlideVariants = {
+  // 3D Side panel variants - subtle 3D rotation matching the carousel
+  const sideSlideVariants3D = {
     enter: (dir: number) => ({
-      x: dir > 0 ? "60%" : "-60%",
+      x: dir > 0 ? "50%" : "-50%",
+      rotateY: dir > 0 ? -25 : 25,
+      scale: 0.9,
       opacity: 0,
     }),
     center: {
       x: 0,
+      rotateY: 0,
+      scale: 1,
       opacity: 1,
       transition: {
-        x: { type: "tween" as const, duration: transitionDuration, ease: transitionEase },
-        opacity: { duration: transitionDuration * 0.6, ease: transitionEase },
+        type: "tween" as const,
+        duration: transitionDuration,
+        ease: transitionEase,
       },
     },
     exit: (dir: number) => ({
-      x: dir > 0 ? "-60%" : "60%",
+      x: dir > 0 ? "-50%" : "50%",
+      rotateY: dir > 0 ? 25 : -25,
+      scale: 0.9,
       opacity: 0,
       transition: {
-        x: { type: "tween" as const, duration: transitionDuration, ease: transitionEase },
-        opacity: { duration: transitionDuration * 0.4, ease: transitionEase },
+        type: "tween" as const,
+        duration: transitionDuration,
+        ease: transitionEase,
       },
     }),
+  };
+
+  // Static 3D styles for side panels (angled towards center)
+  const leftPanel3DStyle = {
+    transform: "perspective(1000px) rotateY(15deg)",
+    transformOrigin: "right center",
+  };
+
+  const rightPanel3DStyle = {
+    transform: "perspective(1000px) rotateY(-15deg)",
+    transformOrigin: "left center",
   };
 
   const logoVariants = {
@@ -271,20 +302,26 @@ export default function Hero() {
     <section className="relative w-full overflow-hidden bg-[#FFFDFA]">
       {/* Big Title */}
       <div className="relative md:min-h-[60vh] md:h-screen w-full ">
-        {/* Mobile: centered image with left/right peeks (like screenshot) */}
+        {/* Mobile: 3D centered image with left/right peeks */}
         <div
           className="md:hidden relative w-full overflow-hidden mt-[100px]"
+          style={{ perspective: "1000px" }}
           onTouchStart={() => setIsPaused(true)}
           onTouchEnd={() => setIsPaused(false)}
         >
-          <div className="flex items-center justify-center gap-[5.32%] ">
+          <div 
+            className="flex items-center justify-center gap-[5.32%]"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            {/* Left side panel - angled towards center */}
             <motion.button
               type="button"
               onClick={goPrev}
               aria-label="Previous image"
               className="w-[22.7%] h-[132.62203979492188px] overflow-hidden relative"
+              style={leftPanel3DStyle}
               initial={prefersReducedMotion ? false : { scale: 1.05, opacity: 0, x: -20 }}
-              animate={prefersReducedMotion || !isLoaded ? {} : { scale: 1, opacity: 0.8, x: 0 }}
+              animate={prefersReducedMotion || !isLoaded ? {} : { scale: 1, opacity: 0.85, x: 0 }}
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const, delay: 0.1 }}
               whileHover={prefersReducedMotion ? {} : { scale: 1.05, opacity: 1 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
@@ -293,7 +330,7 @@ export default function Hero() {
                 <motion.div
                   key={prevIndex}
                   custom={direction}
-                  variants={prefersReducedMotion ? undefined : sideSlideVariants}
+                  variants={prefersReducedMotion ? undefined : sideSlideVariants3D}
                   initial="enter"
                   animate="center"
                   exit="exit"
@@ -312,9 +349,10 @@ export default function Hero() {
               </AnimatePresence>
             </motion.button>
 
-            {/* Main center slider */}
+            {/* Main center slider with 3D perspective */}
             <motion.div
               className="w-[77.2%] h-[176px] overflow-hidden relative"
+              style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
               initial={prefersReducedMotion ? false : { scale: 1.1, opacity: 0 }}
               animate={prefersReducedMotion || !isLoaded ? {} : { scale: 1, opacity: 1 }}
               transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] as const }}
@@ -324,12 +362,12 @@ export default function Hero() {
                 <motion.div
                   key={activeIndex}
                   custom={direction}
-                  variants={prefersReducedMotion ? undefined : slideVariants}
+                  variants={prefersReducedMotion ? undefined : slideVariants3D}
                   initial="enter"
                   animate="center"
                   exit="exit"
                   className="absolute inset-0"
-                  style={{ zIndex: 1 }}
+                  style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}
                 >
                   <Image
                     src={slides[activeIndex].src}
@@ -345,13 +383,15 @@ export default function Hero() {
               </AnimatePresence>
             </motion.div>
 
+            {/* Right side panel - angled towards center */}
             <motion.button
               type="button"
               onClick={goNext}
               aria-label="Next image"
               className="w-[22.7%] h-[132.62203979492188px] overflow-hidden relative"
+              style={rightPanel3DStyle}
               initial={prefersReducedMotion ? false : { scale: 1.05, opacity: 0, x: 20 }}
-              animate={prefersReducedMotion || !isLoaded ? {} : { scale: 1, opacity: 0.8, x: 0 }}
+              animate={prefersReducedMotion || !isLoaded ? {} : { scale: 1, opacity: 0.85, x: 0 }}
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const, delay: 0.1 }}
               whileHover={prefersReducedMotion ? {} : { scale: 1.05, opacity: 1 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
@@ -360,7 +400,7 @@ export default function Hero() {
                 <motion.div
                   key={nextIndex}
                   custom={direction}
-                  variants={prefersReducedMotion ? undefined : sideSlideVariants}
+                  variants={prefersReducedMotion ? undefined : sideSlideVariants3D}
                   initial="enter"
                   animate="center"
                   exit="exit"
@@ -381,17 +421,19 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Desktop: 3-panel layout with overlay controls */}
+        {/* Desktop: 3D 3-panel layout with overlay controls */}
         <div
           className="hidden md:flex relative h-full items-center justify-center gap-2 md:gap-[4.44vw] mx-auto px-2 md:px-0"
+          style={{ perspective: "1500px" }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Left Panel */}
+          {/* Left Panel - 3D angled towards center */}
           <motion.div
             className="w-[17.8%] h-[48.21vh] overflow-hidden relative cursor-pointer"
+            style={leftPanel3DStyle}
             initial={prefersReducedMotion ? false : { opacity: 0, x: -30 }}
-            animate={prefersReducedMotion || !isLoaded ? {} : { opacity: 0.8, x: 0 }}
+            animate={prefersReducedMotion || !isLoaded ? {} : { opacity: 0.85, x: 0 }}
             whileHover={prefersReducedMotion ? {} : { scale: 1.02, opacity: 1 }}
             onClick={goPrev}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const, delay: 0.2 }}
@@ -400,7 +442,7 @@ export default function Hero() {
               <motion.div
                 key={prevIndex}
                 custom={direction}
-                variants={prefersReducedMotion ? undefined : sideSlideVariants}
+                variants={prefersReducedMotion ? undefined : sideSlideVariants3D}
                 initial="enter"
                 animate="center"
                 exit="exit"
@@ -419,9 +461,10 @@ export default function Hero() {
             </AnimatePresence>
           </motion.div>
 
-          {/* Center Panel */}
+          {/* Center Panel - 3D rotation on transition */}
           <motion.div
             className="w-[64.31%] h-[64vh] bg-gray-600 overflow-hidden relative"
+            style={{ perspective: "1500px", transformStyle: "preserve-3d" }}
             initial={prefersReducedMotion ? false : { scale: 1.1, opacity: 0 }}
             animate={prefersReducedMotion || !isLoaded ? {} : { scale: 1, opacity: 1 }}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] as const }}
@@ -431,12 +474,12 @@ export default function Hero() {
               <motion.div
                 key={activeIndex}
                 custom={direction}
-                variants={prefersReducedMotion ? undefined : slideVariants}
+                variants={prefersReducedMotion ? undefined : slideVariants3D}
                 initial="enter"
                 animate="center"
                 exit="exit"
                 className="absolute inset-0"
-                style={{ zIndex: 1 }}
+                style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}
               >
                 <Image
                   src={slides[activeIndex].src}
@@ -452,11 +495,12 @@ export default function Hero() {
             </AnimatePresence>
           </motion.div>
 
-          {/* Right Panel */}
+          {/* Right Panel - 3D angled towards center */}
           <motion.div
             className="w-[17.8%] h-[48.21vh] overflow-hidden relative cursor-pointer"
+            style={rightPanel3DStyle}
             initial={prefersReducedMotion ? false : { opacity: 0, x: 30 }}
-            animate={prefersReducedMotion || !isLoaded ? {} : { opacity: 0.8, x: 0 }}
+            animate={prefersReducedMotion || !isLoaded ? {} : { opacity: 0.85, x: 0 }}
             whileHover={prefersReducedMotion ? {} : { scale: 1.02, opacity: 1 }}
             onClick={goNext}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const, delay: 0.2 }}
@@ -465,7 +509,7 @@ export default function Hero() {
               <motion.div
                 key={nextIndex}
                 custom={direction}
-                variants={prefersReducedMotion ? undefined : sideSlideVariants}
+                variants={prefersReducedMotion ? undefined : sideSlideVariants3D}
                 initial="enter"
                 animate="center"
                 exit="exit"
