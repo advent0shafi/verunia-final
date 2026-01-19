@@ -152,11 +152,36 @@ export function TextReveal({
   children,
   className,
 }: {
-  children: string;
+  children: React.ReactNode;
   className?: string;
 }) {
   const prefersReducedMotion = useReducedMotion();
-  const words = children.split(" ");
+  
+  // Convert children to string, handling ReactNode
+  const textContent = typeof children === 'string' 
+    ? children 
+    : typeof children === 'number' 
+    ? String(children)
+    : React.Children.toArray(children)
+        .map((child) => {
+          if (typeof child === 'string' || typeof child === 'number') {
+            return String(child);
+          }
+          // For JSX elements, try to extract text content
+          if (React.isValidElement(child)) {
+            const childProps = child.props as { children?: React.ReactNode } | null;
+            if (childProps && 'children' in childProps && childProps.children) {
+              return React.Children.toArray(childProps.children)
+                .filter((c) => typeof c === 'string' || typeof c === 'number')
+                .join('');
+            }
+          }
+          return '';
+        })
+        .join(' ')
+        .trim();
+  
+  const words = textContent.split(/\s+/).filter(word => word.length > 0);
 
   if (prefersReducedMotion) {
     return <span className={className}>{children}</span>;

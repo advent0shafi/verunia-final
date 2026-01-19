@@ -1,5 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import SectionContainer from "../ui/section-container";
+import { ImageReveal } from "./animated-section";
+import AnimatedSection from "./animated-section";
+import Link from "next/link";
 
 export default function Sections03() {
   return (
@@ -16,17 +21,21 @@ export default function Sections03() {
 
 
             <div className="group">
-              <div className="overflow-hidden">
-                <Image
-                  src="/hero-image/image-01.png"
-                  alt="Sapphire House, Belgium interior"
-                  width={1200}
-                  height={800}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  quality={82}
-                  className="w-full h-[250px] md:h-[380px] object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
+              <AnimatedSection variant="parallax">
+                <div className="overflow-hidden">
+                  <ImageReveal>
+                    <Image
+                      src="/hero-image/image-01.png"
+                      alt="Sapphire House, Belgium interior"
+                      width={1200}
+                      height={800}
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      quality={82}
+                      className="w-full h-[250px] md:h-[380px] object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </ImageReveal>
+                </div>
+              </AnimatedSection>
               <div className="flex items-center justify-between mt-3">
                 <div className="w-auto pr-3">
                   <div className="w-2 h-2 rounded-full bg-[#271E07]"></div>
@@ -51,17 +60,21 @@ export default function Sections03() {
 
             {/* Project 3 - Sheraton Canada */}
             <div className="group">
-              <div className="overflow-hidden">
-                <Image
-                  src="/hero-image/image-03.png"
-                  alt="Sheraton Canada hotel room"
-                  width={1200}
-                  height={800}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  quality={82}
-                  className="w-full h-[250px] md:h-[380px] object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
+              <AnimatedSection variant="parallax">
+                <div className="overflow-hidden">
+                  <ImageReveal>
+                    <Image
+                      src="/hero-image/image-03.png"
+                      alt="Sheraton Canada hotel room"
+                      width={1200}
+                      height={800}
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      quality={82}
+                      className="w-full h-[250px] md:h-[380px] object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </ImageReveal>
+                </div>
+              </AnimatedSection>
               <div className="flex items-center justify-between mt-3">
                 <div className="w-auto pr-3">
                   <div className="w-2 h-2 rounded-full bg-[#271E07]"></div>
@@ -89,17 +102,21 @@ export default function Sections03() {
           <div className="flex flex-col gap-6 md:gap-8 mt-0 md:mt-32">
             {/* Project 2 - MaisonArt */}
             <div className="group">
-              <div className="overflow-hidden">
-                <Image
-                  src="/hero-image/image-02.png"
-                  alt="MaisonArt office space"
-                  width={1200}
-                  height={800}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  quality={82}
-                  className="w-full h-[200px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
+              <AnimatedSection variant="parallax">
+                <div className="overflow-hidden">
+                  <ImageReveal>
+                    <Image
+                      src="/hero-image/image-02.png"
+                      alt="MaisonArt office space"
+                      width={1200}
+                      height={800}
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      quality={82}
+                      className="w-full h-[200px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </ImageReveal>
+                </div>
+              </AnimatedSection>
               <div className="flex items-center justify-between mt-3">
                 <div className="w-auto pr-3">
                   <div className="w-2 h-2 rounded-full bg-[#271E07]"></div>
@@ -124,17 +141,21 @@ export default function Sections03() {
 
             {/* Project 4 - JW Marriott Nairobi */}
             <div className="group">
-              <div className="overflow-hidden">
-                <Image
-                  src="/hero-image/image-02.png"
-                  alt="JW Marriott Nairobi restaurant"
-                  width={1200}
-                  height={800}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  quality={82}
-                  className="w-full h-[200px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
+              <AnimatedSection variant="parallax">
+                <div className="overflow-hidden">
+                  <ImageReveal>
+                    <Image
+                      src="/hero-image/image-02.png"
+                      alt="JW Marriott Nairobi restaurant"
+                      width={1200}
+                      height={800}
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      quality={82}
+                      className="w-full h-[200px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </ImageReveal>
+                </div>
+              </AnimatedSection>
               <div className="flex items-center justify-between mt-3">
                 <div className="w-auto pr-3">
                   <div className="w-2 h-2 rounded-full bg-[#271E07]"></div>
