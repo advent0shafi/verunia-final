@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
+import LoadingUIWrapper from "@/components/ui/loading-ui-wrapper";
 
 
 
@@ -27,7 +28,7 @@ export default function RootLayout({
       <body
         className={`${instrumentSans.variable} ${fraunces.variable} antialiased`}
       >
-        {children}
+        <LoadingUIWrapper>  {children} </LoadingUIWrapper>
       </body>
     </html>
   );
