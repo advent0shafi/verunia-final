@@ -12,7 +12,6 @@ export default function Home() {
     <main>
       <Header />
       <Hero />
-
       <Sections />
 
       <AnimatedSection variant="fade">

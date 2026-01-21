@@ -40,7 +40,8 @@ export default function AnimatedSection({
       target: ref,
       offset: ["start end", "end start"],
     });
-    const parallaxY = useTransform(scrollYProgress, [0, 1], [20, -20]);
+    // Increased parallax movement for more noticeable effect
+    const parallaxY = useTransform(scrollYProgress, [0, 1], [50, -50]);
     
     return (
       <motion.div

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
 import LoadingUIWrapper from "@/components/ui/loading-ui-wrapper";
+import SmoothScroll from "@/components/smooth-scroll";
 
 
 
@@ -28,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${instrumentSans.variable} ${fraunces.variable} antialiased`}
       >
-        <LoadingUIWrapper>  {children} </LoadingUIWrapper>
+        <LoadingUIWrapper>  <SmoothScroll> {children} </SmoothScroll> </LoadingUIWrapper>
       </body>
     </html>
   );

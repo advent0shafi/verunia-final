@@ -2,12 +2,61 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 import mainLogo from "@/public/logo/main_logo.png";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  const mobileLinks = [
+    { href: "/interior", label: "V Interior" },
+    { href: "/furniture", label: "V-Furnitures" },
+    { href: "/ai-fotivo", label: "Al Fotivo" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+  ];
+
+  // Awwwards-like easing used in Olivier LaRose's nav-menu demo
+  const awTransition = prefersReducedMotion
+    ? ({ duration: 0 } as const)
+    : ({ duration: 1, ease: [0.76, 0, 0.24, 1] as const } as const);
+
+  const backdrop = {
+    initial: { opacity: 0 },
+    open: { opacity: 1, transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.35 } },
+    closed: { opacity: 0, transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.35 } },
+  } as const;
+
+  const menuPanel = {
+    initial: { height: 0 },
+    open: { height: "100vh", transition: awTransition },
+    closed: { height: 0, transition: awTransition },
+  } as const;
+
+  const itemTranslate = {
+    initial: { y: "100%", opacity: 0 },
+    open: (i: number) => ({
+      y: 0,
+      opacity: 1,
+      transition: prefersReducedMotion
+        ? { duration: 0 }
+        : { duration: 1, ease: [0.76, 0, 0.24, 1] as const, delay: 0.12 + i * 0.06 },
+    }),
+    closed: (i: number) => ({
+      y: "100%",
+      opacity: 0,
+      transition: prefersReducedMotion
+        ? { duration: 0 }
+        : {
+            duration: 0.7,
+            ease: [0.76, 0, 0.24, 1] as const,
+            delay: (mobileLinks.length - 1 - i) * 0.03,
+          },
+    }),
+  } as const;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,82 +140,92 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden flex flex-col gap-1.5 p-2"
-            aria-label="Open menu"
+            className="md:hidden flex flex-col gap-1.5 p-2 relative w-8 h-8 justify-center items-center"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-header-menu"
-            onClick={() => setMenuOpen(true)}
+            onClick={() => setMenuOpen(!menuOpen)}
           >
-            <span className="w-6 h-0.5 bg-black"></span>
-            <span className="w-6 h-0.5 bg-black"></span>
-            <span className="w-6 h-0.5 bg-black"></span>
+            <motion.span
+              className="w-6 h-0.5 bg-black absolute"
+              animate={menuOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -6 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            />
+            <motion.span
+              className="w-6 h-0.5 bg-black absolute"
+              animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+            />
+            <motion.span
+              className="w-6 h-0.5 bg-black absolute"
+              animate={menuOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 6 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            />
           </button>
         </div>
       </header>
 
       {/* Mobile Menu Overlay */}
-      {menuOpen && (
-        <div
-          className="fixed inset-0 z-60 bg-black/60 flex flex-col md:hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile menu"
-          onClick={() => setMenuOpen(false)}
-        >
-          <div className="flex justify-end p-6">
-            <button
-              type="button"
-              className="text-white text-3xl leading-none"
-              aria-label="Close menu"
-              onClick={() => setMenuOpen(false)}
-            >
-              &times;
-            </button>
-          </div>
-
-          <nav
-            id="mobile-header-menu"
-            className="flex flex-col items-center justify-center flex-1 gap-6"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="fixed inset-0 z-60 md:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile menu"
+            initial={prefersReducedMotion ? false : "initial"}
+            animate="open"
+            exit="closed"
           >
-            <Link
-              href="/interior"
+            {/* Backdrop */}
+            <motion.div
+              className="absolute inset-0 bg-black/40"
+              variants={backdrop}
               onClick={() => setMenuOpen(false)}
-              className="text-white text-xl font-semibold transition-colors hover:text-gray-300"
+            />
+
+            {/* Slide-down panel (height reveal) */}
+            <motion.div
+              className="absolute top-0 left-0 w-full bg-[#171412] overflow-hidden flex flex-col"
+              variants={menuPanel}
+              onClick={(e) => e.stopPropagation()}
             >
-              V Interior
-            </Link>
-            <Link
-              href="/furniture"
-              onClick={() => setMenuOpen(false)}
-              className="text-white text-xl font-semibold transition-colors hover:text-gray-300"
-            >
-              V-Furnitures
-            </Link>
-            <Link
-              href="/ai-fotivo"
-              onClick={() => setMenuOpen(false)}
-              className="text-white text-xl font-semibold transition-colors hover:text-gray-300"
-            >
-              Al Fotivo
-            </Link>
-            <Link
-              href="/about"
-              onClick={() => setMenuOpen(false)}
-              className="text-white text-xl font-semibold transition-colors hover:text-gray-300"
-            >
-              About
-            </Link>
-            <Link
-              href="/contact"
-              onClick={() => setMenuOpen(false)}
-              className="text-white text-xl font-semibold transition-colors hover:text-gray-300"
-            >
-              Contact
-            </Link>
-          </nav>
-        </div>
-      )}
+              <div className="flex justify-end p-6">
+                <motion.button
+                  type="button"
+                  className="text-white text-3xl leading-none w-10 h-10 flex items-center justify-center"
+                  aria-label="Close menu"
+                  onClick={() => setMenuOpen(false)}
+                  whileHover={prefersReducedMotion ? {} : { scale: 1.08 }}
+                  whileTap={prefersReducedMotion ? {} : { scale: 0.96 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  &times;
+                </motion.button>
+              </div>
+
+              <nav
+                id="mobile-header-menu"
+                className="flex flex-col items-center justify-center flex-1 gap-6 pb-10"
+              >
+                {mobileLinks.map((item, i) => (
+                  <div key={item.href} className="overflow-hidden">
+                    <motion.div custom={i} variants={itemTranslate}>
+                      <Link
+                        href={item.href}
+                        onClick={() => setMenuOpen(false)}
+                        className="text-white text-xl font-semibold font-fraunces transition-colors hover:text-gray-300 block"
+                      >
+                        {item.label}
+                      </Link>
+                    </motion.div>
+                  </div>
+                ))}
+              </nav>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
