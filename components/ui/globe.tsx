@@ -13,7 +13,6 @@ declare module "@react-three/fiber" {
   }
 }
 
-extend({ ThreeGlobe: ThreeGlobe });
 
 const RING_PROPAGATION_SPEED = 3;
 const aspect = 1.2;
@@ -63,7 +62,7 @@ interface WorldProps {
 let numbersOfRings = [0];
 
 export function Globe({ globeConfig, data }: WorldProps) {
-  const globeRef = useRef<ThreeGlobe | null>(null);
+  const globeRef = useRef<any>(null);
   const groupRef = useRef();
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -86,12 +85,23 @@ export function Globe({ globeConfig, data }: WorldProps) {
 
   // Initialize globe only once
   useEffect(() => {
-    if (!globeRef.current && groupRef.current) {
+    let mounted = true;
+  
+    (async () => {
+      const mod = await import("three-globe");
+      if (!mounted) return;
+  
+      const ThreeGlobe = mod.default;
       globeRef.current = new ThreeGlobe();
-      (groupRef.current as any).add(globeRef.current);
+      (groupRef.current as any)?.add(globeRef.current);
       setIsInitialized(true);
-    }
+    })();
+  
+    return () => {
+      mounted = false;
+    };
   }, []);
+  
 
   // Build material when globe is initialized or when relevant props change
   useEffect(() => {

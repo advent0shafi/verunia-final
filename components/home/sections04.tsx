@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import dynamic from "next/dynamic";
 
@@ -16,7 +17,7 @@ export function GlobeDemo() {
     atmosphereAltitude: 0.06,
     emissive: "#000000",
     emissiveIntensity: 0.15,
-    shininess: 0.8,
+    shininess: 0.8, 
     polygonColor: "rgba(238, 186, 120, 0.35)",
     ambientLight: "#FDBA74",
     directionalLeftLight: "#FFE6CC",
