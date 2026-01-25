@@ -92,7 +92,7 @@ export default function InteriorHeader() {
         </button>
 
         {/* Centered Logo */}
-        <div className="absolute left-1/2 top-1/2 bg-red-300 -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute left-1/2 top-1/2  -translate-x-1/2 -translate-y-1/2">
           <Link href="/">
             <Image
               src="/logo/main_logo.png"
