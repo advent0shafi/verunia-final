@@ -1,0 +1,1 @@
+export const frontendPoint = 'https://verunia.com'
