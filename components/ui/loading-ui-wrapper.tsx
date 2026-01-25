@@ -1,7 +1,9 @@
 "use client"
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import LoadingThumbnail from "./loading-thumbnail";
 import { motion, AnimatePresence } from "motion/react";
+
+export const LoadingContext = createContext({ isLoading: true });
 
 export default function LoadingUIWrapper({ children }: { children: React.ReactNode }) {
     const [isLoading, setIsLoading] = useState(true)
@@ -15,7 +17,7 @@ export default function LoadingUIWrapper({ children }: { children: React.ReactNo
     }, [])
 
     return (
-        <>
+        <LoadingContext.Provider value={{ isLoading }}>
             <AnimatePresence>
                 {isLoading && (
                     <motion.div
@@ -29,6 +31,6 @@ export default function LoadingUIWrapper({ children }: { children: React.ReactNo
                 )}
             </AnimatePresence>
             {children}
-        </>
+        </LoadingContext.Provider>
     )
 }

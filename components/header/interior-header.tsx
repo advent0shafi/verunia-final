@@ -76,7 +76,7 @@ export default function InteriorHeader() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-transparent">
-      <div className="flex items-center max-w-[1440px] mx-auto justify-between px-6 py-4 relative">
+      <div className="flex items-center max-w-[1440px] mx-auto justify-between px-6 py-4 bg- relative">
         {/* Hamburger menu (same as initial layout; visible on desktop too) */}
         <button
           type="button"
@@ -92,7 +92,7 @@ export default function InteriorHeader() {
         </button>
 
         {/* Centered Logo */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute left-1/2 top-1/2 bg-red-300 -translate-x-1/2 -translate-y-1/2">
           <Link href="/">
             <Image
               src="/logo/main_logo.png"
@@ -155,10 +155,11 @@ export default function InteriorHeader() {
                 {mobileLinks.map((item, i) => (
                   <div key={item.href} className="overflow-hidden">
                     <motion.div custom={i} variants={itemTranslate}>
+
                       <Link
                         href={item.href}
                         onClick={() => setMenuOpen(false)}
-                        className="text-white text-xl font-semibold font-fraunces transition-colors hover:text-gray-300 block"
+                        className="text-white font-fraunces  font-medium font-fra text-[48px] leading-[60px] [-letter-spacing:-0.02em] font-semibold font-fraunces transition-colors hover:text-gray-300 block"
                       >
                         {item.label}
                       </Link>

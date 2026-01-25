@@ -1,18 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useReducedMotion } from "motion/react";
 import { HeroCarousel } from "./hero/hero-carousel";
 import { HeroLogoSection } from "./hero/hero-logo-section";
 import { ScrollRevealText } from "./hero/scroll-reveal-text";
+import { LoadingContext } from "@/components/ui/loading-ui-wrapper";
 
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
+  const { isLoading } = useContext(LoadingContext);
+  const isLoaded = !isLoading;
 
   return (
     <section className="relative w-full overflow-hidden bg-[#FFFDFA]">
