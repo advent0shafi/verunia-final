@@ -1,3 +1,4 @@
+import { ImageReveal } from "@/components/home/animated-section";
 import SectionContainer from "../ui/section-container";
 import Image from "next/image";
 
@@ -26,13 +27,15 @@ function InteriorImageCard({
 }: InteriorImageCardProps) {
     return (
         <div className={`w-full h-full object-cover ${minHeight} ${maxHeight} relative`}>
-            <Image 
-                src={src}
-                alt={alt}
-                width={width}
-                height={height}
-                className={`w-full h-full object-cover ${minHeight} ${maxHeight}`}
-            />
+            <ImageReveal className={`w-full h-full ${minHeight} ${maxHeight}`}>
+                <Image
+                    src={src}
+                    alt={alt}
+                    width={width}
+                    height={height}
+                    className={`w-full h-full object-cover`}
+                />
+            </ImageReveal>
             <div
                 className={`
                     absolute 
@@ -73,14 +76,14 @@ export default function InteriorSection01() {
             <div className="w-full max-w-[1440px] h-full max-md:max-w-full py-8 md:py-10 relative overflow-hidden">
                 <div className="w-full h-full flex flex-col md:flex-row ">
                     <div className="w-full md:w-[45%]  p-2 md:p-4 pl-0 ">
-                        <InteriorImageCard 
+                        <InteriorImageCard
                             src="/interior-page/interior-01.png"
                             alt="Interior Section 01"
                             number="01"
                         />
                     </div>
                     <div className="w-full md:w-[55%]  p-2 md:p-4 pl-0 ">
-                        <InteriorImageCard 
+                        <InteriorImageCard
                             src="/interior-page/interior-02.png"
                             alt="Interior Section 01"
                             number="02"
@@ -88,7 +91,7 @@ export default function InteriorSection01() {
                     </div>
                 </div>
                 <div className="w-full md:w-full  p-2 md:px-4 pb-4 pl-0 ">
-                    <InteriorImageCard 
+                    <InteriorImageCard
                         src="/interior-page/interior-02.png"
                         alt="Interior Section 01"
                         number="03"

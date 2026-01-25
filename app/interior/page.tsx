@@ -10,25 +10,40 @@ import { Metadata } from "next";
 import { frontendPoint } from "@/lib/getData";
 import AiFotivoAward from "@/components/ai-fotivo-page/ai-fotivo-award";
 export const metadata: Metadata = {
-    title: 'Interior',
+  title: 'Interior',
+  description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
+  keywords: ['Furniture', 'Verunia Furniture Trading LLC'],
+  openGraph: {
+    title: 'Interior - Verunia',
     description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
-    keywords: ['Furniture', 'Verunia Furniture Trading LLC'],
-    openGraph: {
-        title: 'Interior - Verunia',
-        description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
-        images: [{ url: `${frontendPoint}/opengraph-image.png` }],
-    },
-} 
+    images: [{ url: `${frontendPoint}/opengraph-image.png` }],
+  },
+}
+
+import AnimatedSection from "@/components/home/animated-section";
 
 export default function InteriorPage() {
   return (
     <main>
       <InteriorHeader />
       <InteriorHeroPage />
-      <InteriorSection01 />
-      <InteriorSection02 />
-      <InteriorSection03 />
-      <AiFotivoAward/>
+
+      <AnimatedSection variant="fade">
+        <InteriorSection01 />
+      </AnimatedSection>
+
+      <AnimatedSection variant="slide-up">
+        <InteriorSection02 />
+      </AnimatedSection>
+
+      <AnimatedSection variant="scale">
+        <InteriorSection03 />
+      </AnimatedSection>
+
+      <AnimatedSection variant="fade">
+        <AiFotivoAward />
+      </AnimatedSection>
+
       <Footer />
     </main>
   );
