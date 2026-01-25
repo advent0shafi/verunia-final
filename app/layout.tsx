@@ -17,6 +17,7 @@ const fraunces = Fraunces({ subsets: ["latin"], weight: ["400", "500", "600", "7
 export const metadata: Metadata = {
   title: "Verunia",
   description: "Interior design studio",
+  
 };
 
 export default function RootLayout({
