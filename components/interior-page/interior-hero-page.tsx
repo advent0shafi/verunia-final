@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import interiorHero from "@/public/interior-page/hero-01.png";
+import interiorHero from "@/public/interior-page/image-interior-01.png";
 
 import { ImageReveal } from "@/components/home/animated-section";
 

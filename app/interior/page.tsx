@@ -24,7 +24,7 @@ import AnimatedSection from "@/components/home/animated-section";
 
 export default function InteriorPage() {
   return (
-    <main>
+    <main className="bg-[#171412]">
       <InteriorHeader />
       <InteriorHeroPage />
 

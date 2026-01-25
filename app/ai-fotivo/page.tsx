@@ -7,7 +7,7 @@ import AiFotivoSection03 from "@/components/ai-fotivo-page/ai-fotivo-section03";
 import AiFotivoSection04 from "@/components/ai-fotivo-page/ai-fotivo-section04";
 import AiFotivoSection05 from "@/components/ai-fotivo-page/ai-fotivo-section05"
 import { Metadata } from "next";
-import { frontendPoint } from "@/lib/getData"   ;
+import { frontendPoint } from "@/lib/getData";
 import AiFotivoAward from "@/components/ai-fotivo-page/ai-fotivo-award";
 export const metadata: Metadata = {
     title: 'Al Fotivo',
@@ -19,17 +19,38 @@ export const metadata: Metadata = {
         images: [{ url: `${frontendPoint}/opengraph-image.png` }],
     },
 }
+import AnimatedSection from "@/components/home/animated-section";
+
 export default function AiFotivoPage() {
     return (
         <main>
             <AiFotivaHeader />
             <AiFotivoHero />
-            <AiFotivoSection01 />
-            <AiFotivoSection02 />
-            <AiFotivoSection03 />
-            <AiFotivoSection04 />
-            <AiFotivoSection05 />
-            <AiFotivoAward />
+
+            <AnimatedSection variant="fade">
+                <AiFotivoSection01 />
+            </AnimatedSection>
+
+            <AnimatedSection variant="slide-up">
+                <AiFotivoSection02 />
+            </AnimatedSection>
+
+            <AnimatedSection variant="scale">
+                <AiFotivoSection03 />
+            </AnimatedSection>
+
+            <AnimatedSection variant="slide-up">
+                <AiFotivoSection04 />
+            </AnimatedSection>
+
+            <AnimatedSection variant="fade">
+                <AiFotivoSection05 />
+            </AnimatedSection>
+
+            <AnimatedSection variant="fade">
+                <AiFotivoAward />
+            </AnimatedSection>
+
             <Footer />
         </main>
     )

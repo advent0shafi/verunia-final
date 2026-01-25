@@ -1,5 +1,4 @@
 import { ImageReveal } from "@/components/home/animated-section";
-import SectionContainer from "../ui/section-container";
 import Image from "next/image";
 
 type InteriorImageCardProps = {
@@ -33,6 +32,7 @@ function InteriorImageCard({
                     alt={alt}
                     width={width}
                     height={height}
+                    priority
                     className={`w-full h-full object-cover`}
                 />
             </ImageReveal>
@@ -73,26 +73,26 @@ function InteriorImageCard({
 export default function InteriorSection01() {
     return (
         <section className="items-center bg-[#171412] flex flex-col justify-center px-4 md:px-6 lg:px-8">
-            <div className="w-full max-w-[1440px] h-full max-md:max-w-full py-8 md:py-10 relative overflow-hidden">
+            <div className="w-full max-w-[1440px]  h-full max-md:max-w-full py-8 md:py-10 relative overflow-hidden">
                 <div className="w-full h-full flex flex-col md:flex-row ">
                     <div className="w-full md:w-[45%]  p-2 md:p-4 pl-0 ">
                         <InteriorImageCard
-                            src="/interior-page/interior-01.png"
+                            src="/interior-page/image-interior-02.png"
                             alt="Interior Section 01"
                             number="01"
                         />
                     </div>
                     <div className="w-full md:w-[55%]  p-2 md:p-4 pl-0 ">
                         <InteriorImageCard
-                            src="/interior-page/interior-02.png"
-                            alt="Interior Section 01"
+                            src="/interior-page/image-interior-03.png"
+                            alt="Interior"
                             number="02"
                         />
                     </div>
                 </div>
                 <div className="w-full md:w-full  p-2 md:px-4 pb-4 pl-0 ">
                     <InteriorImageCard
-                        src="/interior-page/interior-02.png"
+                        src="/interior-page/image-interior-040.png"
                         alt="Interior Section 01"
                         number="03"
                         height={671}

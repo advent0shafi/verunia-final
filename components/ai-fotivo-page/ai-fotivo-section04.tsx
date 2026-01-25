@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { ImageReveal, TextReveal } from "@/components/home/animated-section";
+
 type CollectionCardProps = {
     title: string;
     imageSrc: string;
@@ -25,13 +27,15 @@ function CollectionCard({ title, imageSrc, href }: CollectionCardProps) {
                 href ? "cursor-pointer" : "",
             ].join(" ")}
         >
-            <Image
-                src={imageSrc}
-                alt={title}
-                fill
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                sizes="(max-width: 640px) 80vw, (max-width: 1024px) 60vw, 480px"
-            />
+            <ImageReveal className="w-full h-full">
+                <Image
+                    src={imageSrc}
+                    alt={title}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    sizes="(max-width: 640px) 80vw, (max-width: 1024px) 60vw, 480px"
+                />
+            </ImageReveal>
 
             {/* Dark overlay + subtle bottom gradient for text legibility */}
             <div className="absolute inset-0 bg-black/35" />
@@ -78,7 +82,7 @@ export default function AiFotivoSection04() {
             imageSrc: "/modern-luxury-outdoor-patio-living-space-with-wood.jpg",
             href: "/furniture",
         },
-        
+
     ] as const;
 
     return (
@@ -108,7 +112,7 @@ export default function AiFotivoSection04() {
                 <h2
                     className="font-fraunces font-light text-[#F5C547] text-[48px] leading-[60px] text-center tracking-[-0.02em] mt-[112px] mb-[42px]"
                 >
-                    Featured works
+                    <TextReveal>Featured works</TextReveal>
                 </h2>
             </div>
         </section>

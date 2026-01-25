@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { ImageReveal } from "@/components/home/animated-section";
+
 type CategoryCardProps = {
   title: string;
   imageSrc: string;
@@ -16,13 +18,15 @@ function CategoryCard({ title, imageSrc, className }: CategoryCardProps) {
         className ?? "",
       ].join(" ")}
     >
-      <Image
-        src={imageSrc}
-        alt={title}
-        fill
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      />
+      <ImageReveal className="w-full h-full">
+        <Image
+          src={imageSrc}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      </ImageReveal>
 
       {/* Dark overlay + subtle bottom gradient for text legibility */}
       <div className="absolute inset-0 bg-black/35" />

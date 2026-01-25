@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { ImageReveal } from "@/components/home/animated-section";
+
 type FeaturedWorkCardProps = {
     title: string;
     location: string;
@@ -15,13 +17,15 @@ function FeaturedWorkCard({ title, location, imageSrc }: FeaturedWorkCardProps) 
                 "min-h-[260px] sm:min-h-[320px] md:min-h-[420px]",
             ].join(" ")}
         >
-            <Image
-                src={imageSrc}
-                alt={title}
-                fill
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 480px"
-            />
+            <ImageReveal className="w-full h-full">
+                <Image
+                    src={imageSrc}
+                    alt={title}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 480px"
+                />
+            </ImageReveal>
 
             {/* Dark overlay + subtle bottom gradient for text legibility */}
             <div className="absolute inset-0 bg-black/30" />
@@ -60,14 +64,16 @@ function LuxuryCollectionBanner({ imageSrc }: LuxuryCollectionBannerProps) {
                 "min-h-[320px] md:min-h-[687px]",
             ].join(" ")}
         >
-            <Image
-                src={imageSrc}
-                alt="Luxury Collection"
-                fill
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                sizes="(max-width: 768px) 100vw, 1440px"
-                priority={false}
-            />
+            <ImageReveal className="w-full h-full">
+                <Image
+                    src={imageSrc}
+                    alt="Luxury Collection"
+                    fill
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                    sizes="(max-width: 768px) 100vw, 1440px"
+                    priority={false}
+                />
+            </ImageReveal>
 
             {/* Dark overlay + subtle bottom gradient for text legibility */}
             <div className="absolute inset-0 bg-black/45" />
