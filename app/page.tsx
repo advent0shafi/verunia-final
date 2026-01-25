@@ -1,3 +1,4 @@
+'use client'
 import Header from "@/components/header/header";
 import Hero from "@/components/home/hero";
 import AnimatedSection from "@/components/home/animated-section";
