@@ -8,6 +8,7 @@ import AiFotivoSection04 from "@/components/ai-fotivo-page/ai-fotivo-section04";
 import AiFotivoSection05 from "@/components/ai-fotivo-page/ai-fotivo-section05"
 import { Metadata } from "next";
 import { frontendPoint } from "@/lib/getData"   ;
+import AiFotivoAward from "@/components/ai-fotivo-page/ai-fotivo-award";
 export const metadata: Metadata = {
     title: 'Al Fotivo',
     description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
@@ -28,6 +29,7 @@ export default function AiFotivoPage() {
             <AiFotivoSection03 />
             <AiFotivoSection04 />
             <AiFotivoSection05 />
+            <AiFotivoAward />
             <Footer />
         </main>
     )

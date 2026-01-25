@@ -8,6 +8,7 @@ import InteriorSection03 from "@/components/interior-page/interior-section-03";
 
 import { Metadata } from "next";
 import { frontendPoint } from "@/lib/getData";
+import AiFotivoAward from "@/components/ai-fotivo-page/ai-fotivo-award";
 export const metadata: Metadata = {
     title: 'Interior',
     description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
@@ -27,6 +28,7 @@ export default function InteriorPage() {
       <InteriorSection01 />
       <InteriorSection02 />
       <InteriorSection03 />
+      <AiFotivoAward/>
       <Footer />
     </main>
   );

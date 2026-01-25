@@ -12,6 +12,7 @@ export default function Header() {
   const prefersReducedMotion = useReducedMotion();
 
   const mobileLinks = [
+    { href: "/", label: "Home" },
     { href: "/interior", label: "V Interior" },
     { href: "/furniture", label: "V-Furnitures" },
     { href: "/ai-fotivo", label: "Al Fotivo" },
@@ -214,7 +215,7 @@ export default function Header() {
                       <Link
                         href={item.href}
                         onClick={() => setMenuOpen(false)}
-                        className="text-white text-xl font-semibold font-fraunces transition-colors hover:text-gray-300 block"
+                        className="text-white font-fraunces  font-medium  text-[48px] leading-[60px] [-letter-spacing:-0.02em]  transition-colors hover:text-gray-300 block"
                       >
                         {item.label}
                       </Link>
