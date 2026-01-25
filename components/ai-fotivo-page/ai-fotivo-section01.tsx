@@ -24,7 +24,25 @@ export default function AiFotivoSection01() {
                 priority
             />
             <div className="relative z-10 py-16">
-                <h1 className="font-fraunces font-light max-w-[486.5px] mx-auto text-[60px] leading-[64px] text-center text-[#F5C547] [-letter-spacing:-0.02em] drop-shadow-lg">
+                <h1
+                    className="
+                        font-fraunces
+                    
+                        text-[39.37px]
+                        leading-[41.99px]
+                        [-letter-spacing:-2%]
+                        text-center
+                        text-[#F5C547]
+                        max-w-[486.5px]
+                        mx-auto
+                        drop-shadow-lg
+                        md:text-[60px]
+                        md:leading-[64px]
+                    "
+                    style={{
+                        fontStyle: "normal", // override for "Light" in Tailwind: font-light, with 300 is fine
+                    }}
+                >
                     <TextReveal>When “standard” is</TextReveal> <span className="italic"><TextReveal>not an option.</TextReveal></span>
                 </h1>
                 <p className="font-instrument text-[#FFFDFA] font-normal text-[16px] leading-[24px] tracking-normal text-center max-w-[588.431640625px] mx-auto py-[32px]">

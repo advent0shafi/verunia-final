@@ -1,8 +1,15 @@
 import Image from "next/image"
 import { ImageReveal } from "@/components/home/animated-section";
+import interior00 from "@/public/interior-page/image-interior-00.png";
+import interior05 from "@/public/interior-page/image-interior-05.png";
+import interior06 from "@/public/interior-page/image-interior-06.png";
+import interior07 from "@/public/interior-page/image-interior-07.png";
+import interior08 from "@/public/interior-page/image-interior-08.png";
+import interior09 from "@/public/interior-page/image-interior-09.png";
+import { StaticImageData } from "next/image";
 
 type InteriorImageCardProps = {
-    src: string;
+    src: StaticImageData;
     alt: string;
     number: string;
     year?: string;
@@ -75,7 +82,7 @@ export default function InteriorSection03() {
             <div className="w-full max-w-[1440px] h-full max-md:max-w-full py-8 md:py-10 relative overflow-hidden">
                   <div className="w-full md:w-full  p-2 md:px-4 pb-4 pl-0 ">
                     <InteriorImageCard
-                        src="/interior-page/image-interior-00.png"
+                        src={interior00}
                         alt="Interior Section 03 Card 3"
                         number="03"
                         height={671}
@@ -85,14 +92,14 @@ export default function InteriorSection03() {
                 <div className="w-full h-full flex flex-col md:flex-row ">
                     <div className="w-full md:w-[45%]  p-2 md:p-4 pl-0 ">
                         <InteriorImageCard
-                            src="/interior-page/image-interior-05.png"
+                            src={interior05}
                             alt="Interior Section 03 Card 1"
                             number="01"
                         />
                     </div>
                     <div className="w-full md:w-[55%]  p-2 md:p-4 pl-0 ">
                         <InteriorImageCard
-                            src="/interior-page/image-interior-06.png"
+                            src={interior06}
                             alt="Interior Section 03 Card 2"
                             number="02"
                         />
@@ -100,7 +107,7 @@ export default function InteriorSection03() {
                 </div>
                 <div className="w-full md:w-full  p-2 md:px-4 pb-4 pl-0 ">
                     <InteriorImageCard
-                        src="/interior-page/image-interior-07.png"
+                        src={interior07}
                         alt="Interior Section 03 Card 3"
                         number="03"
                         height={671}
@@ -110,14 +117,14 @@ export default function InteriorSection03() {
                 <div className="w-full h-full flex flex-col md:flex-row ">
                     <div className="w-full md:w-[45%]  p-2 md:p-4 pl-0 ">
                         <InteriorImageCard
-                        src="/interior-page/image-interior-08.png"
+                        src={interior09}
                             alt="Interior Section 03 Card 1"
                             number="01"
                         />
                     </div>
                     <div className="w-full md:w-[55%]  p-2 md:p-4 pl-0 ">
                         <InteriorImageCard
-                        src="/interior-page/image-interior-09.png"
+                        src={interior08}
                             alt="Interior Section 03 Card 2"
                             number="02"
                         />

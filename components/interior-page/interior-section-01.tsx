@@ -1,8 +1,11 @@
 import { ImageReveal } from "@/components/home/animated-section";
 import Image from "next/image";
-
+import interior01 from "@/public/interior-page/image-interior-02.png";
+import interior02 from "@/public/interior-page/image-interior-03.png";
+import interior04 from "@/public/interior-page/image-interior-040.png";
+import { StaticImageData } from "next/image";
 type InteriorImageCardProps = {
-    src: string;
+        src: StaticImageData;
     alt: string;
     number: string;
     year?: string;
@@ -32,7 +35,8 @@ function InteriorImageCard({
                     alt={alt}
                     width={width}
                     height={height}
-                    priority
+                    placeholder="blur"
+
                     className={`w-full h-full object-cover`}
                 />
             </ImageReveal>
@@ -77,14 +81,14 @@ export default function InteriorSection01() {
                 <div className="w-full h-full flex flex-col md:flex-row ">
                     <div className="w-full md:w-[45%]  p-2 md:p-4 pl-0 ">
                         <InteriorImageCard
-                            src="/interior-page/image-interior-02.png"
+                            src={interior01}
                             alt="Interior Section 01"
                             number="01"
                         />
                     </div>
                     <div className="w-full md:w-[55%]  p-2 md:p-4 pl-0 ">
                         <InteriorImageCard
-                            src="/interior-page/image-interior-03.png"
+                            src={interior02}
                             alt="Interior"
                             number="02"
                         />
@@ -92,7 +96,7 @@ export default function InteriorSection01() {
                 </div>
                 <div className="w-full md:w-full  p-2 md:px-4 pb-4 pl-0 ">
                     <InteriorImageCard
-                        src="/interior-page/image-interior-040.png"
+                            src={interior04}
                         alt="Interior Section 01"
                         number="03"
                         height={671}

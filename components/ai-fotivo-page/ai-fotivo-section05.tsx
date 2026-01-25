@@ -84,7 +84,17 @@ function LuxuryCollectionBanner({ imageSrc }: LuxuryCollectionBannerProps) {
                     Discover Brands
                 </p>
                 <h3
-                    className="font-fraunces font-light text-[#FFFDFA] text-[48px] leading-[60px] tracking-[-0.02em] text-center py-3 drop-shadow"
+                    className="
+                        font-fraunces 
+                        font-light
+                        text-[48px]
+                        leading-[60px]
+                        [-letter-spacing:-2%]
+                        text-center
+                        text-[#FFFDFA]
+                        py-3
+                        drop-shadow
+                    "
                 >
                     Luxury Collection
                 </h3>
@@ -115,7 +125,7 @@ export default function AiFotivoSection05() {
         {
             title: "Master suite corner",
             location: "Riyadh, Saudi Arabia",
-            imageSrc: "/ai-fotivo-page/ai-fotiva (4).png",
+            imageSrc: "/ai-fotivo-page/riyadh-master.png",
         },
     ] as const;
 
@@ -134,7 +144,7 @@ export default function AiFotivoSection05() {
                 </div>
 
                 <div className="py-[16px]">
-                    <LuxuryCollectionBanner imageSrc="/ai-fotivo-page/ai-fotiva (7).png" />
+                    <LuxuryCollectionBanner imageSrc="/ai-fotivo-page/image-ai-fotiva-10.png" />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
                     {items.map((item) => (
@@ -147,7 +157,7 @@ export default function AiFotivoSection05() {
                     ))}
                 </div>
                 <div className="py-[16px]">
-                    <LuxuryCollectionBanner imageSrc="/ai-fotivo-page/ai-fotiva04.png" />
+                    <LuxuryCollectionBanner imageSrc="/ai-fotivo-page/image-luxuary.png" />
                 </div>
             </div>
         </section>

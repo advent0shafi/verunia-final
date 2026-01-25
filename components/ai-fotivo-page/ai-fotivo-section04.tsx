@@ -1,11 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { StaticImageData } from "next/image";
 import { ImageReveal, TextReveal } from "@/components/home/animated-section";
-
+import imageAiFotiva06 from "@/public/ai-fotivo-page/image-ai-fotiva-06.png";
+import imageAiFotiva07 from "@/public/ai-fotivo-page/image-ai-fotiva-07.png";
+import imageAiFotiva08 from "@/public/ai-fotivo-page/image-ai-fotiva-08.png";
+import imageAiFotiva09 from "@/public/ai-fotivo-page/image-ai-fotiva-09.png";   
 type CollectionCardProps = {
     title: string;
-    imageSrc: string;
+    imageSrc: StaticImageData;
     href?: string;
 };
 
@@ -32,6 +35,7 @@ function CollectionCard({ title, imageSrc, href }: CollectionCardProps) {
                     src={imageSrc}
                     alt={title}
                     fill
+                    placeholder="blur"
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     sizes="(max-width: 640px) 80vw, (max-width: 1024px) 60vw, 480px"
                 />
@@ -64,22 +68,22 @@ export default function AiFotivoSection04() {
     const collections = [
         {
             title: "Dining Collection",
-            imageSrc: "/contemporary-living-space-with-panoramic-windows-a.jpg",
+            imageSrc: imageAiFotiva06,
             href: "/furniture",
         },
         {
             title: "Living Collection",
-            imageSrc: "/modern-luxury-living-room-with-large-windows--slee.jpg",
+            imageSrc: imageAiFotiva07,
             href: "/furniture",
         },
         {
             title: "Luxury Collection",
-            imageSrc: "/elegant-belgian-interior-sapphire-house-ornate-sta.jpg",
+            imageSrc: imageAiFotiva08,
             href: "/interior",
         },
         {
             title: "Outdoor Collection",
-            imageSrc: "/modern-luxury-outdoor-patio-living-space-with-wood.jpg",
+            imageSrc: imageAiFotiva09,
             href: "/furniture",
         },
 

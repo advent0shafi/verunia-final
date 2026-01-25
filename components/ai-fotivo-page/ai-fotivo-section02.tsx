@@ -1,10 +1,14 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 import { ImageReveal } from "@/components/home/animated-section";
-
+import imageAiFotiva01 from "@/public/ai-fotivo-page/image-ai-fotiva-01.png";
+import imageAiFotiva02 from "@/public/ai-fotivo-page/image-ai-fotiva-02.png";
+import imageAiFotiva03 from "@/public/ai-fotivo-page/image-ai-fotiva-03.png";
+import imageAiFotiva04 from "@/public/ai-fotivo-page/image-ai-fotiva-04.png";
+import imageAiFotiva05 from "@/public/ai-fotivo-page/image-ai-fotiva-05.png";
 type CategoryCardProps = {
   title: string;
-  imageSrc: string;
+      imageSrc: StaticImageData;
   className?: string;
 };
 
@@ -23,6 +27,7 @@ function CategoryCard({ title, imageSrc, className }: CategoryCardProps) {
           src={imageSrc}
           alt={title}
           fill
+          placeholder="blur"
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
@@ -35,10 +40,9 @@ function CategoryCard({ title, imageSrc, className }: CategoryCardProps) {
       <div className="absolute bottom-0 left-0 p-4 md:p-6">
         <h3
           className="
-            font-fraunces font-light text-[#FFFDFA]
-            text-[36px] leading-[44px]
-            tracking-[-0.02em] text-center
-            drop-shadow
+            font-fraunces font-light text-[30px] leading-[38px] tracking-normal
+            text-center drop-shadow text-[#FFFDFA]
+            md:text-[36px] md:leading-[44px] md:tracking-[-0.02em]
           "
         >
           {title}
@@ -52,27 +56,27 @@ export default function AiFotivoSection02() {
   const items = [
     {
       title: "Furniture",
-      imageSrc: "/ai-fotivo-page/ai-fotiva04.png",
+      imageSrc: imageAiFotiva01,
       className: "lg:col-span-3 md:min-h-[260px]",
     },
     {
       title: "Lighting",
-      imageSrc: "/ai-fotivo-page/ai-fotiva02.png",
+      imageSrc: imageAiFotiva02,
       className: "lg:col-span-3 md:min-h-[260px]",
     },
     {
       title: "Crystals",
-      imageSrc: "/ai-fotivo-page/ai-fotiva01.jpg",
+      imageSrc: imageAiFotiva03,
       className: "lg:col-span-2",
     },
     {
       title: "Textiles",
-      imageSrc: "/ai-fotivo-page/ai-fotiva03.jpg",
+      imageSrc: imageAiFotiva04,
       className: "lg:col-span-2",
     },
     {
       title: "Accessories",
-      imageSrc: "/interior-page/interior-04.png",
+      imageSrc: imageAiFotiva05,
       className: "lg:col-span-2",
     },
   ] as const;

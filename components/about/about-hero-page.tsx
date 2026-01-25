@@ -1,6 +1,6 @@
 import Image from "next/image";
 import SectionContainer from "../ui/section-container";
-
+import imageAboutHeroPage from "@/public/about-page/image-01.png";
 export default function AboutHeroPage() {
     return (
         <section className="bg-[#FFFDFA] w-full relative">
@@ -31,10 +31,11 @@ export default function AboutHeroPage() {
                 </div>
                 <div className="mt-6 md:mt-10">
                     <Image
-                        src={'/about-page/image-01.png'}
+                        src={imageAboutHeroPage}
                         alt="Verunia"
                         width={1440}
                         height={535}
+                        placeholder="blur"
                         priority
                         className="w-full h-[250px] md:h-[400px] lg:h-[535px] object-cover rounded-[6px] md:rounded-none"
                     />
