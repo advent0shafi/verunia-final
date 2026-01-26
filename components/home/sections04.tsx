@@ -11,7 +11,7 @@ export function GlobeDemo() {
   const globeConfig = {
     pointSize: 4,
     // Warm dark globe + gold/orange accents (matches the provided reference image)
-    globeColor: "#120A06",
+    globeColor: "#135195",
     showAtmosphere: true,
     atmosphereColor: "#FCE7D1",
     atmosphereAltitude: 0.06,
@@ -31,7 +31,7 @@ export function GlobeDemo() {
     autoRotate: true,
     autoRotateSpeed: 0.5,
   };
-  const colors = ["#EA580C", "#F97316", "#C2410C"];
+  const colors = ["#8FC4F0", "#8FC4F0", "#8FC4F0"];
   const pickColor = () => colors[Math.floor(Math.random() * colors.length)];
   const sampleArcs = [
     // Canada → Antwerpen (Belgium)
