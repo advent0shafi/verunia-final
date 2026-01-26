@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 // REPLACE WITH YOUR IMPORTS
@@ -27,28 +27,35 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-play
+  // --- SHARED LOGIC ---
+  const count = slides.length;
+  
+  // Wrapped index for the 3D mobile logic
+  const prevIndex = (index - 1 + count) % count;
+  const nextIndex = (index + 1) % count;
+
+  const goNext = useCallback(() => setIndex((prev) => prev + 1), []);
+  const goPrev = useCallback(() => setIndex((prev) => prev - 1), []);
+
   useEffect(() => {
-    if (isPaused) return;
-    const timer = setInterval(() => {
-      setIndex((prev) => prev + 1);
-    }, 4500);
+    if (isPaused || prefersReducedMotion) return;
+    const timer = setInterval(goNext, 4500);
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, [isPaused, prefersReducedMotion, goNext]);
 
   const getSlideContent = (i: number) => {
-    const wrappedIndex = ((i % slides.length) + slides.length) % slides.length;
+    const wrappedIndex = ((i % count) + count) % count;
     return slides[wrappedIndex];
   };
 
-  // --- DESKTOP VARIANTS (UNCHANGED) ---
+  // --- DESKTOP VARIANTS (From Block 1) ---
   const desktopVariants = {
     center: {
       width: "64.31%",
       height: "64vh",
       left: "50%",
       x: "-50%",
-      zIndex: 10,
+      zIndex: 60,
       opacity: 1,
       scale: 1,
       transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
@@ -59,7 +66,7 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
       left: "calc(50% - 32.155% - 4.44vw - 8.9%)",
       x: "-50%",
       zIndex: 30,
-      opacity: 1,
+      opacity: 0.85,
       scale: 1,
       transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
     },
@@ -69,7 +76,7 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
       left: "calc(50% + 32.155% + 4.44vw + 8.9%)",
       x: "-50%",
       zIndex: 30,
-      opacity: 1,
+      opacity: 0.85,
       scale: 1,
       transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
     },
@@ -81,7 +88,7 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
       zIndex: 10,
       opacity: 0,
       scale: 1,
-      transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+      transition: { duration: 0.8 },
     },
     farRight: {
       width: "17.8%",
@@ -91,72 +98,26 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
       zIndex: 10,
       opacity: 0,
       scale: 1,
-      transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+      transition: { duration: 0.8 },
     },
   };
 
-  // --- MOBILE VARIANTS (MATCHING UPLOADED IMAGE) ---
-  const mobileVariants = {
-    center: {
-      width: "75vw",        // Large, dominant center image
-      height: "55vh",       // Taller portrait aspect ratio
-      left: "50%",
-      x: "-50%",
-      zIndex: 10,
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+  // --- MOBILE 3D SETTINGS (From Block 2) ---
+  const slideVariants3D = {
+    enter: { opacity: 0, scale: 0.85, z: -150 },
+    center: { 
+      opacity: 1, scale: 1, z: 0,
+      transition: { duration: 0.7, ease: [0.32, 0.72, 0, 1] } 
     },
-    left: {
-      width: "20vw",        // Narrow side strips
-      height: "35vh",       // Much shorter than center
-      // Math: Center(50%) - HalfCenter(37.5vw) - Gap(3vw) - HalfSide(10vw)
-      left: "calc(50% - 37.5vw - 3vw - 10vw)", 
-      x: "-50%",
-      zIndex: 30,
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
-    },
-    right: {
-      width: "20vw",
-      height: "35vh",
-      // Math: Center(50%) + HalfCenter(37.5vw) + Gap(3vw) + HalfSide(10vw)
-      left: "calc(50% + 37.5vw + 3vw + 10vw)",
-      x: "-50%",
-      zIndex: 30,
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
-    },
-    farLeft: {
-      width: "20vw",
-      height: "35vh",
-      left: "-50%",
-      x: "-50%",
-      zIndex: 10,
-      opacity: 0,
-      scale: 1,
-      transition: { duration: 0.6 },
-    },
-    farRight: {
-      width: "20vw",
-      height: "35vh",
-      left: "150%",
-      x: "-50%",
-      zIndex: 10,
-      opacity: 0,
-      scale: 1,
-      transition: { duration: 0.6 },
-    },
+    exit: { opacity: 0, scale: 0.85, z: -150 }
   };
 
   return (
     <div className="relative w-full overflow-hidden">
       
-      {/* --- DESKTOP VIEW --- */}
+      {/* --- DESKTOP VIEW (Layout from Block 1) --- */}
       <div 
-        className="flex relative w-full md:h-screen h-[70vh] md:mt-0 mt-[50px] items-center justify-center overflow-hidden"
+        className="hidden md:flex relative w-full h-screen items-center justify-center overflow-hidden"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -174,7 +135,6 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
             return (
               <motion.div
                 key={virtualIndex}
-                layout
                 variants={desktopVariants}
                 initial={offset > 0 ? "farRight" : "farLeft"}
                 animate={pos}
@@ -182,8 +142,8 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
                 className="absolute top-1/2 -translate-y-1/2 overflow-hidden cursor-pointer shadow-2xl"
                 style={{ top: "50%" }}
                 onClick={() => {
-                  if (pos === "left") setIndex(index - 1);
-                  if (pos === "right") setIndex(index + 1);
+                  if (pos === "left") goPrev();
+                  if (pos === "right") goNext();
                 }}
               >
                 <div className="relative w-full h-full">
@@ -198,7 +158,7 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
                   />
                   <div 
                     className="absolute inset-0 bg-black transition-opacity duration-500 pointer-events-none"
-                    style={{ opacity: pos === 'center' ? 0 : 0.1 }} 
+                    style={{ opacity: pos === 'center' ? 0 : 0.15 }} 
                   />
                 </div>
               </motion.div>
@@ -207,60 +167,58 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
         </AnimatePresence>
       </div>
 
-
-      {/* --- MOBILE VIEW --- */}
-      <div 
-        className="hidden relative w-full h-[70vh]  items-center justify-center overflow-hidden"
+      {/* --- MOBILE VIEW (3D Style from Block 2) --- */}
+      <div
+        className="md:hidden relative w-full h-[500px] flex items-center justify-center overflow-hidden mt-[100px]"
+        style={{ perspective: "1000px" }}
         onTouchStart={() => setIsPaused(true)}
         onTouchEnd={() => setIsPaused(false)}
       >
-        <AnimatePresence initial={false} mode="popLayout">
-          {[-2, -1, 0, 1, 2].map((offset) => {
-            const virtualIndex = index + offset;
-            const content = getSlideContent(virtualIndex);
-            
-            let pos = "center";
-            if (offset === -1) pos = "left";
-            else if (offset === 1) pos = "right";
-            else if (offset < -1) pos = "farLeft";
-            else if (offset > 1) pos = "farRight";
+        <div className="flex items-center justify-center gap-[2.5%] w-full" style={{ transformStyle: "preserve-3d" }}>
+          
+          {/* Mobile Left Peek */}
+          <div 
+            className="w-[7%] h-[350px]  relative opacity-60 overflow-hidden"
+            style={{ transform: "perspective(1000px) rotateY(20deg)", transformOrigin: "right center" }}
+            onClick={goPrev}
+          >
+             <Image src={slides[prevIndex].src} alt="prev" fill className="object-cover" sizes="25vw" />
+          </div>
 
-            return (
+          {/* Mobile Center Slide */}
+          <div className="w-[80%] h-[500px] relative" style={{ transformStyle: "preserve-3d" }}>
+            <AnimatePresence initial={false} mode="sync">
               <motion.div
-                key={virtualIndex}
-                layout
-                variants={mobileVariants}
-                initial={offset > 0 ? "farRight" : "farLeft"}
-                animate={pos}
-                exit={offset < 0 ? "farLeft" : "farRight"}
-                // Removed bg-colors and added shadow for clean look
-                className="absolute overflow-hidden shadow-lg "
-                style={{ top: "20%", transform: "translateY(-50%)" }}
-                onClick={() => {
-                   if (pos === "left") setIndex(index - 1);
-                   if (pos === "right") setIndex(index + 1);
-                }}
+                key={index}
+                variants={slideVariants3D}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                className="absolute inset-0 shadow-xl overflow-hidden rounded-sm"
               >
-                <div className="relative w-full h-full">
-                  <Image 
-                    src={content.src} 
-                    alt={content.alt} 
-                    fill 
-                    className="object-cover" 
-                    sizes={pos === "center" ? "75vw" : "20vw"}
-                  />
-                  {/* Optional: Slight dim on side images for depth */}
-                  <div 
-                    className="absolute inset-0 bg-white/10 transition-opacity duration-500 pointer-events-none"
-                    style={{ opacity: pos === 'center' ? 0 : 0.2 }} 
-                  />
-                </div>
+                <Image
+                  src={getSlideContent(index).src}
+                  alt="active"
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="75vw"
+                />
               </motion.div>
-            )
-          })}
-        </AnimatePresence>
+            </AnimatePresence>
+          </div>
+
+          {/* Mobile Right Peek */}
+          <div 
+            className="w-[7%] h-[350px] relative opacity-60 overflow-hidden"
+            style={{ transform: "perspective(1000px) rotateY(-20deg)", transformOrigin: "left center" }}
+            onClick={goNext}
+          >
+             <Image src={slides[nextIndex].src} alt="next" fill className="object-cover" sizes="25vw" />
+          </div>
+
+        </div>
       </div>
-      
     </div>
   );
 };

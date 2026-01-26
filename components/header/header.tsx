@@ -169,7 +169,7 @@ export default function Header() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-60 md:hidden"
+            className="fixed inset-0  md:hidden"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile menu"
@@ -179,14 +179,14 @@ export default function Header() {
           >
             {/* Backdrop */}
             <motion.div
-              className="absolute inset-0 bg-black/40"
+              className="absolute z-90 inset-0 "
               variants={backdrop}
               onClick={() => setMenuOpen(false)}
             />
 
             {/* Slide-down panel (height reveal) */}
             <motion.div
-              className="absolute top-0 left-0 w-full bg-[#171412] overflow-hidden flex flex-col"
+              className="absolute top-0 left-0 w-full bg-[#171412] z-90 overflow-hidden flex flex-col"
               variants={menuPanel}
               onClick={(e) => e.stopPropagation()}
             >
