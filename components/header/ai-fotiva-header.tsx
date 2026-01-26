@@ -134,7 +134,7 @@ export default function AiFotivaHeader() {
 
                         {/* Slide-down panel (height reveal) */}
                         <motion.div
-                            className="absolute top-0 left-0 w-full bg-[#171412] overflow-hidden flex flex-col"
+                            className="absolute top-0 z-40 left-0 w-full bg-[#171412] overflow-hidden flex flex-col"
                             variants={menuPanel}
                             onClick={(e) => e.stopPropagation()}
                         >
