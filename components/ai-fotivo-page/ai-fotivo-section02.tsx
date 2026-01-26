@@ -18,7 +18,7 @@ function CategoryCard({ title, imageSrc, className }: CategoryCardProps) {
       className={[
         "group relative overflow-hidden rounded-[6px]",
         "bg-[#171412] ring-1 ring-white/10",
-        "min-h-[180px] md:min-h-[400px]",
+        "min-h-[350px] md:min-h-[400px]",
         className ?? "",
       ].join(" ")}
     >

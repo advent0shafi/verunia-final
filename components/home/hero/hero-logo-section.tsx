@@ -28,7 +28,7 @@ export const HeroLogoSection = ({ prefersReducedMotion, isLoaded }: HeroLogoSect
 
   return (
     <motion.div
-      className=" z-50  md:absolute bottom-0 left-0 right-0  text-center md:mt-0 mt-[30px]"
+      className=" z-70  md:absolute bottom-0 left-0 right-0  text-center md:mt-0 mt-[30px]"
       initial={prefersReducedMotion ? false : "initial"}
       animate={prefersReducedMotion || !isLoaded ? {} : "animate"}
       variants={prefersReducedMotion ? {} : logoVariants}

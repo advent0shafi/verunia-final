@@ -27,7 +27,7 @@ export default function AiFotivoPage() {
             <AiFotivaHeader />
             <AiFotivoHero />
 
-            <AnimatedSection variant="fade">
+            <AnimatedSection variant="slide-up">
                 <AiFotivoSection01 />
             </AnimatedSection>
 

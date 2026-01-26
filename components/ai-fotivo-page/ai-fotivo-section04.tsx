@@ -23,7 +23,7 @@ function CollectionCard({ title, imageSrc, href }: CollectionCardProps) {
                 "group relative overflow-hidden rounded-[6px] border border-white/10",
                 "bg-[#171412] ring-1 ring-white/10",
                 "shrink-0 snap-start",
-                "h-[260px] min-w-[280px]",
+                "h-[350px]  min-w-[280px]",
                 "sm:h-[300px] sm:min-w-[360px]",
                 "md:h-[400px] md:min-w-[400px]",
                 "lg:h-[400px] lg:min-w-[400px]",

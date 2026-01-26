@@ -5,7 +5,7 @@ import { TextReveal } from "@/components/home/animated-section";
 export default function AiFotivoSection03() {
     return (
         <section
-            className="relative w-full min-h-[560px] bg-[#171412] flex items-center justify-center"
+            className="relative w-full md:min-h-[560px] min-h-[220px] bg-[#171412] flex items-center justify-center"
             style={{
                 // fallback for clients not supporting Image as background
                 backgroundImage: "url('/ui/background.svg')",
@@ -23,10 +23,27 @@ export default function AiFotivoSection03() {
                 className="pointer-events-none select-none opacity-0 absolute"
                 priority
             />
-            <div className="relative z-10 py-16">
-                <h1 className="font-fraunces font-light max-w-[600px]  mx-auto text-[60px] leading-[64px] text-center text-[#F5C547] [-letter-spacing:-0.02em] drop-shadow-lg">
-
-                    <span className="italic"><TextReveal>Detail that holds up</TextReveal> </span> <TextReveal>to close inspection.</TextReveal>
+            <div className="relative z-10 md:py-16 py-3">
+                <h1
+                    className="
+                        font-fraunces 
+                        font-light 
+                        italic 
+                        max-w-[600px] 
+                        mx-auto 
+                        text-[39.03px] 
+                        md:text-[60px] 
+                        leading-[41.64px] 
+                        md:leading-[64px]
+                        text-center 
+                        text-[#F5C547] 
+                        [-letter-spacing:-0.02em] 
+                        drop-shadow-lg
+                    "
+                >
+                    <TextReveal>
+                        Detail that holds up to close inspection.
+                    </TextReveal>
                 </h1>
 
             </div>

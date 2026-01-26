@@ -39,7 +39,8 @@ function InteriorImageCard({
                     alt={alt}
                     width={width}
                     height={height}
-                    className={`w-full h-full object-cover`}
+                    className={`w-full md:h-full h-[500px] object-cover`}
+
                 />
             </ImageReveal>
             <div
@@ -86,7 +87,7 @@ export default function InteriorSection03() {
                         alt="Interior Section 03 Card 3"
                         number="03"
                         height={671}
-                        maxHeight="max-h-[300px] md:max-h-[671px]"
+                        maxHeight="max-h-[500px] md:max-h-[671px]"
                     />
                 </div>
                 <div className="w-full h-full flex flex-col md:flex-row ">
@@ -111,7 +112,7 @@ export default function InteriorSection03() {
                         alt="Interior Section 03 Card 3"
                         number="03"
                         height={671}
-                        maxHeight="max-h-[300px] md:max-h-[671px]"
+                        maxHeight="max-h-[500px] md:max-h-[671px]"
                     />
                 </div>
                 <div className="w-full h-full flex flex-col md:flex-row ">
