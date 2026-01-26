@@ -117,7 +117,7 @@ export default function AiFotivaHeader() {
             <AnimatePresence>
                 {menuOpen && (
                     <motion.div
-                        className="fixed inset-0 z-50 md:hidden"
+                        className="fixed inset-0 z-60"
                         role="dialog"
                         aria-modal="true"
                         aria-label="Mobile menu"
