@@ -50,10 +50,10 @@ export default function InteriorHeader() {
       transition: prefersReducedMotion
         ? { duration: 0 }
         : {
-            duration: 0.7,
-            ease: [0.76, 0, 0.24, 1] as const,
-            delay: (mobileLinks.length - 1 - i) * 0.03,
-          },
+          duration: 0.7,
+          ease: [0.76, 0, 0.24, 1] as const,
+          delay: (mobileLinks.length - 1 - i) * 0.03,
+        },
     }),
   } as const;
 
@@ -80,15 +80,27 @@ export default function InteriorHeader() {
         {/* Hamburger menu (same as initial layout; visible on desktop too) */}
         <button
           type="button"
-          className="flex flex-col justify-center  w-10 h-10 order-1 md:order-0"
+          className="flex flex-col gap-1.5 p-2 relative w-8 h-8  order-1 md:order-0"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
           aria-controls="mobile-interior-menu"
-          onClick={() => setMenuOpen((v) => !v)}
+          onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span className="block w-8 h-0.5 bg-white mb-1.5 rounded" />
-          <span className="block w-8 h-0.5 bg-white mb-1.5 rounded" />
-          <span className="block w-4 h-0.5 bg-white rounded" />
+          <motion.span
+            className="w-8 h-0.5 bg-white absolute"
+            animate={menuOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -6 }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          />
+          <motion.span
+            className="w-8 h-0.5 bg-white absolute"
+            animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
+            transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          />
+          <motion.span
+            className="w-4 h-0.5 bg-white absolute"
+            animate={menuOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 6 }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          />
         </button>
 
         {/* Centered Logo */}

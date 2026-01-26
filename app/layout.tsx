@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   keywords: ['Verunia', 'Verunia Furniture Trading LLC', 'Verunia Furniture', 'Verunia Interiors', 'Verunia AI', 'Verunia Furniture Trading LLC'],
   authors: [{ name: 'Verunia' }],
   creator: 'Verunia',
-  
+
 }
 
 export default function RootLayout({

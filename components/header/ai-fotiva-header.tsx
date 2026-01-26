@@ -1,23 +1,102 @@
-'use client'
+"use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 export default function AiFotivaHeader() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const prefersReducedMotion = useReducedMotion();
+
+    const mobileLinks = [
+        { href: "/", label: "Home" },
+        { href: "/interior", label: "V Interior" },
+        { href: "/furniture", label: "V-Furnitures" },
+        { href: "/ai-fotivo", label: "Al Fotivo" },
+        { href: "/about", label: "About" },
+        { href: "/contact", label: "Contact" },
+    ];
+
+    // Awwwards-like easing
+    const awTransition = prefersReducedMotion
+        ? ({ duration: 0 } as const)
+        : ({ duration: 1, ease: [0.76, 0, 0.24, 1] as const } as const);
+
+    const backdrop = {
+        initial: { opacity: 0 },
+        open: { opacity: 1, transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.35 } },
+        closed: { opacity: 0, transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.35 } },
+    } as const;
+
+    const menuPanel = {
+        initial: { height: 0 },
+        open: { height: "100vh", transition: awTransition },
+        closed: { height: 0, transition: awTransition },
+    } as const;
+
+    const itemTranslate = {
+        initial: { y: "100%", opacity: 0 },
+        open: (i: number) => ({
+            y: 0,
+            opacity: 1,
+            transition: prefersReducedMotion
+                ? { duration: 0 }
+                : { duration: 1, ease: [0.76, 0, 0.24, 1] as const, delay: 0.12 + i * 0.06 },
+        }),
+        closed: (i: number) => ({
+            y: "100%",
+            opacity: 0,
+            transition: prefersReducedMotion
+                ? { duration: 0 }
+                : {
+                    duration: 0.7,
+                    ease: [0.76, 0, 0.24, 1] as const,
+                    delay: (mobileLinks.length - 1 - i) * 0.03,
+                },
+        }),
+    } as const;
+
+    useEffect(() => {
+        if (!menuOpen) return;
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setMenuOpen(false);
+        };
+        document.addEventListener("keydown", onKeyDown);
+        const originalOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+            document.body.style.overflow = originalOverflow;
+        };
+    }, [menuOpen]);
 
     return (
         <header className="fixed top-0 left-0 w-full z-50 bg-transparent">
             <div className="flex items-center max-w-[1440px] mx-auto justify-between px-6 py-4 relative">
                 {/* Hamburger menu on the left */}
                 <button
-                    className="flex flex-col justify-center  w-10 h-10 order-1 md:order-0"
-                    aria-label="Open menu"
-                    onClick={() => setMenuOpen(true)}
+                    type="button"
+                    className="flex flex-col gap-1.5 p-2 relative w-10 h-10 order-1 md:order-0"
+                    aria-label={menuOpen ? "Close menu" : "Open menu"}
+                    aria-expanded={menuOpen}
+                    aria-controls="mobile-ai-fotiva-menu"
+                    onClick={() => setMenuOpen(!menuOpen)}
                 >
-                    <span className="block w-8 h-0.5 bg-white mb-1.5 rounded" />
-          <span className="block w-8 h-0.5 bg-white mb-1.5 rounded" />
-          <span className="block w-4 h-0.5 bg-white rounded" />
+                    <motion.span
+                        className="w-8 h-0.5 bg-white absolute"
+                        animate={menuOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -6 }}
+                        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                    />
+                    <motion.span
+                        className="w-8 h-0.5 bg-white absolute"
+                        animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
+                        transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                    />
+                    <motion.span
+                        className="w-4 h-0.5 bg-white absolute"
+                        animate={menuOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 6 }}
+                        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                    />
                 </button>
 
                 {/* Centered Logo */}
@@ -35,40 +114,66 @@ export default function AiFotivaHeader() {
             </div>
 
             {/* Hamburger menu opening overlay */}
-            {menuOpen && (
-                <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex flex-col">
-                    <div className="flex justify-end p-6">
-                        <button
-                            className="text-white text-2xl"
-                            aria-label="Close menu"
+            <AnimatePresence>
+                {menuOpen && (
+                    <motion.div
+                        className="fixed inset-0 z-50 md:hidden"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Mobile menu"
+                        initial={prefersReducedMotion ? false : "initial"}
+                        animate="open"
+                        exit="closed"
+                    >
+                        {/* Backdrop */}
+                        <motion.div
+                            className="absolute inset-0 bg-black/40"
+                            variants={backdrop}
                             onClick={() => setMenuOpen(false)}
-                        >
-                            &times;
-                        </button>
-                    </div>
+                        />
 
-                    <nav className="flex flex-col items-center justify-center flex-1 gap-6">
-                        <Link href="/" onClick={() => setMenuOpen(false)} className="text-white font-fraunces  font-medium font-fra text-[48px] leading-[60px] [-letter-spacing:-0.02em]  font-fraunces transition-colors hover:text-gray-300 block">
-                            Home
-                        </Link>
-                        <Link href="/interior" onClick={() => setMenuOpen(false)} className="text-white font-fraunces  font-medium font-fra text-[48px] leading-[60px] [-letter-spacing:-0.02em]  font-fraunces transition-colors hover:text-gray-300 block">
-                            V Interior
-                        </Link>
-                        <Link href="/furniture" onClick={() => setMenuOpen(false)} className="text-white font-fraunces  font-medium font-fra text-[48px] leading-[60px] [-letter-spacing:-0.02em]  font-fraunces transition-colors hover:text-gray-300 block">
-                            V-Furnitures
-                        </Link>
-                        <Link href="/ai-fotivo" onClick={() => setMenuOpen(false)} className="text-white font-fraunces  font-medium font-fra text-[48px] leading-[60px] [-letter-spacing:-0.02em]  font-fraunces transition-colors hover:text-gray-300 block">
-                            Al Fotivo
-                        </Link>
-                        <Link href="/about" onClick={() => setMenuOpen(false)} className="text-white font-fraunces  font-medium font-fra text-[48px] leading-[60px] [-letter-spacing:-0.02em]  font-fraunces transition-colors hover:text-gray-300 block">
-                            About
-                        </Link>
-                        <Link href="/contact" onClick={() => setMenuOpen(false)} className="text-white font-fraunces  font-medium font-fra text-[48px] leading-[60px] [-letter-spacing:-0.02em]  font-fraunces transition-colors hover:text-gray-300 block">
-                            Contact
-                        </Link>
-                    </nav>
-                </div>
-            )}
+                        {/* Slide-down panel (height reveal) */}
+                        <motion.div
+                            className="absolute top-0 left-0 w-full bg-[#171412] overflow-hidden flex flex-col"
+                            variants={menuPanel}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className="flex justify-end p-6">
+                                <motion.button
+                                    type="button"
+                                    className="text-white text-3xl leading-none w-10 h-10 flex items-center justify-center"
+                                    aria-label="Close menu"
+                                    onClick={() => setMenuOpen(false)}
+                                    whileHover={prefersReducedMotion ? {} : { scale: 1.08 }}
+                                    whileTap={prefersReducedMotion ? {} : { scale: 0.96 }}
+                                    transition={{ duration: 0.15 }}
+                                >
+                                    &times;
+                                </motion.button>
+                            </div>
+
+                            <nav
+                                id="mobile-ai-fotiva-menu"
+                                className="flex flex-col items-center justify-center flex-1 gap-6 pb-10"
+                            >
+                                {mobileLinks.map((item, i) => (
+                                    <div key={item.href} className="overflow-hidden">
+                                        <motion.div custom={i} variants={itemTranslate}>
+                                            <Link
+                                                href={item.href}
+                                                onClick={() => setMenuOpen(false)}
+                                                className="text-white font-fraunces font-medium text-[48px] leading-[60px] [-letter-spacing:-0.02em] transition-colors hover:text-gray-300 block"
+                                            >
+                                                {item.label}
+                                            </Link>
+                                        </motion.div>
+                                    </div>
+                                ))}
+                            </nav>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </header>
     );
 }

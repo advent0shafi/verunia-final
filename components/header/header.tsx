@@ -52,10 +52,10 @@ export default function Header() {
       transition: prefersReducedMotion
         ? { duration: 0 }
         : {
-            duration: 0.7,
-            ease: [0.76, 0, 0.24, 1] as const,
-            delay: (mobileLinks.length - 1 - i) * 0.03,
-          },
+          duration: 0.7,
+          ease: [0.76, 0, 0.24, 1] as const,
+          delay: (mobileLinks.length - 1 - i) * 0.03,
+        },
     }),
   } as const;
 
@@ -88,9 +88,8 @@ export default function Header() {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
-        scrolled ? "bg-white shadow-sm" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${scrolled ? "bg-white shadow-sm" : "bg-transparent"
+        }`}
     >
       <header className="flex  items-center justify-between max-w-[1440px]  mx-auto py-4 px-4 md:px-6">
         <Link href="/">
