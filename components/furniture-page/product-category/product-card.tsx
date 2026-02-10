@@ -8,14 +8,15 @@ interface Product {
   name: string;
   image: string;
   colors: string[];
+  slug: string;
 }
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
-      href={`/product/${product.id}`}
+      href={`product/${product.slug}`}
       className=" group"
     >
-      <div className="border border-[#E5E1D6] rounded-[6px] p-[16px] overflow-hidden transition-all duration-300 hover:border-[#E5E1D6] ">
+      <div className="border border-[#E5E1D6] rounded-[6px] p-[16px]  overflow-hidden transition-all duration-300 hover:border-[#E5E1D6] ">
         {/* Product Image */}
         <div className="bg-[#F5F5F4] flex items-center justify-center rounded-[4px] min-w-[262px] w-full h-[262px]">
           <Image

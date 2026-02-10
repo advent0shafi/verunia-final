@@ -6,7 +6,9 @@ interface Product {
   category: string;
   name: string;
   image: string;
+  slug: string;
   colors: string[];
+
 }
 const products: Product[] = [
   {
@@ -14,13 +16,16 @@ const products: Product[] = [
     category: "Office Chair",
     name: "High Back Chair CK-858A",
     image: "/furniture-page/products/chair-1.png",
+    slug: "high-back-chair-ck-858a",
     colors: ["#ffffff", "#6b7280", "#78716c", "#f59e0b"],
+
   },
   {
     id: "2",
     category: "Office Chair",
     name: "High Back Chair CK-858A",
     image: "/furniture-page/products/black-chair.png",
+    slug: "high-back-chair-ck-858a",
     colors: ["#ffffff", "#6b7280", "#22c55e"],
   },
   {
@@ -28,6 +33,7 @@ const products: Product[] = [
     category: "Desks",
     name: "TY-B0124",
     image: "/furniture-page/products/product-2.png",
+    slug: "ty-b0124",
     colors: ["#ffffff", "#6b7280"],
   },
   {
@@ -35,6 +41,7 @@ const products: Product[] = [
     category: "Sofa",
     name: "H-5252",
     image: "/furniture-page/products/product-1.png",
+    slug: "h-5252",
     colors: ["#ffffff", "#6b7280", "#78716c", "#f59e0b"],
   },
   {
@@ -42,6 +49,7 @@ const products: Product[] = [
     category: "Office Chair",
     name: "High Back Chair CK-900",
     image: "/furniture-page/products/black-chair.png",
+    slug: "high-back-chair-ck-900",
     colors: ["#1f2937", "#22c55e", "#78716c", "#f59e0b"],
   },
 ];

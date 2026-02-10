@@ -34,7 +34,7 @@ export default function FurniturePageHero() {
                   size="sm"
                   className="shrink-0 bg-white text-[#1C1917] rounded-[4px] py-2 px-4 border-[#E5E1D6] hover:bg-white/70"
                 >
-                  <Link href={`/furniture?category=${slug}`} className="gap-2">
+                  <Link href={`/furniture/${slug}`} className="gap-2">
                     <Icon className="size-4 text-[#1C1917]" aria-hidden="true" />
                     <span className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-normal">{label}</span>
                   </Link>

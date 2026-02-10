@@ -9,6 +9,7 @@ const nextConfig = {
     // Allow SVG usage with next/image (we still mark SVGs unoptimized at call sites).
     dangerouslyAllowSVG: true,
   },
+  turbo: false,
 }
 
 export default nextConfig
