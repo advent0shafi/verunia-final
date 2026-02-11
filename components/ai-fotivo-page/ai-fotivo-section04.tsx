@@ -69,22 +69,22 @@ export default function AiFotivoSection04() {
         {
             title: "Dining Collection",
             imageSrc: imageAiFotiva06,
-            href: "/furniture",
+            href: "/ai-fotivo/category/outdoor-collection",
         },
         {
             title: "Living Collection",
             imageSrc: imageAiFotiva07,
-            href: "/furniture",
+            href: "/ai-fotivo/category/outdoor-collection",
         },
         {
             title: "Luxury Collection",
             imageSrc: imageAiFotiva08,
-            href: "/interior",
+            href: "/ai-fotivo/category/outdoor-collection",
         },
         {
             title: "Outdoor Collection",
             imageSrc: imageAiFotiva09,
-            href: "/furniture",
+            href: "/ai-fotivo/category/outdoor-collection",
         },
 
     ] as const;

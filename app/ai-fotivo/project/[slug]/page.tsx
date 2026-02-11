@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import { getProjectBySlug, interiorProjects } from "@/data/interior-projects";
-import ProjectDetail from "@/components/interior-page/project-detail";
-import InteriorHeader from "@/components/header/interior-header";
+import { getProjectBySlug, aiFotivoProjects } from "@/data/ai-fotivo-data";
+import FotivoProjectDetail from "@/components/ai-fotivo-page/fotivo-project-detail";
 import Footer from "@/components/footer/footer";
 import { Metadata } from "next";
+import AiFotivaHeader from "@/components/header/ai-fotiva-header";
 
 interface ProjectPageProps {
     params: Promise<{
@@ -12,7 +12,7 @@ interface ProjectPageProps {
 }
 
 export async function generateStaticParams() {
-    return interiorProjects.map((project) => ({
+    return aiFotivoProjects.map((project) => ({
         slug: project.slug,
     }));
 }
@@ -28,12 +28,12 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     }
 
     return {
-        title: `${project.title} - Verunia Interiors`,
+        title: `${project.title} - Al Fotivo`,
         description: project.description,
     };
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+export default async function FotivoProjectPage({ params }: ProjectPageProps) {
     const { slug } = await params;
     const project = getProjectBySlug(slug);
 
@@ -43,8 +43,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
     return (
         <main>
-            <InteriorHeader />
-            <ProjectDetail project={project} />
+            <AiFotivaHeader/>
+            <FotivoProjectDetail project={project} />
             <Footer />
         </main>
     );

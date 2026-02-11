@@ -16,7 +16,7 @@ type InteriorImageCardProps = {
     maxHeight?: string;
 };
 
-function InteriorImageCard({
+export function InteriorImageCard({
     src,
     alt,
     number,

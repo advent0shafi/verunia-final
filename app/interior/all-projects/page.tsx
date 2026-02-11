@@ -16,15 +16,19 @@ export default function AllProjectsPage() {
             <InteriorHeader />
 
             <section className="pt-32 pb-20 px-6 md:px-12 lg:px-20 grow">
-                <div className="max-w-[1440px] mx-auto">
+                <div className="max-w-[1440px] mx-auto ">
+                    <div className="px-5">
                     <AnimatedSection variant="fade">
-                        <h1 className="font-instrument font-medium text-[40px] md:text-[56px] text-[#FDFDFC] mb-4">
-                            Selected Projects
+                         <p className="font-instrument font-medium not-italic text-[16px] leading-[24px] tracking-normal align-middle text-[#A1A1AA] max-w-2xl ">
+                             All Projects
+                         </p>
+                        <h1 className="font-instrument font-medium not-italic max-w-[719px] text-[48px] leading-[60px] [-letter-spacing:-0.02em] text-[#FDFDFC] py-[24px]">
+                        Spaces that work beautifully, long after the first day.
                         </h1>
-                        <p className="font-instrument text-[#A1A1AA] text-lg max-w-2xl mb-16">
-                            A curated collection of our finest interior design work, showcasing our commitment to quality, functionality, and aesthetic excellence.
-                        </p>
+                       
                     </AnimatedSection>
+                    </div>
+                    
 
                     <AnimatedSection variant="slide-up">
                         <ProjectGrid projects={interiorProjects} />
