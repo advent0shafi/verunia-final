@@ -163,7 +163,7 @@ export default function InteriorHeader() {
 
               <nav
                 id="mobile-interior-menu"
-                className="flex flex-col items-center justify-center flex-1 gap-6 pb-10"
+                className="flex flex-col items-center justify-center flex-1 gap-3 pb-10"
               >
                 {mobileLinks.map((item, i) => (
                   <div key={item.href} className="overflow-hidden">
@@ -172,7 +172,7 @@ export default function InteriorHeader() {
                       <Link
                         href={item.href}
                         onClick={() => setMenuOpen(false)}
-                        className="text-white font-fraunces  font-medium font-fra text-[48px] leading-[60px] [-letter-spacing:-0.02em]  font-fraunces transition-colors hover:text-gray-300 block"
+                        className="text-white font-fraunces  font-medium font-fra text-[38px] leading-[60px] [-letter-spacing:-0.02em]  font-fraunces transition-colors hover:text-gray-300 block"
                       >
                         {item.label}
                       </Link>

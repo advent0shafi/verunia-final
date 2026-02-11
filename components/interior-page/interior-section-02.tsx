@@ -1,4 +1,5 @@
 import { TextReveal } from "@/components/home/animated-section";
+import Link from "next/link";
 
 export default function InteriorSection02() {
     return (
@@ -21,8 +22,12 @@ export default function InteriorSection02() {
                             </TextReveal>
                         </p>
                         <button className="border-t border-b border-[#FDFDFC] text-[#FDFDFC] text-start mt-[32px] py-3">
+                        <Link href={"/interior/all-projects"}>
+
                             <span className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-[0] text-[#FDFDFC]">About Verunia Interiors</span> →
+                            </Link>
                         </button>
+                       
                     </div>
 
                 </div>

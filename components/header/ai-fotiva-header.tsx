@@ -154,7 +154,7 @@ export default function AiFotivaHeader() {
 
                             <nav
                                 id="mobile-ai-fotiva-menu"
-                                className="flex flex-col items-center justify-center flex-1 gap-6 pb-10"
+                                className="flex flex-col items-center justify-center flex-1 gap-3 pb-10"
                             >
                                 {mobileLinks.map((item, i) => (
                                     <div key={item.href} className="overflow-hidden">
@@ -162,7 +162,7 @@ export default function AiFotivaHeader() {
                                             <Link
                                                 href={item.href}
                                                 onClick={() => setMenuOpen(false)}
-                                                className="text-white font-fraunces font-medium text-[48px] leading-[60px] [-letter-spacing:-0.02em] transition-colors hover:text-gray-300 block"
+                                                className="text-white font-fraunces font-medium text-[38px] leading-[60px] [-letter-spacing:-0.02em] transition-colors hover:text-gray-300 block"
                                             >
                                                 {item.label}
                                             </Link>
