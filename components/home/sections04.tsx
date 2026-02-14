@@ -17,7 +17,7 @@ export function GlobeDemo() {
     atmosphereAltitude: 0.06,
     emissive: "#000000",
     emissiveIntensity: 0.15,
-    shininess: 0.8, 
+    shininess: 0.8,
     polygonColor: "rgba(238, 186, 120, 0.35)",
     ambientLight: "#FDBA74",
     directionalLeftLight: "#FFE6CC",
@@ -43,8 +43,10 @@ export function GlobeDemo() {
       endLng: 4.4025,
       arcAlt: 0.3,
       color: pickColor(),
+      startLabel: "Toronto",
+      endLabel: "Antwerpen",
     },
-  
+
     // Antwerpen → Huajian (China)
     {
       order: 2,
@@ -54,8 +56,9 @@ export function GlobeDemo() {
       endLng: 121.4737,
       arcAlt: 0.5,
       color: pickColor(),
+      endLabel: "Shanghai",
     },
-  
+
     // Huajian (China) → Seoul Yongsan
     {
       order: 3,
@@ -65,8 +68,9 @@ export function GlobeDemo() {
       endLng: 126.9906,
       arcAlt: 0.2,
       color: pickColor(),
+      endLabel: "Seoul",
     },
-  
+
     // Seoul Yongsan → Indonesia
     {
       order: 4,
@@ -76,8 +80,9 @@ export function GlobeDemo() {
       endLng: 106.8456,
       arcAlt: 0.4,
       color: pickColor(),
+      endLabel: "Jakarta",
     },
-  
+
     // Indonesia → Saudi Arabia
     {
       order: 5,
@@ -87,8 +92,9 @@ export function GlobeDemo() {
       endLng: 46.6753,
       arcAlt: 0.6,
       color: pickColor(),
+      endLabel: "Riyadh",
     },
-  
+
     // Saudi Arabia → Oman
     {
       order: 6,
@@ -98,8 +104,9 @@ export function GlobeDemo() {
       endLng: 58.3829,
       arcAlt: 0.2,
       color: pickColor(),
+      endLabel: "Muscat",
     },
-  
+
     // Oman → UAE
     {
       order: 7,
@@ -109,8 +116,9 @@ export function GlobeDemo() {
       endLng: 55.2708,
       arcAlt: 0.15,
       color: pickColor(),
+      endLabel: "Dubai",
     },
-  
+
     // UAE → Canada (closing the global loop)
     {
       order: 8,
@@ -122,7 +130,7 @@ export function GlobeDemo() {
       color: pickColor(),
     },
   ];
-  
+
 
   return (
     <div className="flex flex-row items-center  justify-center   md:h-auto dark:bg-black  relative w-full">

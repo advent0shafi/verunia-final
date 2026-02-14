@@ -18,6 +18,8 @@ type Position = {
   endLng: number;
   arcAlt: number;
   color: string;
+  startLabel?: string;
+  endLabel?: string;
 };
 
 export type GlobeConfig = {
@@ -44,6 +46,9 @@ export type GlobeConfig = {
   };
   autoRotate?: boolean;
   autoRotateSpeed?: number;
+  labelSize?: number;
+  labelColor?: string;
+  labelResolution?: number;
 };
 
 interface WorldProps {
@@ -72,6 +77,9 @@ export function Globe({ globeConfig, data }: WorldProps) {
     arcLength: 0.9,
     rings: 1,
     maxRings: 3,
+    labelSize: 1.5,
+    labelColor: "#ffffff",
+    labelResolution: 2,
     ...globeConfig,
   };
 
@@ -133,6 +141,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
           color: arc.color,
           lat: arc.startLat,
           lng: arc.startLng,
+          label: arc.startLabel,
         },
         {
           size: defaultProps.pointSize,
@@ -140,6 +149,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
           color: arc.color,
           lat: arc.endLat,
           lng: arc.endLng,
+          label: arc.endLabel,
         },
       );
     }
@@ -152,6 +162,9 @@ export function Globe({ globeConfig, data }: WorldProps) {
           ),
         ) === i,
     );
+
+    // Filter points that have labels for the labelsData
+    const labelPoints = filteredPoints.filter((p) => p.label);
 
     globeRef.current
       .hexPolygonsData(countries.features)
@@ -182,6 +195,17 @@ export function Globe({ globeConfig, data }: WorldProps) {
       .pointsMerge(true)
       .pointAltitude(0.0)
       .pointRadius(2);
+
+    globeRef.current
+      .labelsData(labelPoints)
+      .labelLat((d: any) => d.lat)
+      .labelLng((d: any) => d.lng)
+      .labelText((d: any) => d.label)
+      .labelSize(defaultProps.labelSize)
+      .labelDotRadius(0) // Hide the label dot so it doesn't conflict with the point
+      .labelColor(() => defaultProps.labelColor)
+      .labelResolution(defaultProps.labelResolution)
+      .labelAltitude(0.01); // Slightly raise the label to avoid z-fighting with the point
 
     globeRef.current
       .ringsData([])
@@ -287,10 +311,10 @@ export function hexToRgb(hex: string) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16),
+    }
     : null;
 }
 
