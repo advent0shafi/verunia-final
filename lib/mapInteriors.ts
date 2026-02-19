@@ -19,10 +19,10 @@ export function mapInteriorsToUI(
   response: InteriorsApiResponse
 ): InteriorProjectUI[] {
   return response.data.map((item) => {
-    const interior = item.Interior;
+    const interior = item;
 
     return {
-      slug: slugify(interior.project_title),
+      slug: interior.slug,
       title: interior.project_title,
       mainImage: interior.project_thumbnail_image
         ? `${backendAPI}${interior.project_thumbnail_image.url}`

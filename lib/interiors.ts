@@ -2,7 +2,7 @@ import { backendAPI } from "./getData";
 
 export async function getInteriors(): Promise<InteriorsApiResponse> {
   const res = await fetch(
-    `https://api.veruniagroup.com/api/interiors?populate[Interior][fields][0]=project_title&populate[Interior][fields][1]=client_name&populate[Interior][fields][2]=project_type&populate[Interior][fields][3]=location&populate[Interior][fields][4]=completion_date&populate[Interior][populate][project_thumbnail_image][fields][0]=url&populate[Interior][populate][gallery_images][fields][0]=url`,
+    `https://api.veruniagroup.com/api/interiors?populate=*`,
     {
       // App Router: cache control
       next: { revalidate: 60 }, // ISR: revalidate every 60s
@@ -15,3 +15,25 @@ export async function getInteriors(): Promise<InteriorsApiResponse> {
 
   return res.json();
 }
+
+
+export async function getInteriorBySlug(slug: string): Promise<InteriorProject | null> {
+  const res = await fetch(
+    `${backendAPI}/api/interiors?filters[slug][$eq]=${slug}&populate=*`,
+    { next: { revalidate: 60 } } // ISR
+  );
+
+  if (!res.ok) return null;
+
+  const json: StrapiResponse<InteriorProject> = await res.json();
+  return json.data[0] ?? null;
+}
+
+export async function getAllInteriorSlugs(): Promise<string[]> {
+  const res = await fetch(`${backendAPI}/api/interiors?fields[0]=slug`);
+  const json = await res.json();
+
+  return json.data.map((item: any) => item.slug);
+}
+
+
