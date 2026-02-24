@@ -1,11 +1,10 @@
+
+
 import { notFound } from "next/navigation";
-import { getCategoryBySlug, getProjectsByCategory, aiFotivoCategories } from "@/data/ai-fotivo-data";
 import FotivoCategoryGrid from "@/components/ai-fotivo-page/fotivo-category-grid";
 import AiFotivaHeader from "@/components/header/ai-fotiva-header";
 import Footer from "@/components/footer/footer";
-import { Metadata } from "next";
-import { ImageReveal } from "@/components/home/animated-section";
-import Image from "next/image";
+import { getAiFotivoProductsByCategorySlug } from "@/lib/aiFotivo";
 
 interface CategoryPageProps {
     params: Promise<{
@@ -13,42 +12,20 @@ interface CategoryPageProps {
     }>;
 }
 
-export async function generateStaticParams() {
-    return aiFotivoCategories.map((category) => ({
-        slug: category.slug,
-    }));
-}
-
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-    const { slug } = await params;
-    const category = getCategoryBySlug(slug);
-
-    if (!category) {
-        return {
-            title: 'Category Not Found',
-        };
-    }
-
-    return {
-        title: `${category.title} - Al Fotivo`,
-        description: category.description,
-    };
-}
-
 export default async function FotivoCategoryPage({ params }: CategoryPageProps) {
     const { slug } = await params;
-    const category = getCategoryBySlug(slug);
-    const projects = getProjectsByCategory(slug);
 
-    if (!category) {
+    const response = await getAiFotivoProductsByCategorySlug(slug);
+    const products = response.data;
+
+    if (!products || products.length === 0) {
         notFound();
     }
 
     return (
         <main className="bg-[#171412] min-h-screen text-[#FDFDFC]">
             <AiFotivaHeader />
-
-            {/* Category Hero */}
+  {/* Category Hero */}
             <section className="relative w-full h-[50vh] md:h-[60vh] " style={{
                 // fallback for clients not supporting Image as background
                 backgroundImage: "url('/ui/background.svg')",
@@ -63,17 +40,14 @@ export default async function FotivoCategoryPage({ params }: CategoryPageProps) 
                   Collection
                 </p>
                     <h1 className="font-fraunces font-light text-[48px] md:text-[64px] text-[#F5C547] mb-4">
-                        {category.title}
+                        {products[0].al_fotivo_category.name}
                     </h1>
                    
                 </div>
             </section>
-
             <section className="py-20 px-6 md:px-12 lg:px-20">
                 <div className="max-w-[1440px] mx-auto">
-                   
-                        <FotivoCategoryGrid  />
-                    
+                    <FotivoCategoryGrid products={products} />
                 </div>
             </section>
 

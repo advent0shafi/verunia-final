@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation";
-import { getProjectBySlug, aiFotivoProjects } from "@/data/ai-fotivo-data";
 import FotivoProjectDetail from "@/components/ai-fotivo-page/fotivo-project-detail";
 import Footer from "@/components/footer/footer";
-import { Metadata } from "next";
 import AiFotivaHeader from "@/components/header/ai-fotiva-header";
+import { getAiFotivoProductBySlug, getRelatedAiFotivoProducts } from "@/lib/aiFotivo";
 
 interface ProjectPageProps {
     params: Promise<{
@@ -11,40 +10,35 @@ interface ProjectPageProps {
     }>;
 }
 
-export async function generateStaticParams() {
-    return aiFotivoProjects.map((project) => ({
-        slug: project.slug,
-    }));
-}
-
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+export default async function FotivoProjectPage({
+    params,
+}: ProjectPageProps) {
     const { slug } = await params;
-    const project = getProjectBySlug(slug);
 
-    if (!project) {
-        return {
-            title: 'Project Not Found',
-        };
-    }
+    const productRes = await getAiFotivoProductBySlug(slug);
+    const product = productRes.data?.[0];
 
-    return {
-        title: `${project.title} - Al Fotivo`,
-        description: project.description,
-    };
-}
-
-export default async function FotivoProjectPage({ params }: ProjectPageProps) {
-    const { slug } = await params;
-    const project = getProjectBySlug(slug);
-
-    if (!project) {
+    if (!product) {
         notFound();
     }
 
+    const relatedResponse = await getRelatedAiFotivoProducts(
+        product.al_fotivo_category.slug,
+        product.id
+    );
+
+    const relatedProducts = relatedResponse.data?.filter(
+        (rp: any) => rp.id !== product.id
+    ).slice(0, 3) || [];
+
+
     return (
         <main>
-            <AiFotivaHeader/>
-            <FotivoProjectDetail project={project} />
+            <AiFotivaHeader />
+            <FotivoProjectDetail
+                product={product}
+                relatedProducts={relatedProducts}
+            />
             <Footer />
         </main>
     );

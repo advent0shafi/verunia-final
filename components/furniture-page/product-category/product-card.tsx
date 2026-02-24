@@ -10,10 +10,10 @@ export default function ProductCard({ product }: { product: Product }) {
       scroll={true}
       className=" group"
     >
-      
+
       <div className="border border-[#E5E1D6] rounded-[6px] p-[16px]  overflow-hidden transition-all duration-300 hover:border-[#E5E1D6] ">
         {/* Product Image */}
-        <div className="bg-[#F5F5F4] flex items-center justify-center rounded-[4px] min-w-[262px] w-full h-[262px]">
+        <div className="bg-[#F5F5F4] flex items-center justify-center rounded-[4px] min-w-[262px] w-full h-[262px] md:max-h-[262px]">
           {product.main_image?.url ? (
             <Image
               src={`https://api.veruniagroup.com${product.main_image.url}`}
@@ -37,7 +37,7 @@ export default function ProductCard({ product }: { product: Product }) {
           </p>
 
           {/* Product Name */}
-          <h3 className="text-[#171412] font-normal not-italic text-base leading-6 align-middle font-instrument  tracking-normal">{product.name}</h3>
+          <h3 className="text-[#171412] font-normal md:text-[16px] text-[14px] not-italic text-base leading-6 align-middle font-instrument  tracking-normal">{product.name}</h3>
 
           {/* Color Swatches */}
           <div className="flex items-center gap-1.5 mt-4">

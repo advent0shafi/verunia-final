@@ -240,3 +240,19 @@ type Category = {
   headerDescription: string
   headerImage?: Media
 }
+
+
+ type AIFotivoCategory = {
+  id: number;
+  name: string;
+  slug: string;
+  headerDescription: string;
+  headerImage: {
+    url: string;
+  };
+  al_fotivo_products: Product[];
+}
+
+type AIFotivoCategoryResponse = {
+  data: AIFotivoCategory[];
+}
