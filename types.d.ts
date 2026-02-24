@@ -115,3 +115,124 @@ type StrapiResponse<T> = {
     };
   };
 };
+
+
+// =========================
+// SEO
+// =========================
+type Seo = {
+  id: number
+  metaTitle: string
+  metaDescription: string
+}
+
+// =========================
+// Product (light version)
+// =========================
+
+type ProductSummary = {
+  id: number
+  name: string
+  slug: string
+  cardLabel: string
+  description: string
+  product_info_url: string | null
+}
+
+// =========================
+// Category
+// =========================
+
+type Category = {
+  id: number
+  name: string
+  slug: string
+  headerDescription: string
+  headerImage: StrapiImage
+  seo: Seo[]
+  product?: ProductSummary
+}
+
+// =========================
+// API Response Wrapper
+// =========================
+
+type ApiCategoryResponse<T> = {
+  data: T[]
+  meta: {
+    pagination: {
+      page: number
+      pageSize: number
+      pageCount: number
+      total: number
+    }
+  }
+}
+
+type CategoryNavItem = {
+  id: number
+  name: string
+  slug: string
+}
+
+// =========================
+// Category (embedded in product)
+// =========================
+
+type ProductCategory = {
+  id: number
+  name: string
+  slug: string
+  headerDescription: string
+}
+
+// =========================
+// Product Variant
+// =========================
+
+type ProductVariant = {
+  id: number
+  name: string
+  color_code: string
+}
+
+// =========================
+// Product
+// =========================
+
+type Product = {
+  id: number
+  name: string
+  slug: string
+  cardLabel: string
+  description: string
+  product_info_url: string | null
+  category: ProductCategory
+  main_image: Media
+  images: Media[]
+  product_variant: ProductVariant[]
+}
+
+// =========================
+// API Wrapper
+// =========================
+
+type ProductApiResponse = {
+  data: Product[]
+  meta: {
+    pagination: {
+      page: number
+      pageSize: number
+      pageCount: number
+      total: number
+    }
+  }
+}
+
+type Category = {
+  id: number
+  name: string
+  slug: string
+  headerDescription: string
+  headerImage?: Media
+}

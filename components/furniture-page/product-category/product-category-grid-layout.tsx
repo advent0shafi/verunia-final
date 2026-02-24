@@ -2,7 +2,7 @@ import CategoryNavHeader from "@/components/ui/category-nav-header";
 import ProductCategoryGrid from "./product-catogery-grid";
 import SidebarFilter from "./sidebar-filter";
 
-export default function ProductCategoryGridLayout() {
+export default function ProductCategoryGridLayout(  {products}: {products: Product[]}) {
   return (
     <section className="bg-white py-10 sm:py-12 md:py-16 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
@@ -17,7 +17,7 @@ export default function ProductCategoryGridLayout() {
 
           {/* Product Grid */}
           <section className="flex-1">
-            <ProductCategoryGrid />
+            <ProductCategoryGrid products={products} />
           </section>
 
         </div>

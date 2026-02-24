@@ -7,6 +7,7 @@ import { useState } from 'react';
 import ProductThumbnails from './product-thumbnails';
 import { Armchair, Box, Package, Search, Sofa, Sparkles, Table } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import CategoryNavHeader from '@/components/ui/category-nav-header';
 
 interface Product {
   name: string;
@@ -19,52 +20,16 @@ interface Product {
 
 export default function ProductDetail({ product }: { product: Product }) {
   const [selectedImage, setSelectedImage] = useState(product.image);
-  const categories = [
-    { label: "Chairs", slug: "chairs", Icon: Armchair },
-    { label: "Desks", slug: "desks", Icon: Table },
-    { label: "Sofas", slug: "sofas", Icon: Sofa },
-    { label: "Storage", slug: "storage", Icon: Package },
-    { label: "Silent Boxes", slug: "silent-boxes", Icon: Box },
-    { label: "Accessories", slug: "accessories", Icon: Sparkles },
-  ] as const;
+ 
 
 
   return (
     <section className="py-12 md:py-16 lg:py-[90px]">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-[80px]   ">
-      <div className="mb-[40px]">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-6">
-            <nav
-              aria-label="Furniture catalog categories"
-              className="flex items-center gap-3 overflow-x-auto py-1 pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {categories.map(({ label, slug, Icon }) => (
-                <Button
-                  key={slug}
-                  asChild
-                  variant="outline"
-                  size="sm"
-                  className="shrink-0 bg-white text-[#1C1917] rounded-[4px] py-2 px-4 border-[#E5E1D6] hover:bg-white/70"
-                >
-                  <Link href={`/furniture?category=${slug}`} className="gap-2">
-                    <Icon className="size-4 text-[#1C1917]" aria-hidden="true" />
-                    <span className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-normal">{label}</span>
-                  </Link>
-                </Button>
-              ))}
-            </nav>
-
-            <div className="relative w-full md:max-w-[320px] bg">
-              <Search
-                className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-[#78716C]"
-                aria-hidden="true"
-              />
-              <input
-                placeholder="Search Catalog"
-                type="text"
-                className="h-10  pl-9  text-[#1C1917] placeholder:text-[#A8A29E]"
-              />
-            </div>
+        <div className="mb-[40px]">
+          {/* Secondary header (catalog nav) */}
+          <div className=" ">
+            <CategoryNavHeader />
           </div>
         </div>
         <motion.div
@@ -111,7 +76,7 @@ export default function ProductDetail({ product }: { product: Product }) {
             {/* Colors */}
             <p className="font-instrument font-normal text-[#57534E] mb-2 not-italic text-[14px] leading-[24px] tracking-[0%] align-middle">Available Finishes:</p>
             <div className="flex items-center gap-2">
-             
+
               {product.colors.map((color, idx) => (
                 <span
                   key={idx}
