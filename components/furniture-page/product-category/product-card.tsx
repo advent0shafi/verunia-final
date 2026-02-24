@@ -6,9 +6,11 @@ import Link from "next/link";
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link
-      href={`product/${product.slug}`}
+      href={`/furniture/product/${product.slug}`}
+      scroll={true}
       className=" group"
     >
+      
       <div className="border border-[#E5E1D6] rounded-[6px] p-[16px]  overflow-hidden transition-all duration-300 hover:border-[#E5E1D6] ">
         {/* Product Image */}
         <div className="bg-[#F5F5F4] flex items-center justify-center rounded-[4px] min-w-[262px] w-full h-[262px]">
@@ -18,7 +20,7 @@ export default function ProductCard({ product }: { product: Product }) {
               alt={product.name}
               width={262}
               height={262}
-              className="min-w-[262px] h-[262px] object-contain transition-transform duration-300 w-full  rounded-[4px]"
+              className="min-w-[262px] max-w-[262px] h-[262px] object-contain transition-transform duration-300 w-full  rounded-[4px]"
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center rounded-[4px]">

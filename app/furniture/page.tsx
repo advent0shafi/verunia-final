@@ -23,9 +23,10 @@ export default function FurniturePage() {
     <main>
       <Header />
       <FurniturePageHero />
-      <FurnitureProductPage />
+       <FurnitureBestProduct />
+     
       <FurnitureDesignedSection />
-      <FurnitureBestProduct />
+      <FurnitureProductPage />
       <FurnitureDesignedSection02 />
       <FurnitureAwardsSection />
       <Footer />

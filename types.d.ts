@@ -200,16 +200,20 @@ type ProductVariant = {
 // Product
 // =========================
 
+type ProductMedia = StrapiImage;
+
 type Product = {
   id: number
   name: string
   slug: string
   cardLabel: string
   description: string
+  isfeatured: boolean
+  isBestSeller: boolean
   product_info_url: string | null
   category: ProductCategory
-  main_image: Media
-  images: Media[]
+  main_image: ProductMedia
+  images: ProductMedia[]
   product_variant: ProductVariant[]
 }
 

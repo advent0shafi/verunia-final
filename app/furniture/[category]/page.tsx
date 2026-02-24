@@ -38,7 +38,7 @@ export default async function ProductCategoryPage({ params }: PageProps) {
         }
       />
 
-      <ProductCategoryGridLayout  products={products} />
+      <ProductCategoryGridLayout products={products} categoryName={categoryData.name} />
 
       <VeruniaFooter />
     </main>

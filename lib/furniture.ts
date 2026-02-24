@@ -1,6 +1,6 @@
 export async function getCategoriesClient(): Promise<CategoryNavItem[]> {
   const res = await fetch(
-       `https://api.veruniagroup.com/api/categories?populate=*`,
+    `https://api.veruniagroup.com/api/categories?populate=*`,
 
   )
 
@@ -61,4 +61,19 @@ export async function getProductBySlug(
 
   const json: ProductApiResponse = await res.json();
   return json.data.length ? json.data[0] : null;
+}
+
+export async function getBestSellerProducts(): Promise<Product[]> {
+  const res = await fetch(
+    `https://api.veruniagroup.com/api/products?populate=*&filters[isBestSeller][$eq]=true`,
+    { cache: "no-store" }
+  )
+
+  if (!res.ok) {
+    console.warn("Failed to fetch best sellers")
+    return [];
+  }
+
+  const json: ProductApiResponse = await res.json()
+  return json.data
 }

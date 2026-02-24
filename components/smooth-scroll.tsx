@@ -1,6 +1,7 @@
 'use client'
 
 import { ReactNode, useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -13,6 +14,7 @@ interface SmoothScrollProps {
 
 export default function SmoothScroll({ children }: SmoothScrollProps) {
   const lenisRef = useRef<Lenis | null>(null)
+  const pathname = usePathname()
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
@@ -55,6 +57,13 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       document.documentElement.classList.remove('lenis')
     }
   }, [])
+
+  // Reset scroll on pathname change using Lenis
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true })
+    }
+  }, [pathname])
 
   return <>{children}</>
 }

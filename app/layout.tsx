@@ -5,7 +5,6 @@ import LoadingUIWrapper from "@/components/ui/loading-ui-wrapper";
 import SmoothScroll from "@/components/smooth-scroll";
 import { frontendPoint } from "@/lib/getData";
 
-
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
