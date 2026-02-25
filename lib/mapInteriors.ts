@@ -13,6 +13,7 @@ export type InteriorProjectUI = {
   mainImage: string;
   year?: string;
   place?: string;
+  isFeatured: boolean;
 };
 
 export function mapInteriorsToUI(
@@ -29,6 +30,7 @@ export function mapInteriorsToUI(
         : "https://api.veruniagroup.com/uploads/Gemini_Generated_Image_qean01qean01qean_1_1_1_a5d6bdc05d.png",
       year: interior.completion_date,
       place: interior.location,
+      isFeatured: interior.isFeatured ?? false,
     };
   });
 }

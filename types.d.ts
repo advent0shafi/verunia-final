@@ -71,6 +71,7 @@ type InteriorItem = {
 
   project_thumbnail_image: StrapiImage | null;
   gallery_images: StrapiImage[];
+  isFeatured: boolean;
 };
 
 // ==========================
@@ -99,6 +100,7 @@ type InteriorProject = {
   completion_date: string;
   project_thumbnail_image: StrapiImage;
   gallery_images: StrapiImage[];
+  isFeatured: boolean;
 };
 
 // ==============================
@@ -242,7 +244,7 @@ type Category = {
 }
 
 
- type AIFotivoCategory = {
+type AIFotivoCategory = {
   id: number;
   name: string;
   slug: string;

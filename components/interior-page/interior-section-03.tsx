@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image"
 import { ImageReveal } from "@/components/home/animated-section";
 import interior00 from "@/public/interior-page/image-interior-00.png";
@@ -9,7 +10,7 @@ import interior09 from "@/public/interior-page/image-interior-09.png";
 import { StaticImageData } from "next/image";
 
 type InteriorImageCardProps = {
-    src: StaticImageData;
+    src: StaticImageData | string;
     alt: string;
     number: string;
     year?: string;
@@ -18,7 +19,11 @@ type InteriorImageCardProps = {
     width?: number;
     minHeight?: string;
     maxHeight?: string;
+    onClickUrl?: string;
 };
+
+import { useRouter } from "next/navigation";
+import React from "react";
 
 function InteriorImageCard({
     src,
@@ -30,9 +35,27 @@ function InteriorImageCard({
     width = 1000,
     minHeight = "min-h-[300px] md:min-h-[671px]",
     maxHeight = "",
+    onClickUrl,
 }: InteriorImageCardProps) {
+    const router = useRouter();
+
+    const handleClick = React.useCallback(() => {
+        if (onClickUrl) {
+            router.push(onClickUrl);
+        }
+    }, [onClickUrl, router]);
+
     return (
-        <div className={`w-full h-full object-cover ${minHeight} ${maxHeight} relative`}>
+        <div
+            role="button"
+            tabIndex={0}
+            onClick={handleClick}
+            onKeyDown={e => {
+                if (e.key === "Enter" || e.key === " ") handleClick();
+            }}
+            className={`cursor-pointer w-full h-full object-cover ${minHeight} ${maxHeight} relative outline-none`}
+            aria-label={alt}
+        >
             <ImageReveal className={`w-full h-full ${minHeight} ${maxHeight}`}>
                 <Image
                     src={src}
@@ -59,7 +82,7 @@ function InteriorImageCard({
                     <div className="flex items-center justify-between ">
                         <div className="flex items-center gap-2">
                             <span className="font-instrument md:min-w-80 min-w-[250px] font-bold text-[14px] leading-[20px] tracking-normal align-middle text-[#222]">
-                                Sapphire House, Belgium
+                                {place || "Sapphire House, Belgium"}
                             </span>
                         </div>
                         <span className="font-instrument font-semibold text-[14px] leading-[20px] tracking-normal align-middle text-[#271E07] pl-4 border-l border-[#271E07]">
@@ -77,60 +100,66 @@ function InteriorImageCard({
     );
 }
 
-export default function InteriorSection03() {
+import { InteriorProjectUI } from "@/lib/mapInteriors";
+
+export default function InteriorSection03({ projects = [] }: { projects?: InteriorProjectUI[] }) {
+    const proj1 = projects[0];
+    const proj2 = projects[1];
+    const proj3 = projects[2];
+    const proj4 = projects[3];
+    const proj5 = projects[4];
+    const proj6 = projects[5];
+
     return (
         <section className="items-center bg-[#171412] flex flex-col justify-center px-4 md:px-6 lg:px-8">
             <div className="w-full max-w-[1440px] h-full max-md:max-w-full py-8 md:py-10 relative overflow-hidden">
-                  <div className="w-full md:w-full  p-2 md:px-4 pb-4 pl-0 ">
+                <div className="w-full md:w-full  p-2 md:px-4 pb-4 pl-0 ">
                     <InteriorImageCard
-                        src={interior00}
-                        alt="Interior Section 03 Card 3"
+                        src={proj1?.mainImage || interior00}
+                        alt={proj1?.title || "Interior Section 03 Card 3"}
                         number="03"
                         height={671}
                         maxHeight="max-h-[500px] md:max-h-[671px]"
+                        onClickUrl={proj1 ? `/interior/project/${proj1.slug}` : undefined}
+                        year={proj1?.year || undefined}
+                        place={proj1?.title || undefined}
                     />
                 </div>
                 <div className="w-full h-full flex flex-col md:flex-row ">
                     <div className="w-full md:w-[45%]  p-2 md:p-4 pl-0 ">
                         <InteriorImageCard
-                            src={interior05}
-                            alt="Interior Section 03 Card 1"
+                            src={proj2?.mainImage || interior05}
+                            alt={proj2?.title || "Interior Section 03 Card 1"}
                             number="01"
+                            onClickUrl={proj2 ? `/interior/project/${proj2.slug}` : undefined}
+                            year={proj2?.year || undefined}
+                            place={proj2?.title || undefined}
                         />
                     </div>
                     <div className="w-full md:w-[55%]  p-2 md:p-4 pl-0 ">
                         <InteriorImageCard
-                            src={interior06}
-                            alt="Interior Section 03 Card 2"
+                            src={proj3?.mainImage || interior06}
+                            alt={proj3?.title || "Interior Section 03 Card 2"}
                             number="02"
+                            onClickUrl={proj3 ? `/interior/project/${proj3.slug}` : undefined}
+                            year={proj3?.year || undefined}
+                            place={proj3?.title || undefined}
                         />
                     </div>
                 </div>
                 <div className="w-full md:w-full  p-2 md:px-4 pb-4 pl-0 ">
                     <InteriorImageCard
-                        src={interior07}
-                        alt="Interior Section 03 Card 3"
+                        src={proj4?.mainImage || interior07}
+                        alt={proj4?.title || "Interior Section 03 Card 3"}
                         number="03"
                         height={671}
                         maxHeight="max-h-[500px] md:max-h-[671px]"
+                        onClickUrl={proj4 ? `/interior/project/${proj4.slug}` : undefined}
+                        year={proj4?.year || undefined}
+                        place={proj4?.title || undefined}
                     />
                 </div>
-                <div className="w-full h-full flex flex-col md:flex-row ">
-                    <div className="w-full md:w-[45%]  p-2 md:p-4 pl-0 ">
-                        <InteriorImageCard
-                        src={interior09}
-                            alt="Interior Section 03 Card 1"
-                            number="01"
-                        />
-                    </div>
-                    <div className="w-full md:w-[55%]  p-2 md:p-4 pl-0 ">
-                        <InteriorImageCard
-                        src={interior08}
-                            alt="Interior Section 03 Card 2"
-                            number="02"
-                        />
-                    </div>
-                </div>
+               
             </div>
         </section>
     );

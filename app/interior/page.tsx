@@ -21,15 +21,21 @@ export const metadata: Metadata = {
 }
 
 import AnimatedSection from "@/components/home/animated-section";
+import { getInteriors } from "@/lib/interiors";
+import { mapInteriorsToUI } from "@/lib/mapInteriors";
 
-export default function InteriorPage() {
+export default async function InteriorPage() {
+  const apiData = await getInteriors();
+  const projects = mapInteriorsToUI(apiData);
+  const featuredProjects = projects.filter(p => p.isFeatured);
+
   return (
     <main className="bg-[#171412]">
       <InteriorHeader />
       <InteriorHeroPage />
 
       <AnimatedSection variant="fade">
-        <InteriorSection01 />
+        <InteriorSection01 projects={featuredProjects.slice(0, 3)} />
       </AnimatedSection>
 
       <AnimatedSection variant="slide-up">
@@ -37,7 +43,7 @@ export default function InteriorPage() {
       </AnimatedSection>
 
       <AnimatedSection variant="scale">
-        <InteriorSection03 />
+        <InteriorSection03 projects={featuredProjects.slice(3, 9)} />
       </AnimatedSection>
 
       <AnimatedSection variant="fade">
