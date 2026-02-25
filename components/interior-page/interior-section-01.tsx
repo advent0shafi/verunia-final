@@ -13,6 +13,7 @@ type InteriorImageCardProps = {
     src: StaticImageData | string;
     alt: string;
     number: string;
+    title: string;
     year?: string;
     place?: string;
     height?: number;
@@ -26,6 +27,7 @@ export function InteriorImageCard({
     src,
     alt,
     number,
+    title,
     year = "2024",
     place = "HolidayInn",
     height = 1000,
@@ -79,7 +81,7 @@ export function InteriorImageCard({
                     <div className="flex items-center justify-between ">
                         <div className="flex items-center gap-2">
                             <span className="font-instrument md:min-w-80 min-w-[250px] font-bold text-[14px] leading-[20px] tracking-normal align-middle text-[#222]">
-                                Sapphire House, Belgium
+                                {title}
                             </span>
                         </div>
                         <span className="font-instrument font-semibold text-[14px] leading-[20px] tracking-normal align-middle text-[#271E07] pl-4 border-l border-[#271E07]">
@@ -113,20 +115,22 @@ export default function InteriorSection01({ projects = [] }: { projects?: Interi
                         <InteriorImageCard
                             src={proj1?.mainImage || interior01}
                             alt={proj1?.title || "Interior Section 01"}
+                            title={proj1?.title || "HolidayInn"}
                             number="01"
                             onClickUrl={proj1 ? `/interior/project/${proj1.slug}` : "/"}
                             year={proj1?.year || "2024"}
-                            place={proj1?.title || "HolidayInn"}
+                            place={proj1?.place || "HolidayInn"}
                         />
                     </div>
                     <div className="w-full md:w-[55%]  p-2 md:p-4 pl-0 ">
                         <InteriorImageCard
                             src={proj2?.mainImage || interior02}
                             alt={proj2?.title || "Interior"}
+                            title={proj2?.title || "HolidayInn"}
                             number="02"
                             onClickUrl={proj2 ? `/interior/project/${proj2.slug}` : undefined}
                             year={proj2?.year || undefined}
-                            place={proj2?.title || undefined}
+                            place={proj2?.place || undefined}
                         />
                     </div>
                 </div>
@@ -134,12 +138,13 @@ export default function InteriorSection01({ projects = [] }: { projects?: Interi
                     <InteriorImageCard
                         src={proj3?.mainImage || interior04}
                         alt={proj3?.title || "Interior Section 01"}
+                        title={proj3?.title || "HolidayInn"}
                         number="03"
                         height={671}
                         maxHeight="max-h-[500px] md:max-h-[671px]"
                         onClickUrl={proj3 ? `/interior/project/${proj3.slug}` : undefined}
                         year={proj3?.year || undefined}
-                        place={proj3?.title || undefined}
+                        place={proj3?.place || undefined}
                     />
                 </div>
             </div>

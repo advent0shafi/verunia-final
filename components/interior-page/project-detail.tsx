@@ -8,15 +8,18 @@ import { ImageReveal } from "@/components/home/animated-section";
 import { InteriorImageCard } from "./interior-section-01";
 
 
+import { InteriorProjectUI } from "@/lib/mapInteriors";
+
 // fallback images for "Similar projects" section (kept as-is)
 import interior01 from "@/public/interior-page/image-interior-02.png";
 import interior02 from "@/public/interior-page/image-interior-03.png";
 
 interface ProjectDetailProps {
   project: InteriorProject;
+  similarProjects?: InteriorProjectUI[];
 }
 
-export default function ProjectDetail({ project }: ProjectDetailProps) {
+export default function ProjectDetail({ project, similarProjects = [] }: ProjectDetailProps) {
 
   // Verunia editorial rhythm (UNCHANGED)
   const getLayoutClass = (index: number) => {
@@ -34,7 +37,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
     <div className="bg-[#121211] text-[#FDFDFC] min-h-screen font-instrument">
 
       {/* ================= HERO SECTION ================= */}
-      <section className="relative w-full pt-[100px] border-b border-white/10 pb-8 md:pb-10">
+      <section className="relative w-full  pt-[100px] border-b border-white/10 pb-8 md:pb-10">
         <div className="max-w-[1440px] mx-auto">
 
           {/* Breadcrumb */}
@@ -77,7 +80,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       </section>
 
       {/* ================= GALLERY SECTION ================= */}
-      <section className="max-w-[1600px] mx-auto px-4 md:px-12 lg:px-20 py-20">
+      <section className="max-w-[1600px]  mx-auto px-4 md:px-12 lg:px-20 pt-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10">
           {project.gallery_images.map((image, index) => (
             <div
@@ -96,37 +99,47 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* ================= SIMILAR PROJECTS ================= */}
-      <section className="flex flex-col justify-center px-4 md:px-6 lg:px-8">
+          <div className="flex flex-col justify-center  pt-20">
         <div className="w-full max-w-[1440px] px-6">
           <h1 className="font-instrument text-[#FDFDFC] font-medium text-[48px] leading-[60px]">
             Similar projects
           </h1>
         </div>
-      </section>
-
-      <section className="flex flex-col justify-center px-4 md:px-6 lg:px-8">
+      </div>
+           <div className="flex flex-col justify-center ">
         <div className="w-full max-w-[1440px] pb-8 md:pb-10">
           <div className="w-full flex flex-col md:flex-row">
             <div className="w-full md:w-[45%] p-2 md:p-4 pl-0">
               <InteriorImageCard
-                src={interior01}
-                alt="Similar project"
+                src={similarProjects[0]?.mainImage || interior01}
+                alt={similarProjects[0]?.title || "Similar project"}
+                title={similarProjects[0]?.title || "HolidayInn"}
                 number="01"
+                onClickUrl={similarProjects[0] ? `/interior/project/${similarProjects[0].slug}` : undefined}
+                year={similarProjects[0]?.year || undefined}
+                place={similarProjects[0]?.place || undefined}
               />
             </div>
             <div className="w-full md:w-[55%] p-2 md:p-4 pl-0">
               <InteriorImageCard
-                src={interior02}
-                alt="Similar project"
+                src={similarProjects[1]?.mainImage || interior02}
+                alt={similarProjects[1]?.title || "Similar project"}
+                title={similarProjects[1]?.title || "HolidayInn"}
                 number="02"
+                onClickUrl={similarProjects[1] ? `/interior/project/${similarProjects[1].slug}` : undefined}
+                year={similarProjects[1]?.year || undefined}
+                place={similarProjects[1]?.place || undefined}
               />
             </div>
           </div>
         </div>
+      </div>
       </section>
+
+      {/* ================= SIMILAR PROJECTS ================= */}
+    
+
+ 
 
     </div>
   );

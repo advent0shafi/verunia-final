@@ -5,10 +5,8 @@ import InteriorHeader from "@/components/header/interior-header";
 import ProjectDetail from "@/components/interior-page/project-detail";
 import Footer from "@/components/footer/footer";
 
-import { getAllInteriorSlugs, getInteriorBySlug } from "@/lib/interiors";
-
-// --------------------
-// Types
+import { getAllInteriorSlugs, getInteriorBySlug, getInteriors } from "@/lib/interiors";
+import { mapInteriorsToUI } from "@/lib/mapInteriors";
 // --------------------
 interface Props {
   params: Promise<{
@@ -66,10 +64,16 @@ export default async function ProjectPage({ params }: Props) {
     notFound();
   }
 
+  const apiData = await getInteriors();
+  const allProjects = mapInteriorsToUI(apiData);
+  const otherProjects = allProjects.filter((p) => p.slug !== slug);
+  const randomizedProjects = otherProjects.sort(() => 0.5 - Math.random());
+  const similarProjects = randomizedProjects.slice(0, 2);
+
   return (
     <main>
       <InteriorHeader />
-      <ProjectDetail project={project} />
+      <ProjectDetail project={project} similarProjects={similarProjects} />
       <Footer />
     </main>
   );
