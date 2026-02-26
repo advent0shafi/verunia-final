@@ -103,7 +103,7 @@ export default function AiFotivaHeader() {
                 <div className="md:absolute md:left-1/2 md:top-1/2 transform md:-translate-x-1/2 md:-translate-y-1/2">
                     <Link href="/">
                         <Image
-                            src="/logo/ai-fotiva-logo.svg"
+                             src="/logo/main_logo.png"
                             alt="Verunia"
                             width={100}
                             height={100}
