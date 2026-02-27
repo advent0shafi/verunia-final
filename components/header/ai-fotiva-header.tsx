@@ -101,7 +101,7 @@ export default function AiFotivaHeader() {
 
                 {/* Centered Logo */}
                 <div className="md:absolute md:left-1/2 md:top-1/2 transform md:-translate-x-1/2 md:-translate-y-1/2">
-                    <Link href="/">
+                    {/* <Link href="/">
                         <Image
                              src="/logo/main_logo.png"
                             alt="Verunia"
@@ -109,7 +109,7 @@ export default function AiFotivaHeader() {
                             height={100}
                             className="w-10 h-[48px] object-contain"
                         />
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
 

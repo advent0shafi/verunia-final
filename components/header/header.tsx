@@ -116,7 +116,7 @@ export default function Header() {
               href="/furniture"
               className="hover:text-gray-500 font-instrument text-[16px] font-medium"
             >
-              V-Furnitures
+            Office Furnitures
             </Link>
             <Link
               href="/ai-fotivo"
