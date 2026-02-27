@@ -14,7 +14,7 @@ export default function Header() {
   const mobileLinks = [
     { href: "/", label: "Home" },
     { href: "/interior", label: "V Interior" },
-    { href: "/furniture", label: "V-Furnitures" },
+    { href: "/furniture", label: "Office Furnitures" },
     { href: "/ai-fotivo", label: "Al Fotivo" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
