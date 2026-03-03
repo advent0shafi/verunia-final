@@ -13,7 +13,7 @@ export default function Header() {
 
   const mobileLinks = [
     { href: "/", label: "Home" },
-    { href: "/interior", label: "V Interior" },
+    { href: "/interior", label: "V-Interior" },
     { href: "/furniture", label: "Office Furnitures" },
     { href: "/ai-fotivo", label: "Al Fotivo" },
     { href: "/about", label: "About" },
@@ -110,7 +110,7 @@ export default function Header() {
               href="/interior"
               className="hover:text-gray-500 font-instrument text-[16px] font-medium"
             >
-              V Interior
+              V-Interior
             </Link>
             <Link
               href="/furniture"
