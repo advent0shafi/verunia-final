@@ -15,7 +15,7 @@ export default function Sections02() {
     <SectionContainer >
       <div className="">
         <h2
-          className="text-black font-fraunces font-normal not-italic align-middle
+          className="text-black font-helvetica font-normal not-italic align-middle
             text-[32px] leading-[40px] tracking-[-0.02em]
             md:text-[48px] md:leading-[60px]"
         >

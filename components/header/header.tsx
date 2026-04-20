@@ -15,7 +15,7 @@ export default function Header() {
     { href: "/", label: "Home" },
     { href: "/interior", label: "V-Interior" },
     { href: "/furniture", label: "Office Furnitures" },
-    { href: "/ai-fotivo", label: "Al Fotivo" },
+    { href: "/bespoke", label: "Bespoke" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
@@ -119,10 +119,10 @@ export default function Header() {
             Office Furnitures
             </Link>
             <Link
-              href="/ai-fotivo"
+              href="/bespoke"
               className="hover:text-gray-500 font-instrument text-[16px] font-medium"
             >
-              Al Fotivo
+              Bespoke
             </Link>
             <Link
               href="/about"
@@ -214,7 +214,7 @@ export default function Header() {
                       <Link
                         href={item.href}
                         onClick={() => setMenuOpen(false)}
-                        className="text-white font-fraunces  font-medium  text-[38px] leading-[60px] [-letter-spacing:-0.02em]  transition-colors hover:text-gray-300 block"
+                        className="text-white font-helvetica  font-medium  text-[38px] leading-[60px] [-letter-spacing:-0.02em]  transition-colors hover:text-gray-300 block"
                       >
                         {item.label}
                       </Link>

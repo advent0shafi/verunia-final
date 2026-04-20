@@ -80,7 +80,7 @@ export default function FotivoProjectDetail({
             </div>
 
             {/* Title */}
-            <h1 className="font-fraunces font-light text-4xl md:text-5xl lg:text-6xl text-white mb-8">
+            <h1 className="font-helvetica font-light text-4xl md:text-5xl lg:text-6xl text-white mb-8">
               {product.name}
             </h1>
 
@@ -101,7 +101,7 @@ export default function FotivoProjectDetail({
 
       {/* You may also like */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 pb-20 md:pb-32">
-        <h2 className="font-fraunces font-light text-3xl md:text-4xl text-white mb-10">
+        <h2 className="font-helvetica font-light text-3xl md:text-4xl text-white mb-10">
           You may also like
         </h2>
 

@@ -34,31 +34,31 @@ export default function VeruniaFooter() {
                         <nav className="flex flex-col gap-3 md:gap-4 mb-8 md:mb-12">
                             <Link
                                 href="/interior"
-                                className="text-white font-fraunces font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
+                                className="text-white font-helvetica font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
                             >
-                                Verunia Interiors
+                              Interiors
                             </Link>
                             <Link
                                 href="/furniture"
-                                className="text-white font-fraunces font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
+                                className="text-white font-helvetica font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
                             >
-                                Verunia Furniture
+                        Furniture
                             </Link>
                             <Link
-                                href="/ai-fotivo"
-                                className="text-white font-fraunces font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
+                                href="/bespoke"
+                                className="text-white font-helvetica font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
                             >
-                                Al Fotivo
+                                Bespoke
                             </Link>
                             <Link
                                 href="/about"
-                                className="text-white font-fraunces font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
+                                className="text-white font-helvetica font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
                             >
                                 About
                             </Link>
                             <Link
                                 href="/contact"
-                                className="text-white font-fraunces font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
+                                className="text-white font-helvetica font-light text-[30px] leading-[38px] tracking-normal align-middle hover:text-[#D4A853] transition-colors md:text-[48px] md:leading-[60px] md:-tracking-[0.02em]"
                             >
                                 Contact
                             </Link>

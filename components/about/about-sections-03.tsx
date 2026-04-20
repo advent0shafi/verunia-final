@@ -7,7 +7,7 @@ export default function AboutSections03() {
             <SectionContainer>
                 <div className="w-full py-[60px] md:py-[112px]">
                     {/* Main Heading */}
-                    <h2 className="text-[#271E07] font-fraunces font-normal not-italic text-center
+                    <h2 className="text-[#271E07] font-helvetica font-normal not-italic text-center
                         text-[28px] leading-[36px] tracking-[-0.02em]
                         md:text-[48px] md:leading-[60px] mb-8 md:mb-20">
                         Three expert brands.
@@ -30,7 +30,7 @@ export default function AboutSections03() {
                                 />
                             </div>
                             <div className="pt-4 md:pt-6 flex flex-col items-center text-center">
-                                <h3 className="font-fraunces font-normal not-italic text-[20px] md:text-[24px] leading-[28px] md:leading-[32px] tracking-normal text-center text-[#523E0F]">
+                                <h3 className="font-helvetica font-normal not-italic text-[20px] md:text-[24px] leading-[28px] md:leading-[32px] tracking-normal text-center text-[#523E0F]">
                                     Verunia Interiors
                                 </h3>
                                 <p className="font-instrument pt-2 max-w-[275px] font-normal text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-[0em] text-center text-[#57534E]">
@@ -52,7 +52,7 @@ export default function AboutSections03() {
                                 />
                             </div>
                             <div className="pt-4 md:pt-6 flex flex-col items-center text-center">
-                                <h3 className="font-fraunces font-normal not-italic text-[20px] md:text-[24px] leading-[28px] md:leading-[32px] tracking-normal text-center text-[#523E0F]">
+                                <h3 className="font-helvetica font-normal not-italic text-[20px] md:text-[24px] leading-[28px] md:leading-[32px] tracking-normal text-center text-[#523E0F]">
                                     Verunia Furniture
                                 </h3>
                                 <p className="font-instrument pt-2 max-w-[275px] font-normal text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-[0em] text-center text-[#57534E]">
@@ -74,7 +74,7 @@ export default function AboutSections03() {
                                 />
                             </div>
                             <div className="pt-4 md:pt-6 flex flex-col items-center text-center">
-                                <h3 className="font-fraunces font-normal not-italic text-[20px] md:text-[24px] leading-[28px] md:leading-[32px] tracking-normal text-center text-[#523E0F]">
+                                <h3 className="font-helvetica font-normal not-italic text-[20px] md:text-[24px] leading-[28px] md:leading-[32px] tracking-normal text-center text-[#523E0F]">
                                     Al Fotivo
                                 </h3>
                                 <p className="font-instrument pt-2 max-w-[275px] font-normal text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-[0em] text-center text-[#57534E]">

@@ -13,7 +13,7 @@ export default function InteriorHeader() {
     { href: "/", label: "Home" },
     { href: "/interior", label: "V-Interior" },
     { href: "/furniture", label: "Office Furnitures" },
-    { href: "/ai-fotivo", label: "Al Fotivo" },
+    { href: "/bespoke", label: "Bespoke" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
@@ -172,7 +172,7 @@ export default function InteriorHeader() {
                       <Link
                         href={item.href}
                         onClick={() => setMenuOpen(false)}
-                        className="text-white font-fraunces  font-medium font-fra text-[38px] leading-[60px] [-letter-spacing:-0.02em]  font-fraunces transition-colors hover:text-gray-300 block"
+                        className="text-white font-helvetica  font-medium font-fra text-[38px] leading-[60px] [-letter-spacing:-0.02em]  font-helvetica transition-colors hover:text-gray-300 block"
                       >
                         {item.label}
                       </Link>

@@ -21,7 +21,7 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
             href={`/furniture/${products[0].category.slug}`}
             className="text-[#1C1917] font-medium text-[16px] md:text-[20px] hover:text-[#8B4513] transition-colors"
           >
-            View All <span className="font-fraunces">{products[0].category.name}</span>
+            View All <span className="font-helvetica">{products[0].category.name}</span>
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">

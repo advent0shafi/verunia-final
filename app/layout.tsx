@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Fraunces } from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import LoadingUIWrapper from "@/components/ui/loading-ui-wrapper";
 import SmoothScroll from "@/components/smooth-scroll";
@@ -10,7 +11,16 @@ const instrumentSans = Instrument_Sans({
   weight: ["400", "500", "600", "700"],
   variable: "--font-instrument",
 })
-const fraunces = Fraunces({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-fraunces" })
+const helvetica = localFont({
+  src: [
+    { path: "../public/font/helvetica/Helvetica.ttf", weight: "400", style: "normal" },
+    { path: "../public/font/helvetica/Helvetica-Oblique.ttf", weight: "400", style: "italic" },
+    { path: "../public/font/helvetica/Helvetica-Bold.ttf", weight: "700", style: "normal" },
+    { path: "../public/font/helvetica/Helvetica-BoldOblique.ttf", weight: "700", style: "italic" },
+  ],
+  variable: "--font-helvetica",
+  display: "swap",
+})
 
 
 
@@ -37,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${instrumentSans.variable} ${fraunces.variable} antialiased`}
+        className={`${instrumentSans.variable} ${helvetica.variable} antialiased`}
       >
         <LoadingUIWrapper>  <SmoothScroll> {children} </SmoothScroll> </LoadingUIWrapper>
       </body>

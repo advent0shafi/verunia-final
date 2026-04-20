@@ -12,7 +12,7 @@ export default function AiFotivaHeader() {
         { href: "/", label: "Home" },
         { href: "/interior", label: "V-Interior" },
         { href: "/furniture", label: "Office Furnitures" },
-        { href: "/ai-fotivo", label: "Al Fotivo" },
+        { href: "/bespoke", label: "Bespoke" },
         { href: "/about", label: "About" },
         { href: "/contact", label: "Contact" },
     ];
@@ -162,7 +162,7 @@ export default function AiFotivaHeader() {
                                             <Link
                                                 href={item.href}
                                                 onClick={() => setMenuOpen(false)}
-                                                className="text-white font-fraunces font-medium text-[38px] leading-[60px] [-letter-spacing:-0.02em] transition-colors hover:text-gray-300 block"
+                                                className="text-white font-helvetica font-medium text-[38px] leading-[60px] [-letter-spacing:-0.02em] transition-colors hover:text-gray-300 block"
                                             >
                                                 {item.label}
                                             </Link>

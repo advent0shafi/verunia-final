@@ -31,7 +31,7 @@ export default function FotivoProjectCard({
                     />
                 </div>
                 <div className="flex flex-col gap-2 justify-center items-center ">
-                    <h3 className=" font-fraunces 
+                    <h3 className=" font-helvetica 
                            font-light 
                            text-[24px]
                            leading-[32px]

@@ -141,9 +141,9 @@ export function GlobeDemo() {
             <span className="font-bold">GCC and beyond.</span>
           </h1>
         </div>
-        {/* Fixed-size globe viewport (1246×589) + crop so only half the globe shows */}
-        <div className="relative md:mx-auto md:mt-10 w-full  md:h-[689px] h-[330.10791015625px] overflow-hidden z-10">
-          <div className="absolute  inset-x-0 -bottom-[80%] h-[190%] w-full">
+        {/* Full-size globe viewport */}
+        <div className="relative md:mx-auto md:mt-10 w-full md:h-[689px] h-[330px] z-10">
+          <div className="absolute inset-0 h-full w-full">
             <World data={sampleArcs} globeConfig={globeConfig} />
           </div>
         </div>

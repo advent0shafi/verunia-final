@@ -8,7 +8,7 @@ export default function AboutSections01() {
             <SectionContainer>
                 <div className="flex flex-col md:flex-row gap-6 md:gap-0 w-full">
                     <div className="w-full">
-                        <h1 className="font-fraunces text-[#271E07] max-w-full md:max-w-[452px] font-medium text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] tracking-[-0.02em]">
+                        <h1 className="font-helvetica text-[#271E07] max-w-full md:max-w-[452px] font-medium text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] tracking-[-0.02em]">
                             A group with a global foundation
                         </h1>
                     </div>

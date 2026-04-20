@@ -10,18 +10,18 @@ import { Metadata } from "next";
 import { frontendPoint } from "@/lib/getData";
 import AiFotivoAward from "@/components/ai-fotivo-page/ai-fotivo-award";
 export const metadata: Metadata = {
-    title: 'Al Fotivo',
+    title: 'Bespoke',
     description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
-    keywords: ['Al Fotivo', 'AI-generated images', 'Verunia Furniture Trading LLC'],
+    keywords: ['Bespoke', 'AI-generated images', 'Verunia Furniture Trading LLC'],
     openGraph: {
-        title: 'Al Fotivo - Verunia',
+        title: 'Bespoke - Verunia',
         description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
         images: [{ url: `${frontendPoint}/opengraph-image.png` }],
     },
 }
 import AnimatedSection from "@/components/home/animated-section";
 
-export default function AiFotivoPage() {
+export default function BespokePage() {
     return (
         <main>
             <AiFotivaHeader />

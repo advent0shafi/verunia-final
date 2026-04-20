@@ -17,7 +17,7 @@
 -   **Icons**: `lucide-react`
 -   **Fonts**:
     -   `Instrument Sans` (Sans-serif, variable)
-    -   `Fraunces` (Serif, variable)
+    -   `Helvetica` (Local font, variable)
 
 ### Animations & 3D
 -   **Orchestration**: `framer-motion` (v12)
@@ -68,7 +68,7 @@ The application uses the Next.js App Router. Review `app/` for the source of tru
 -   **Global CSS**: `app/globals.css`. Uses the `oklch()` color space for dynamic light/dark mode support.
 -   **Theme**:
     -   `light` and `dark` classes control CSS variables.
-    -   `@theme inline` block in CSS defines custom font variables (`--font-instrument`, `--font-fraunces`).
+    -   `@theme inline` block in CSS defines custom font variables (`--font-instrument`, `--font-helvetica`).
 -   **Layout**: `app/layout.tsx`
     -   Wraps the app in `LoadingUIWrapper` (initial 3s loader).
     -   Wraps the app in `SmoothScroll` (Lenis).

@@ -12,7 +12,20 @@ const nextConfig = {
         hostname: 'api.veruniagroup.com',
         pathname: '/uploads/**',
       },
-      
+      {
+        protocol: 'https',
+        hostname: 'digital.ihg.com',
+        pathname: '/is/content/ihg/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'jw-marriott.marriott.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'jw-marriott.marriott.com',
+      },
+
     ],
     
     qualities: [75, 100],

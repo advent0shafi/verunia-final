@@ -49,7 +49,7 @@ function CategoryCard({ title, imageSrc, slug, className }: CategoryCardProps) {
       <div className="absolute bottom-0 left-0 p-4 md:p-6">
         <h3
           className="
-            font-fraunces font-light text-[30px] leading-[38px]
+            font-helvetica font-light text-[30px] leading-[38px]
             text-[#FFFDFA] drop-shadow
             md:text-[36px] md:leading-[44px]
           "

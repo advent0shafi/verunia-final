@@ -26,7 +26,7 @@ export default function AiFotivoSection03() {
             <div className="relative z-10 md:py-16 py-3">
                 <h1
                     className="
-                        font-fraunces 
+                        font-helvetica 
                         font-light 
                         italic 
                         max-w-[600px] 

@@ -53,7 +53,7 @@ export default function ProjectDetail({ project, similarProjects = [] }: Project
 
           {/* Title */}
           <div className="px-6 md:px-12 lg:px-20 mt-6 mb-2">
-            <h1 className="font-fraunces text-white text-3xl md:text-5xl font-normal leading-tight">
+            <h1 className="font-helvetica text-white text-3xl md:text-5xl font-normal leading-tight">
               {project.project_title}
             </h1>
           </div>

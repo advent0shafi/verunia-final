@@ -81,7 +81,7 @@ export default function ProductDetail({ product }: { product: Product }) {
               </p>
             </div>
 
-            <h1 className="font-fraunces text-[32px] md:text-[44px] leading-[1.1] text-[#1C1917] mb-6 font-normal">
+            <h1 className="font-helvetica text-[32px] md:text-[44px] leading-[1.1] text-[#1C1917] mb-6 font-normal">
               {product.name}
             </h1>
 

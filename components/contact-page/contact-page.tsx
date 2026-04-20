@@ -12,7 +12,7 @@ export default function ContactPage() {
                     {/* Left Column - Text Content */}
                     <div className="w-full lg:w-[53%] flex flex-col gap-4 md:gap-6 lg:gap-8">
                         {/* Main Heading */}
-                        <h1 className="font-fraunces text-[#271E07] font-normal not-italic text-[32px] md:text-[48px] lg:text-[72px] leading-[40px] md:leading-[60px] lg:leading-[82px] tracking-[-0.02em]">
+                        <h1 className="font-helvetica text-[#271E07] font-normal not-italic text-[32px] md:text-[48px] lg:text-[72px] leading-[40px] md:leading-[60px] lg:leading-[82px] tracking-[-0.02em]">
                             <TextReveal>Talk to the</TextReveal>
                             <br />
                             <TextReveal>Verunia team.</TextReveal>

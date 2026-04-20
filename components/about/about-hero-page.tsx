@@ -7,7 +7,7 @@ export default function AboutHeroPage() {
             <SectionContainer>
                 <div className="w-full flex flex-col md:flex-row relative pt-[60px] md:pt-[80px]">
                     <div className="w-full">
-                        <h1 className="font-fraunces font-normal mx-auto text-[36px] md:text-[56px] lg:text-[72px] leading-[44px] md:leading-[64px] lg:leading-[82px] tracking-[-0.02em] text-[#523E0F]">
+                        <h1 className="font-helvetica font-normal mx-auto text-[36px] md:text-[56px] lg:text-[72px] leading-[44px] md:leading-[64px] lg:leading-[82px] tracking-[-0.02em] text-[#523E0F]">
                             Where great <br className="hidden md:block" /> 
                             <span className="md:hidden"> </span>
                             spaces <span className="italic">begin.</span>

@@ -40,7 +40,7 @@ export const HeroLogoSection = ({ prefersReducedMotion, isLoaded }: HeroLogoSect
         transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] as const }}
       >
         <Image
-          src="/logo/verunia-svg.svg"
+          src="/logo/verunia-gold-gradient.svg"
           alt="Verunia"
           width={100}
           height={184}

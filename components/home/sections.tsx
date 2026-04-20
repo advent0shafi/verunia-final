@@ -64,12 +64,12 @@ export default function Sections() {
                 <div className="w-full md:w-[35%] h-full order-2 md:order-1">
                     <div className=" md:px-[48px]  md:py-0 ">
                         <div className="hidden md:block">
-                            <h1 className="mb-4 md:mb-6 font-normal text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-fraunces">
-                                <TextReveal>Verunia</TextReveal> <br />
+                            <h1 className="mb-4 md:mb-6 font-normal text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-helvetica">
+                          
                                 <TextReveal>Interiors</TextReveal>
                             </h1>
                         </div>
-                        <div className="pt-4 md:pt-[277px] ">
+                        <div className="pt-4 md:pt-[340px] ">
                             <p className="font-instrument font-normal not-italic text-[18px] leading-[28px] md:text-[20px] md:leading-[30px] tracking-normal text-[#57534E] max-w-md">
                                 <TextReveal>Interior design and fit-out for offices, hospitality and residential spaces.</TextReveal>
                             </p>
@@ -82,8 +82,8 @@ export default function Sections() {
                 </div>
                 <div className="w-full md:w-[65%] h-full order-1 md:order-2 group">
                     <AnimatedSection variant="parallax">
-                        <h1 className="mb-4 md:mb-6 font-normal md:hidden block text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-fraunces">
-                            <TextReveal>Verunia Interiors</TextReveal>
+                        <h1 className="mb-4 md:mb-6 font-normal md:hidden block text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-helvetica">
+                            <TextReveal>Interiors</TextReveal>
 
                         </h1>
                         <ImageReveal>
@@ -105,8 +105,8 @@ export default function Sections() {
             <div className="w-full h-full flex flex-col md:flex-row py-[60px] md:py-[112px]">
                 <div className="w-full md:w-[65%] h-full group">
                     <div className="md:hidden block">
-                        <h1 className="mb-4 md:mb-6 font-normal text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-fraunces">
-                            <TextReveal>Verunia Furnitures</TextReveal>
+                        <h1 className="mb-4 md:mb-6 font-normal text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-helvetica">
+                            <TextReveal>Furnitures</TextReveal>
 
                         </h1>
                     </div>
@@ -127,13 +127,12 @@ export default function Sections() {
                 <div className="w-full md:w-[35%] h-full">
                     <div className=" md:px-[48px]  md:py-0">
                         <div className="hidden md:block"    >
-                            <h1 className="mb-4 md:mb-6 font-normal text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-fraunces">
-                                <TextReveal>Verunia</TextReveal>
-                                <br />
+                            <h1 className="mb-4 md:mb-6 font-normal text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-helvetica">
+                               
                                 <TextReveal>Furnitures</TextReveal>
                             </h1>
                         </div>
-                        <div className="pt-4 md:pt-[277px]">
+                        <div className="pt-4 md:pt-[340px]">
                             <p className="font-instrument font-normal not-italic text-[18px] leading-[28px] md:text-[20px] md:leading-[30px] tracking-normal text-[#57534E] max-w-md">
                                 <TextReveal>Office furniture systems and seating for modern workplaces.</TextReveal>
                             </p>
@@ -151,16 +150,16 @@ export default function Sections() {
                 <div className="w-full md:w-[35%] h-full order-2 md:order-1">
                     <div className=" md:px-[48px]  md:py-0">
                         <div className="hidden md:block">
-                            <h1 className="mb-4 md:mb-6 font-normal text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-fraunces">
-                                <TextReveal>Al Fotivo</TextReveal>
+                            <h1 className="mb-4 md:mb-6 font-normal text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-helvetica">
+                                <TextReveal>Bespoke</TextReveal>
 
                             </h1>
                             <p className="font-instrument font-normal not-italic text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal text-[#57534E] max-w-md">
 
-                                <TextReveal>Luxury interiors and furniture</TextReveal>
+                                <TextReveal>Customized Interior luxury furniting</TextReveal>
                             </p>
                         </div>
-                        <div className="pt-4 md:pt-[277px]">
+                        <div className="pt-4 md:pt-[300px]">
                             <p className="font-instrument font-normal not-italic text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal text-[#57534E] max-w-md">
                                 <TextReveal>Interior design and fit-out for offices, hospitality and residential spaces.</TextReveal>
                             </p>
@@ -174,13 +173,13 @@ export default function Sections() {
                 <div className="w-full md:w-[65%] h-full order-1 md:order-2 group">
                     <AnimatedSection variant="parallax">
                         <div className="md:hidden block">
-                            <h1 className="mb-2 md:mb-6 font-normal text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-fraunces">
-                                <TextReveal>Al Fotivo</TextReveal>
+                            <h1 className="mb-2 md:mb-6 font-normal text-[#523E0F] not-italic text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] [-letter-spacing:--0.02em] font-helvetica">
+                                <TextReveal>Bespoke</TextReveal>
 
                             </h1>
                             <p className="font-instrument mb-[24px] font-normal not-italic text-start text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal text-[#57534E] max-w-md">
 
-                                <TextReveal>Luxury interiors and furniture</TextReveal>
+                                <TextReveal>Customized Interior luxury furniting</TextReveal>
                             </p>
                         </div>
                         <ImageReveal>

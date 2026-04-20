@@ -48,7 +48,7 @@ function CollectionCard({ title, imageSrc, href }: CollectionCardProps) {
             <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
                 <h3
                     className="
-                        font-fraunces 
+                        font-helvetica 
                         font-light 
                         text-[#FFFDFA]
                         text-[30px] 
@@ -114,7 +114,7 @@ export default function AiFotivoSection04() {
             </div>
             <div className="w-full h-full">
                 <h2
-                    className="font-fraunces font-light text-[#F5C547] text-[48px] leading-[60px] text-center tracking-[-0.02em] mt-[112px] mb-[42px]"
+                    className="font-helvetica font-light text-[#F5C547] text-[48px] leading-[60px] text-center tracking-[-0.02em] mt-[112px] mb-[42px]"
                 >
                     <TextReveal>Featured works</TextReveal>
                 </h2>

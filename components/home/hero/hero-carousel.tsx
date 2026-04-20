@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React, { useMemo, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import type { Variants } from "motion/react";
 
 // REPLACE WITH YOUR IMPORTS
 import hero01 from "@/public/hero-image/image-01.png";
@@ -14,15 +15,84 @@ interface HeroCarouselProps {
   isLoaded?: boolean;
 }
 
+const SLIDES = [
+  { src: hero01, alt: "Outdoor Patio" },
+  { src: hero02, alt: "Main Living Room" },
+  { src: hero03, alt: "Secondary Lounge" },
+];
+
+const OFFSETS = [-2, -1, 0, 1, 2] as const;
+
+const DESKTOP_EASE = [0.25, 0.1, 0.25, 1] as const;
+const MOBILE_EASE = [0.32, 0.72, 0, 1] as const;
+
+const desktopVariants: Variants = {
+  center: {
+    width: "64.31%",
+    height: "64vh",
+    left: "50%",
+    x: "-50%",
+    zIndex: 60,
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.8, ease: DESKTOP_EASE },
+  },
+  left: {
+    width: "17.8%",
+    height: "48.21vh",
+    left: "calc(50% - 32.155% - 4.44vw - 8.9%)",
+    x: "-50%",
+    zIndex: 30,
+    opacity: 0.85,
+    scale: 1,
+    transition: { duration: 0.8, ease: DESKTOP_EASE },
+  },
+  right: {
+    width: "17.8%",
+    height: "48.21vh",
+    left: "calc(50% + 32.155% + 4.44vw + 8.9%)",
+    x: "-50%",
+    zIndex: 30,
+    opacity: 0.85,
+    scale: 1,
+    transition: { duration: 0.8, ease: DESKTOP_EASE },
+  },
+  farLeft: {
+    width: "17.8%",
+    height: "48.21vh",
+    left: "-20%",
+    x: "-50%",
+    zIndex: 10,
+    opacity: 0,
+    scale: 1,
+    transition: { duration: 0.8 },
+  },
+  farRight: {
+    width: "17.8%",
+    height: "48.21vh",
+    left: "120%",
+    x: "-50%",
+    zIndex: 10,
+    opacity: 0,
+    scale: 1,
+    transition: { duration: 0.8 },
+  },
+};
+
+const slideVariants3D: Variants = {
+  enter: { opacity: 0, scale: 0.85, z: -150 },
+  center: {
+    opacity: 1,
+    scale: 1,
+    z: 0,
+    transition: { duration: 0.7, ease: MOBILE_EASE },
+  },
+  exit: { opacity: 0, scale: 0.85, z: -150 },
+};
+
 export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCarouselProps) => {
-  const slides = useMemo(
-    () => [
-      { src: hero01, alt: "Outdoor Patio" },
-      { src: hero02, alt: "Main Living Room" },
-      { src: hero03, alt: "Secondary Lounge" },
-    ],
-    []
-  );
+  void isLoaded;
+  const slides = useMemo(() => SLIDES, []);
 
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -34,83 +104,21 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
   const prevIndex = (index - 1 + count) % count;
   const nextIndex = (index + 1) % count;
 
-  const goNext = useCallback(() => setIndex((prev) => prev + 1), []);
-  const goPrev = useCallback(() => setIndex((prev) => prev - 1), []);
+  const goNext = useCallback(() => setIndex((prev) => (prev + 1) % count), [count]);
+  const goPrev = useCallback(() => setIndex((prev) => (prev - 1 + count) % count), [count]);
+  const pauseAutoPlay = useCallback(() => setIsPaused(true), []);
+  const resumeAutoPlay = useCallback(() => setIsPaused(false), []);
 
   useEffect(() => {
     if (isPaused || prefersReducedMotion) return;
-    const timer = setInterval(goNext, 4500);
+    const timer = setInterval(goNext, 3000);
     return () => clearInterval(timer);
   }, [isPaused, prefersReducedMotion, goNext]);
 
-  const getSlideContent = (i: number) => {
+  const getSlideContent = useCallback((i: number) => {
     const wrappedIndex = ((i % count) + count) % count;
     return slides[wrappedIndex];
-  };
-
-  // --- DESKTOP VARIANTS (From Block 1) ---
-  const desktopVariants = {
-    center: {
-      width: "64.31%",
-      height: "64vh",
-      left: "50%",
-      x: "-50%",
-      zIndex: 60,
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
-    },
-    left: {
-      width: "17.8%",
-      height: "48.21vh",
-      left: "calc(50% - 32.155% - 4.44vw - 8.9%)",
-      x: "-50%",
-      zIndex: 30,
-      opacity: 0.85,
-      scale: 1,
-      transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
-    },
-    right: {
-      width: "17.8%",
-      height: "48.21vh",
-      left: "calc(50% + 32.155% + 4.44vw + 8.9%)",
-      x: "-50%",
-      zIndex: 30,
-      opacity: 0.85,
-      scale: 1,
-      transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
-    },
-    farLeft: {
-      width: "17.8%",
-      height: "48.21vh",
-      left: "-20%",
-      x: "-50%",
-      zIndex: 10,
-      opacity: 0,
-      scale: 1,
-      transition: { duration: 0.8 },
-    },
-    farRight: {
-      width: "17.8%",
-      height: "48.21vh",
-      left: "120%",
-      x: "-50%",
-      zIndex: 10,
-      opacity: 0,
-      scale: 1,
-      transition: { duration: 0.8 },
-    },
-  };
-
-  // --- MOBILE 3D SETTINGS (From Block 2) ---
-  const slideVariants3D = {
-    enter: { opacity: 0, scale: 0.85, z: -150 },
-    center: { 
-      opacity: 1, scale: 1, z: 0,
-      transition: { duration: 0.7, ease: [0.32, 0.72, 0, 1] } 
-    },
-    exit: { opacity: 0, scale: 0.85, z: -150 }
-  };
+  }, [count, slides]);
 
   return (
     <div className="relative w-full overflow-hidden">
@@ -118,11 +126,11 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
       {/* --- DESKTOP VIEW (Layout from Block 1) --- */}
       <div 
         className="hidden md:flex relative w-full h-screen items-center justify-center overflow-hidden"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        onMouseEnter={pauseAutoPlay}
+        onMouseLeave={resumeAutoPlay}
       >
         <AnimatePresence initial={false} mode="popLayout">
-          {[-2, -1, 0, 1, 2].map((offset) => {
+          {OFFSETS.map((offset) => {
             const virtualIndex = index + offset;
             const content = getSlideContent(virtualIndex);
             
@@ -171,8 +179,8 @@ export const HeroCarousel = ({ prefersReducedMotion, isLoaded = true }: HeroCaro
       <div
         className="md:hidden relative w-full h-[500px] flex items-center justify-center overflow-hidden mt-[100px]"
         style={{ perspective: "1000px" }}
-        onTouchStart={() => setIsPaused(true)}
-        onTouchEnd={() => setIsPaused(false)}
+        onTouchStart={pauseAutoPlay}
+        onTouchEnd={resumeAutoPlay}
       >
         <div className="flex items-center justify-center gap-[2.5%] w-full" style={{ transformStyle: "preserve-3d" }}>
           

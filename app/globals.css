@@ -132,8 +132,8 @@ body {
   .font-instrument {
     font-family: var(--font-instrument), Arial, Helvetica, sans-serif;
   }
-  .font-fraunces {
-    font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  .font-helvetica {
+    font-family: var(--font-helvetica), Arial, Helvetica, sans-serif;
   }
 }
 

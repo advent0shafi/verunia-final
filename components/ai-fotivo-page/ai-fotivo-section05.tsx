@@ -34,7 +34,7 @@ function FeaturedWorkCard({ title, location, imageSrc }: FeaturedWorkCardProps) 
             <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
                 <h3
                     className="
-            font-fraunces font-light
+            font-helvetica font-light
             text-[#FFFDFA]
             text-[30px] leading-[38px]
             tracking-[0%]
@@ -85,7 +85,7 @@ function LuxuryCollectionBanner({ imageSrc }: LuxuryCollectionBannerProps) {
                 </p>
                 <h3
                     className="
-                        font-fraunces 
+                        font-helvetica 
                         font-light
                         text-[48px]
                         leading-[60px]

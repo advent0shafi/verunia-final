@@ -39,7 +39,7 @@ export default async function FotivoCategoryPage({ params }: CategoryPageProps) 
                 <p className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-[0] text-center text-white/90 max-w-2xl">
                   Collection
                 </p>
-                    <h1 className="font-fraunces font-light text-[48px] md:text-[64px] text-[#F5C547] mb-4">
+                    <h1 className="font-helvetica font-light text-[48px] md:text-[64px] text-[#F5C547] mb-4">
                         {products[0].al_fotivo_category.name}
                     </h1>
                    

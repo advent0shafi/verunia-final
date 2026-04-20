@@ -12,7 +12,7 @@ export default function AboutSections02() {
                             <h2 className="text-[#523E0F] font-instrument font-medium text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal text-left md:text-center">Our Vision</h2>
                         </div>
                         <div className="w-full md:max-w-[60%]">
-                            <p className="text-[#523E0F] font-fraunces font-normal not-italic text-[28px] md:text-[40px] lg:text-[60px] leading-[36px] md:leading-[48px] lg:leading-[64px] tracking-[-0.02em] align-middle">
+                            <p className="text-[#523E0F] font-helvetica font-normal not-italic text-[28px] md:text-[40px] lg:text-[60px] leading-[36px] md:leading-[48px] lg:leading-[64px] tracking-[-0.02em] align-middle">
                                 To become the definitive name in modern and luxury interiors—where bold design meets precise execution.
                             </p>
                         </div>
@@ -27,7 +27,7 @@ export default function AboutSections02() {
                                 <h2 className="text-[#523E0F] font-instrument font-medium text-[16px] md:text-[20px] leading-[24px] md:leading-[30px] tracking-normal text-left md:text-center">Our Mission</h2>
                             </div>
                             <div className="w-full">
-                                <h3 className="text-[#523E0F] font-fraunces font-normal not-italic text-[28px] md:text-[40px] lg:text-[60px] leading-[36px] md:leading-[48px] lg:leading-[64px] tracking-[-0.02em] align-middle">
+                                <h3 className="text-[#523E0F] font-helvetica font-normal not-italic text-[28px] md:text-[40px] lg:text-[60px] leading-[36px] md:leading-[48px] lg:leading-[64px] tracking-[-0.02em] align-middle">
                                     We design beyond aesthetics.
                                 </h3>
                                 <p className="text-[#523E0F] pt-[24px] md:pt-[40px] max-w-full md:max-w-[469px] font-instrument font-normal not-italic text-[16px] md:text-[18px] leading-[24px] md:leading-[28px] tracking-normal align-middle">

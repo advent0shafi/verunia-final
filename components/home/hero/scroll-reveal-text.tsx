@@ -29,7 +29,7 @@ export const ScrollRevealText = ({ prefersReducedMotion }: ScrollRevealTextProps
     return (
       <div className="flex items-center justify-center px-4 md:px-8 py-[80px] md:py-[200px]">
         <div className="max-w-[1200px] mx-auto">
-          <h2 className="font-fraunces not-italic md:text-[48px] text-[24px] md:leading-[60px] leading-[32px] [-letter-spacing:--0.02em] text-center max-w-[900px] mx-auto text-[#523E0F]">
+          <h2 className="font-helvetica not-italic md:text-[48px] text-[24px] md:leading-[60px] leading-[32px] [-letter-spacing:--0.02em] text-center max-w-[900px] mx-auto text-[#523E0F]">
             <span className="font-semibold">Verunia Group</span>{" "}
             <span className="font-extralight">
               brings together dedicated brands in office furniture, interior design and luxury interiors,
@@ -47,7 +47,7 @@ export const ScrollRevealText = ({ prefersReducedMotion }: ScrollRevealTextProps
       className="flex items-center justify-center px-4 md:px-8 py-[80px] md:py-[200px]"
     >
       <div className="max-w-[1200px] mx-auto">
-        <h2 className="font-fraunces not-italic md:text-[48px] text-[24px] md:leading-[60px] leading-[32px] [-letter-spacing:--0.02em] text-center max-w-[900px] mx-auto text-[#523E0F] flex flex-wrap justify-center">
+        <h2 className="font-helvetica not-italic md:text-[48px] text-[24px] md:leading-[60px] leading-[32px] [-letter-spacing:--0.02em] text-center max-w-[900px] mx-auto text-[#523E0F] flex flex-wrap justify-center">
           {allWords.map((word, i) => {
             const start = i / totalWords;
             const end = start + 1 / totalWords;
