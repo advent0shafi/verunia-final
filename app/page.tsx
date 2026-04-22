@@ -6,6 +6,7 @@ import { getInteriors } from "@/lib/interiors";
 import { mapInteriorsToUI, type InteriorProjectUI } from "@/lib/mapInteriors";
 import dynamic from "next/dynamic";
 import LazyLoadSection from "@/components/ui/lazy-load-section";
+import { Suspense } from "react";
 
 const Sections = dynamic(() => import("@/components/home/sections"), {
   loading: () => <SectionFallback minHeightClass="min-h-[900px]" />,
@@ -48,11 +49,15 @@ function SectionFallback({ minHeightClass }: { minHeightClass: string }) {
   );
 }
 
-export default async function Home() {
+async function HomeInteriorProjects() {
   const apiData = await getInteriors();
   const projects = mapInteriorsToUI(apiData);
   const randomInteriorProjects = pickRandomProjects(projects, 4);
 
+  return <Sections03 projects={randomInteriorProjects} />;
+}
+
+export default function Home() {
   return (
     <main>
       <Header />
@@ -67,7 +72,9 @@ export default async function Home() {
 
       <LazyLoadSection minHeightClass="min-h-[900px]">
         <AnimatedSection variant="slide-up">
-          <Sections03 projects={randomInteriorProjects} />
+          <Suspense fallback={<SectionFallback minHeightClass="min-h-[900px]" />}>
+            <HomeInteriorProjects />
+          </Suspense>
         </AnimatedSection>
       </LazyLoadSection>
 
