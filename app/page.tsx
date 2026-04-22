@@ -1,14 +1,34 @@
 import Header from "@/components/header/header";
 import Hero from "@/components/home/hero";
 import AnimatedSection from "@/components/home/animated-section";
-import Sections from "@/components/home/sections";
-import Sections02 from "@/components/home/sections02";
-import Sections03 from "@/components/home/sections03";
-import { GlobeDemo } from "@/components/home/sections04";
-import Sections05 from "@/components/home/sections05";
 import VeruniaFooter from "@/components/footer/footer";
 import { getInteriors } from "@/lib/interiors";
 import { mapInteriorsToUI, type InteriorProjectUI } from "@/lib/mapInteriors";
+import dynamic from "next/dynamic";
+import LazyLoadSection from "@/components/ui/lazy-load-section";
+
+const Sections = dynamic(() => import("@/components/home/sections"), {
+  loading: () => <SectionFallback minHeightClass="min-h-[900px]" />,
+});
+
+const Sections02 = dynamic(() => import("@/components/home/sections02"), {
+  loading: () => <SectionFallback minHeightClass="min-h-[700px]" />,
+});
+
+const Sections03 = dynamic(() => import("@/components/home/sections03"), {
+  loading: () => <SectionFallback minHeightClass="min-h-[900px]" />,
+});
+
+const GlobeDemo = dynamic(
+  () => import("@/components/home/sections04").then((mod) => mod.GlobeDemo),
+  {
+    loading: () => <SectionFallback minHeightClass="min-h-[520px]" />,
+  }
+);
+
+const Sections05 = dynamic(() => import("@/components/home/sections05"), {
+  loading: () => <SectionFallback minHeightClass="min-h-[620px]" />,
+});
 
 function pickRandomProjects(projects: InteriorProjectUI[], count: number): InteriorProjectUI[] {
   const shuffled = [...projects];
@@ -17,6 +37,15 @@ function pickRandomProjects(projects: InteriorProjectUI[], count: number): Inter
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   return shuffled.slice(0, count);
+}
+
+function SectionFallback({ minHeightClass }: { minHeightClass: string }) {
+  return (
+    <div
+      aria-hidden
+      className={`w-full animate-pulse rounded-md bg-[#F7EFE2] ${minHeightClass}`}
+    />
+  );
 }
 
 export default async function Home() {
@@ -30,23 +59,29 @@ export default async function Home() {
       <Hero />
       <Sections />
 
-      <AnimatedSection variant="fade">
-        <Sections02 />
-      </AnimatedSection>
+      <LazyLoadSection minHeightClass="min-h-[700px]">
+        <AnimatedSection variant="fade">
+          <Sections02 />
+        </AnimatedSection>
+      </LazyLoadSection>
 
-      <AnimatedSection variant="slide-up">
-        <Sections03 projects={randomInteriorProjects} />
-      </AnimatedSection>
+      <LazyLoadSection minHeightClass="min-h-[900px]">
+        <AnimatedSection variant="slide-up">
+          <Sections03 projects={randomInteriorProjects} />
+        </AnimatedSection>
+      </LazyLoadSection>
 
-     
+      <LazyLoadSection minHeightClass="min-h-[520px]">
+        <AnimatedSection variant="scale">
+          <GlobeDemo />
+        </AnimatedSection>
+      </LazyLoadSection>
 
-      <AnimatedSection variant="scale">
-        <GlobeDemo />
-      </AnimatedSection>
-      
-      <AnimatedSection variant="fade">
-        <Sections05 />
-      </AnimatedSection>
+      <LazyLoadSection minHeightClass="min-h-[620px]">
+        <AnimatedSection variant="fade">
+          <Sections05 />
+        </AnimatedSection>
+      </LazyLoadSection>
       <VeruniaFooter />
     </main>
   );

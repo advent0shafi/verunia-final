@@ -13,8 +13,8 @@ export default function Header() {
 
   const mobileLinks = [
     { href: "/", label: "Home" },
-    { href: "/interior", label: "V-Interior" },
-    { href: "/furniture", label: "Office Furnitures" },
+    { href: "/interior", label: "Interiors" },
+    { href: "/furniture", label: "Furnitures" },
     { href: "/bespoke", label: "Bespoke" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
@@ -110,13 +110,13 @@ export default function Header() {
               href="/interior"
               className="hover:text-gray-500 font-instrument text-[16px] font-medium"
             >
-              V-Interior
+              Interiors
             </Link>
             <Link
               href="/furniture"
               className="hover:text-gray-500 font-instrument text-[16px] font-medium"
             >
-            Office Furnitures
+            Furnitures
             </Link>
             <Link
               href="/bespoke"

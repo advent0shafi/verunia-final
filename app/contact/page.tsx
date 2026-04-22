@@ -1,8 +1,22 @@
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
-import ContactPage from "@/components/contact-page/contact-page";
 import { frontendPoint } from "@/lib/getData";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
+import LazyLoadSection from "@/components/ui/lazy-load-section";
+
+const ContactPage = dynamic(() => import("@/components/contact-page/contact-page"), {
+  loading: () => <PageSectionFallback minHeightClass="min-h-[720px]" />,
+});
+
+function PageSectionFallback({ minHeightClass }: { minHeightClass: string }) {
+  return (
+    <div
+      aria-hidden
+      className={`w-full animate-pulse rounded-md bg-[#F7EFE2] ${minHeightClass}`}
+    />
+  );
+}
 
 export const metadata: Metadata = {
     title: 'Contact',
@@ -19,7 +33,9 @@ export default function ContactPageRoute() {
     return (
         <main>
             <Header />
-            <ContactPage />
+            <LazyLoadSection minHeightClass="min-h-[720px]">
+                <ContactPage />
+            </LazyLoadSection>
             <Footer />
         </main>
     )

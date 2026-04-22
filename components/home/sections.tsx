@@ -26,11 +26,15 @@ function HoverImage({
     className: string;
 }) {
     const [isHovered, setIsHovered] = useState(false);
+    const [hasInteracted, setHasInteracted] = useState(false);
 
     return (
         <div
             className="relative w-full h-full"
-            onMouseEnter={() => setIsHovered(true)}
+            onMouseEnter={() => {
+                setIsHovered(true);
+                setHasInteracted(true);
+            }}
             onMouseLeave={() => setIsHovered(false)}
         >
             <div className="relative w-full h-full">
@@ -41,17 +45,21 @@ function HoverImage({
                     height={height}
                     sizes={sizes}
                     quality={82}
+                    loading="lazy"
                     className={`${className} transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
                 />
-                <Image
-                    src={hoverSrc}
-                    alt={alt}
-                    width={width}
-                    height={height}
-                    sizes={sizes}
-                    quality={82}
-                    className={`${className} absolute inset-0 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-                />
+                {hasInteracted && (
+                    <Image
+                        src={hoverSrc}
+                        alt={alt}
+                        width={width}
+                        height={height}
+                        sizes={sizes}
+                        quality={82}
+                        loading="lazy"
+                        className={`${className} absolute inset-0 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                    />
+                )}
             </div>
         </div>
     );

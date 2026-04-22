@@ -9,11 +9,35 @@ export default function LoadingUIWrapper({ children }: { children: React.ReactNo
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false)
-        }, 3000)
+        let mounted = true;
+        const startedAt = performance.now();
+        const minVisibleMs = 900;
+        const maxVisibleMs = 2600;
 
-        return () => clearTimeout(timer)
+        const finishLoading = () => {
+            if (!mounted) return;
+            const elapsed = performance.now() - startedAt;
+            const remaining = Math.max(0, minVisibleMs - elapsed);
+            window.setTimeout(() => {
+                if (mounted) setIsLoading(false);
+            }, remaining);
+        };
+
+        const maxTimer = window.setTimeout(() => {
+            if (mounted) setIsLoading(false);
+        }, maxVisibleMs);
+
+        if (document.readyState === "complete") {
+            finishLoading();
+        } else {
+            window.addEventListener("load", finishLoading, { once: true });
+        }
+
+        return () => {
+            mounted = false;
+            window.removeEventListener("load", finishLoading);
+            window.clearTimeout(maxTimer);
+        };
     }, [])
 
     return (
@@ -22,8 +46,10 @@ export default function LoadingUIWrapper({ children }: { children: React.ReactNo
                 {isLoading && (
                     <motion.div
                         key="loading-wrapper"
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                        initial={{ opacity: 1 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0, filter: "blur(4px)" }}
+                        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                         className="fixed inset-0 z-[9999]"
                     >
                         <LoadingThumbnail />

@@ -1,7 +1,13 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import React, { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
+import React, { useMemo, useRef } from "react";
 
 type AnimatedSectionProps = {
   children: React.ReactNode;
@@ -40,13 +46,17 @@ export default function AnimatedSection({
       target: ref,
       offset: ["start end", "end start"],
     });
-    // Increased parallax movement for more noticeable effect
-    const parallaxY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-    
+    const parallaxY = useTransform(scrollYProgress, [0, 1], [36, -36]);
+    const smoothParallaxY = useSpring(parallaxY, {
+      stiffness: 90,
+      damping: 22,
+      mass: 0.45,
+    });
+
     return (
       <motion.div
         ref={ref}
-        style={{ y: parallaxY }}
+        style={{ y: smoothParallaxY, willChange: "transform" }}
         className={className}
       >
         {children}
@@ -54,9 +64,8 @@ export default function AnimatedSection({
     );
   }
 
-  // For other variants, use whileInView for reliable initial visibility
-  const transition = { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const };
-  const viewport = { once: true, margin: "0px" } as const;
+  // Smooth but lightweight viewport animation tuned for "Framer-like" feel.
+  const viewport = { once: true, amount: 0.15, margin: "0px 0px -8% 0px" } as const;
 
   const getVariants = () => {
     switch (variant) {
@@ -64,21 +73,40 @@ export default function AnimatedSection({
         return {
           initial: { opacity: 0 },
           whileInView: { opacity: 1 },
+          transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
         };
       case "slide-up":
         return {
-          initial: { opacity: 0, y: 40 },
+          initial: { opacity: 0, y: 30 },
           whileInView: { opacity: 1, y: 0 },
+          transition: {
+            type: "spring" as const,
+            stiffness: 115,
+            damping: 20,
+            mass: 0.75,
+          },
         };
       case "scale":
         return {
-          initial: { opacity: 0, scale: 0.94 },
+          initial: { opacity: 0, scale: 0.965 },
           whileInView: { opacity: 1, scale: 1 },
+          transition: {
+            type: "spring" as const,
+            stiffness: 120,
+            damping: 22,
+            mass: 0.72,
+          },
         };
       default:
         return {
-          initial: { opacity: 0, y: 40 },
+          initial: { opacity: 0, y: 30 },
           whileInView: { opacity: 1, y: 0 },
+          transition: {
+            type: "spring" as const,
+            stiffness: 115,
+            damping: 20,
+            mass: 0.75,
+          },
         };
     }
   };
@@ -91,7 +119,8 @@ export default function AnimatedSection({
       initial={variants.initial}
       whileInView={variants.whileInView}
       viewport={viewport}
-      transition={transition}
+      transition={variants.transition}
+      style={{ willChange: "opacity, transform" }}
       className={className}
     >
       {children}
@@ -183,31 +212,32 @@ export function TextReveal({
 }) {
   const prefersReducedMotion = useReducedMotion();
   
-  // Convert children to string, handling ReactNode
-  const textContent = typeof children === 'string' 
-    ? children 
-    : typeof children === 'number' 
-    ? String(children)
-    : React.Children.toArray(children)
-        .map((child) => {
-          if (typeof child === 'string' || typeof child === 'number') {
-            return String(child);
-          }
-          // For JSX elements, try to extract text content
-          if (React.isValidElement(child)) {
-            const childProps = child.props as { children?: React.ReactNode } | null;
-            if (childProps && 'children' in childProps && childProps.children) {
-              return React.Children.toArray(childProps.children)
-                .filter((c) => typeof c === 'string' || typeof c === 'number')
-                .join('');
-            }
-          }
-          return '';
-        })
-        .join(' ')
-        .trim();
-  
-  const words = textContent.split(/\s+/).filter(word => word.length > 0);
+  const words = useMemo(() => {
+    const textContent =
+      typeof children === "string"
+        ? children
+        : typeof children === "number"
+        ? String(children)
+        : React.Children.toArray(children)
+            .map((child) => {
+              if (typeof child === "string" || typeof child === "number") {
+                return String(child);
+              }
+              if (React.isValidElement(child)) {
+                const childProps = child.props as { children?: React.ReactNode } | null;
+                if (childProps && "children" in childProps && childProps.children) {
+                  return React.Children.toArray(childProps.children)
+                    .filter((c) => typeof c === "string" || typeof c === "number")
+                    .join("");
+                }
+              }
+              return "";
+            })
+            .join(" ")
+            .trim();
+
+    return textContent.split(/\s+/).filter((word) => word.length > 0);
+  }, [children]);
 
   if (prefersReducedMotion) {
     return <span className={className}>{children}</span>;

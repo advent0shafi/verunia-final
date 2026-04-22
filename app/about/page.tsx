@@ -1,14 +1,39 @@
 import Header from "@/components/header/header";
-import { FooterSkeleton } from "@/components/home/home-skeletons";
 import Footer from "@/components/footer/footer";
 import AboutHeroPage from "@/components/about/about-hero-page";
-import AboutSections01 from "@/components/about/about-sections-01";
-import AboutSections02 from "@/components/about/about-sections-02";
 import AnimatedSection from "@/components/home/animated-section";
-import { GlobeDemo } from "@/components/home/sections04";
-import AboutSections03 from "@/components/about/about-sections-03";
 import { Metadata } from "next";
 import { frontendPoint } from "@/lib/getData";
+import dynamic from "next/dynamic";
+import LazyLoadSection from "@/components/ui/lazy-load-section";
+
+const AboutSections01 = dynamic(() => import("@/components/about/about-sections-01"), {
+  loading: () => <PageSectionFallback minHeightClass="min-h-[520px]" />,
+});
+
+const AboutSections02 = dynamic(() => import("@/components/about/about-sections-02"), {
+  loading: () => <PageSectionFallback minHeightClass="min-h-[520px]" />,
+});
+
+const AboutSections03 = dynamic(() => import("@/components/about/about-sections-03"), {
+  loading: () => <PageSectionFallback minHeightClass="min-h-[700px]" />,
+});
+
+const GlobeDemo = dynamic(
+  () => import("@/components/home/sections04").then((mod) => mod.GlobeDemo),
+  {
+    loading: () => <PageSectionFallback minHeightClass="min-h-[520px]" />,
+  }
+);
+
+function PageSectionFallback({ minHeightClass }: { minHeightClass: string }) {
+  return (
+    <div
+      aria-hidden
+      className={`w-full animate-pulse rounded-md bg-[#F7EFE2] ${minHeightClass}`}
+    />
+  );
+}
 export const metadata: Metadata = {
     title: 'About Us',
     description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
@@ -24,13 +49,20 @@ export default function AboutPage() {
         <main>  
             <Header />
             <AboutHeroPage />
-            <AboutSections01/>
-            <AboutSections02/>
-            <AboutSections03/>
-            <AnimatedSection variant="scale">
-
-        <GlobeDemo />
-      </AnimatedSection>
+            <LazyLoadSection minHeightClass="min-h-[520px]">
+              <AboutSections01 />
+            </LazyLoadSection>
+            <LazyLoadSection minHeightClass="min-h-[520px]">
+              <AboutSections02 />
+            </LazyLoadSection>
+            <LazyLoadSection minHeightClass="min-h-[700px]">
+              <AboutSections03 />
+            </LazyLoadSection>
+            <LazyLoadSection minHeightClass="min-h-[520px]">
+              <AnimatedSection variant="scale">
+                <GlobeDemo />
+              </AnimatedSection>
+            </LazyLoadSection>
             <Footer />
         </main>
     )

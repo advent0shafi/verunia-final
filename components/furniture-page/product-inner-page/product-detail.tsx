@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import ProductThumbnails from './product-thumbnails';
@@ -9,6 +10,13 @@ import CategoryNavHeader from '@/components/ui/category-nav-header';
 const API_BASE_URL = 'https://api.veruniagroup.com';
 
 export default function ProductDetail({ product }: { product: Product }) {
+  type FutureDetailsFields = {
+    detailed_description?: string;
+    detailed_highlights?: string[];
+    detailed_specs?: Array<{ label: string; value: string }>;
+  };
+  const productWithFutureFields = product as Product & FutureDetailsFields;
+
   const initialImage = product.main_image?.url
     ? `${API_BASE_URL}${product.main_image.url}`
     : '/fallback-product.png';
@@ -25,6 +33,54 @@ export default function ProductDetail({ product }: { product: Product }) {
   ].filter(Boolean) as ProductMedia[];
 
   const thumbnails = allImages.map(img => `${API_BASE_URL}${img.url}`);
+  const [activeTab, setActiveTab] = useState<'description' | 'details'>('description');
+
+  const detailedDescription =
+    productWithFutureFields.detailed_description ||
+    'Supporting healthy posture through thoughtful ergonomics and precision-crafted mechanics. Built for demanding work environments, this product combines breathable materials, adaptive support and durable engineering for long-term daily comfort.';
+
+  const detailHighlights =
+    productWithFutureFields.detailed_highlights?.length
+      ? productWithFutureFields.detailed_highlights
+      : [
+          'Adjustable seat height and depth',
+          '4D adjustable armrest support',
+          'Adjustable lumbar support',
+          'Synchro tilt with tension control',
+          'Tilt locking positions',
+          'Adjustable headrest for neck comfort',
+        ];
+
+  const detailsRows =
+    productWithFutureFields.detailed_specs?.length
+      ? productWithFutureFields.detailed_specs
+      : [
+          { label: 'Warranty', value: '5 Year Limited Warranty' },
+          { label: 'Delivery', value: 'Delivery Time: 1 - 2 Days' },
+          { label: 'Chair Ergonomics', value: '4D Armrest, Adjustable Headrest, Lumbar Support, Synchro Tilt, Tilt Lock' },
+          { label: 'Certifications', value: 'ANSI / BIFMA' },
+          { label: 'Awards', value: 'IF Design Award Winner' },
+        ];
+
+  const featureCards = [
+    {
+      title: 'Breathable Material',
+      description: 'Enhancing air circulation to help keep users cool and comfortable through extended work sessions.',
+      image: thumbnails[0] || selectedImage,
+    },
+    {
+      title: 'Ergonomic Support',
+      description: 'Supports healthy posture and reduces pressure on the lower back with adjustable control points.',
+      image: thumbnails[1] || selectedImage,
+    },
+    {
+      title: 'Refined Performance',
+      description: 'A durable mechanism engineered for smooth movement, reliable lock positions and long-term use.',
+      image: thumbnails[2] || selectedImage,
+    },
+  ];
+
+  const productInfoHref = `/contact?source=product-info&product=${encodeURIComponent(product.name)}`;
 
   return (
     <section className="py-12 md:py-16 lg:py-[90px]">
@@ -120,14 +176,123 @@ export default function ProductDetail({ product }: { product: Product }) {
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-4 mt-auto">
-              <button className="flex-1 bg-[#44403C] text-white px-8 py-4 rounded-[4px] font-instrument text-[16px] font-medium hover:bg-[#1C1917] transition-all duration-300 shadow-sm">
+              <Link
+                href={productInfoHref}
+                className="flex-1 bg-[#44403C] text-white px-8 py-4 rounded-[4px] font-instrument text-[16px] font-medium hover:bg-[#1C1917] transition-all duration-300 shadow-sm text-center"
+              >
                 Request Product Info
-              </button>
-              <button className="flex-1 border border-[#E5E1D6] text-[#44403C] px-8 py-4 rounded-[4px] font-instrument text-[16px] font-medium hover:bg-[#F5F5F4] transition-all duration-300">
-                Download Brochure
-              </button>
+              </Link>
+              {product.product_info_url ? (
+                <a
+                  href={product.product_info_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 border border-[#E5E1D6] text-[#44403C] px-8 py-4 rounded-[4px] font-instrument text-[16px] font-medium hover:bg-[#F5F5F4] transition-all duration-300 text-center"
+                >
+                  Download Brochure
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  className="flex-1 border border-[#E5E1D6] text-[#A8A29E] px-8 py-4 rounded-[4px] font-instrument text-[16px] font-medium bg-[#FAFAF9] cursor-not-allowed"
+                  disabled
+                >
+                  Brochure Unavailable
+                </button>
+              )}
             </div>
           </motion.div>
+        </div>
+
+        {/* Extended Detail Section */}
+        <div className="mt-14 md:mt-16 rounded-[8px] border border-[#E7E5E4] bg-[#FAFAFA]">
+          <div className="flex items-center border-b border-[#E7E5E4]">
+            <button
+              type="button"
+              onClick={() => setActiveTab('description')}
+              className={`px-5 md:px-6 py-3 font-instrument text-[14px] md:text-[15px] transition ${
+                activeTab === 'description'
+                  ? 'text-[#1C1917] border-b-2 border-[#0E7490] font-medium'
+                  : 'text-[#78716C] hover:text-[#44403C]'
+              }`}
+            >
+              Description
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('details')}
+              className={`px-5 md:px-6 py-3 font-instrument text-[14px] md:text-[15px] transition ${
+                activeTab === 'details'
+                  ? 'text-[#1C1917] border-b-2 border-[#0E7490] font-medium'
+                  : 'text-[#78716C] hover:text-[#44403C]'
+              }`}
+            >
+              Product Details
+            </button>
+          </div>
+
+          <div className="p-5 md:p-7">
+            {activeTab === 'description' ? (
+              <div>
+                <h3 className="font-helvetica text-[24px] md:text-[30px] leading-[1.2] text-[#1C1917]">
+                  Ergonomic Design for Ultra Comfort
+                </h3>
+                <p className="mt-3 max-w-3xl font-instrument text-[15px] md:text-[16px] leading-[1.65] text-[#57534E]">
+                  {detailedDescription}
+                </p>
+
+                <ul className="mt-4 space-y-1.5 font-instrument text-[15px] text-[#44403C]">
+                  {detailHighlights.map((highlight) => (
+                    <li key={highlight} className="flex items-start gap-2">
+                      <span className="mt-1 text-[#57534E]">•</span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-7 grid grid-cols-1 gap-4 md:grid-cols-3">
+                  {featureCards.map((card) => (
+                    <div key={card.title} className="rounded-[6px] bg-white border border-[#E7E5E4] overflow-hidden">
+                      <div className="relative h-[200px] bg-[#F5F5F4]">
+                        <Image
+                          src={card.image}
+                          alt={card.title}
+                          fill
+                          className="object-contain p-4"
+                          sizes="(min-width: 1024px) 28vw, (min-width: 768px) 45vw, 100vw"
+                        />
+                      </div>
+                      <div className="p-4">
+                        <h4 className="font-helvetica text-[20px] leading-[1.2] text-[#1C1917]">
+                          {card.title}
+                        </h4>
+                        <p className="mt-2 font-instrument text-[14px] leading-[1.55] text-[#57534E]">
+                          {card.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[640px] border-collapse">
+                  <tbody>
+                    {detailsRows.map((row) => (
+                      <tr key={row.label} className="border-b border-[#E7E5E4] last:border-b-0">
+                        <th className="w-[35%] py-3 text-left align-top font-instrument text-[14px] md:text-[15px] font-medium text-[#44403C]">
+                          {row.label}
+                        </th>
+                        <td className="py-3 font-instrument text-[14px] md:text-[15px] leading-[1.6] text-[#57534E]">
+                          {row.value}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>
