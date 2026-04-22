@@ -176,21 +176,25 @@ export default function ProductDetail({ product }: { product: Product }) {
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-4 mt-auto">
-              <Link
-                href={productInfoHref}
-                className="flex-1 bg-[#44403C] text-white px-8 py-4 rounded-[4px] font-instrument text-[16px] font-medium hover:bg-[#1C1917] transition-all duration-300 shadow-sm text-center"
-              >
-                Request Product Info
-              </Link>
+              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.995 }} className="flex-1">
+                <Link
+                  href={productInfoHref}
+                  className="block w-full bg-[#44403C] text-white px-8 py-4 rounded-[4px] font-instrument text-[16px] font-medium hover:bg-[#1C1917] transition-all duration-300 shadow-sm text-center"
+                >
+                  Request Product Info
+                </Link>
+              </motion.div>
               {product.product_info_url ? (
-                <a
+                <motion.a
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.995 }}
                   href={product.product_info_url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 border border-[#E5E1D6] text-[#44403C] px-8 py-4 rounded-[4px] font-instrument text-[16px] font-medium hover:bg-[#F5F5F4] transition-all duration-300 text-center"
                 >
                   Download Brochure
-                </a>
+                </motion.a>
               ) : (
                 <button
                   type="button"
@@ -232,8 +236,15 @@ export default function ProductDetail({ product }: { product: Product }) {
           </div>
 
           <div className="p-5 md:p-7">
-            {activeTab === 'description' ? (
-              <div>
+            <AnimatePresence mode="wait">
+              {activeTab === 'description' ? (
+                <motion.div
+                  key="description-panel"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                >
                 <h3 className="font-helvetica text-[24px] md:text-[30px] leading-[1.2] text-[#1C1917]">
                   Ergonomic Design for Ultra Comfort
                 </h3>
@@ -252,7 +263,11 @@ export default function ProductDetail({ product }: { product: Product }) {
 
                 <div className="mt-7 grid grid-cols-1 gap-4 md:grid-cols-3">
                   {featureCards.map((card) => (
-                    <div key={card.title} className="rounded-[6px] bg-white border border-[#E7E5E4] overflow-hidden">
+                    <motion.div
+                      key={card.title}
+                      whileHover={{ y: -4 }}
+                      className="rounded-[6px] bg-white border border-[#E7E5E4] overflow-hidden transition-shadow duration-300 hover:shadow-[0_18px_34px_-28px_rgba(28,25,23,0.7)]"
+                    >
                       <div className="relative h-[200px] bg-[#F5F5F4]">
                         <Image
                           src={card.image}
@@ -270,12 +285,19 @@ export default function ProductDetail({ product }: { product: Product }) {
                           {card.description}
                         </p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
-            ) : (
-              <div className="overflow-x-auto">
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="details-panel"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                  className="overflow-x-auto"
+                >
                 <table className="w-full min-w-[640px] border-collapse">
                   <tbody>
                     {detailsRows.map((row) => (
@@ -290,8 +312,9 @@ export default function ProductDetail({ product }: { product: Product }) {
                     ))}
                   </tbody>
                 </table>
-              </div>
-            )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>

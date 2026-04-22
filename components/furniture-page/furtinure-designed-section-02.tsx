@@ -1,9 +1,11 @@
 import Image from "next/image";
+import AnimatedSection from "@/components/home/animated-section";
 
 export default function FurnitureDesignedSection02() {
   return (
     <section className="w-full bg-[#ffffff]">
       <div className="max-w-[1440px]  mx-auto px-6 bg-[#FAFAFA] rounded-[6px] md:px-12 lg:px-16 py-16 md:py-20 lg:py-24 space-y-10 md:space-y-12 lg:space-y-14">
+      <AnimatedSection variant="slide-up">
       <div className="w-full   overflow-hidden ">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0 w-full  0">
           <div className="w-full  h-[192.99478149414062px] md:hidden block  ">
@@ -39,14 +41,14 @@ export default function FurnitureDesignedSection02() {
               </div>
             </div>
 
-            <div className="w-full  min-h-[437px] md:block hidden  ">
+            <div className="w-full min-h-[437px] md:block hidden group">
                 <Image
                   src="/furniture-page/section-03.png"
                   alt="TY Models desk"
                   
                   width={500}
                   height={500}
-                  className="object-cover min-h-[437px] w-full"
+                  className="object-cover min-h-[437px] w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
 
 
                   priority={false}
@@ -55,6 +57,7 @@ export default function FurnitureDesignedSection02() {
             </div>
           </div>
         </div>
+        </AnimatedSection>
       </div>
     </section>
   );

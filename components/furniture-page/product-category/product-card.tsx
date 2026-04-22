@@ -8,10 +8,10 @@ export default function ProductCard({ product }: { product: Product }) {
     <Link
       href={`/furniture/product/${product.slug}`}
       scroll={true}
-      className=" group"
+      className="group block"
     >
 
-      <div className="border border-[#E5E1D6] rounded-[6px] p-[16px]  overflow-hidden transition-all duration-300 hover:border-[#E5E1D6] ">
+      <div className="border border-[#E5E1D6] rounded-[6px] p-[16px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_30px_-24px_rgba(28,25,23,0.6)]">
         {/* Product Image */}
         <div className="bg-[#F5F5F4] flex items-center justify-center rounded-[4px] min-w-[262px] w-full h-[262px] md:max-h-[262px]">
           {product.main_image?.url ? (
@@ -20,7 +20,7 @@ export default function ProductCard({ product }: { product: Product }) {
               alt={product.name}
               width={262}
               height={262}
-              className="min-w-[262px] max-w-[262px] h-[262px] object-contain transition-transform duration-300 w-full  rounded-[4px]"
+              className="min-w-[262px] max-w-[262px] h-[262px] object-contain transition-transform duration-500 ease-out w-full rounded-[4px] group-hover:scale-[1.045]"
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center rounded-[4px]">
@@ -37,7 +37,9 @@ export default function ProductCard({ product }: { product: Product }) {
           </p>
 
           {/* Product Name */}
-          <h3 className="text-[#171412] font-normal md:text-[16px] text-[14px] not-italic text-base leading-6 align-middle font-instrument  tracking-normal">{product.name}</h3>
+          <h3 className="text-[#171412] font-normal md:text-[16px] text-[14px] not-italic text-base leading-6 align-middle font-instrument tracking-normal transition-colors duration-300 group-hover:text-[#0E7490]">
+            {product.name}
+          </h3>
 
           {/* Color Swatches */}
           <div className="flex items-center gap-1.5 mt-4">
