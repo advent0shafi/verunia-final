@@ -23,7 +23,8 @@ export const metadata: Metadata = {
 import AnimatedSection from "@/components/home/animated-section";
 import { getInteriors } from "@/lib/interiors";
 import { mapInteriorsToUI } from "@/lib/mapInteriors";
-
+import InteriorHeroDescriptions from "@/components/interior-page/interior-hero-descriptions";
+  
 export default async function InteriorPage() {
   const apiData = await getInteriors();
   const projects = mapInteriorsToUI(apiData);
@@ -33,7 +34,9 @@ export default async function InteriorPage() {
     <main className="bg-[#171412]">
       <InteriorHeader />
       <InteriorHeroPage />
-
+      <AnimatedSection variant="slide-up">
+        <InteriorHeroDescriptions />
+      </AnimatedSection>
       <AnimatedSection variant="fade">
         <InteriorSection01 projects={featuredProjects.slice(0, 3)} />
       </AnimatedSection>
