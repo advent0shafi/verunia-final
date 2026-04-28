@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { ImageReveal } from "@/components/home/animated-section";
 
@@ -99,12 +100,12 @@ function LuxuryCollectionBanner({ imageSrc }: LuxuryCollectionBannerProps) {
                     Luxury Collection
                 </h3>
 
-                <button
-                    type="button"
+                <Link
+                    href="/contact"
                     className="pb-2 font-instrument font-normal text-[#FFFDFA] not-italic text-[16px] leading-[24px] tracking-normal border-b border-[#FFFDFA]/70 hover:border-[#FFFDFA] transition-colors"
                 >
-                    About Bespoke <span aria-hidden>→</span>
-                </button>
+                    Enquire <span aria-hidden>→</span>
+                </Link>
             </div>
         </div>
     );

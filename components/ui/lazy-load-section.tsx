@@ -8,6 +8,7 @@ type LazyLoadSectionProps = {
   className?: string;
   minHeightClass?: string;
   rootMargin?: string;
+  fallbackClassName?: string;
 };
 
 export default function LazyLoadSection({
@@ -15,6 +16,7 @@ export default function LazyLoadSection({
   className,
   minHeightClass = "min-h-[420px]",
   rootMargin = "420px 0px",
+  fallbackClassName = "bg-[#F7EFE2] section-shimmer",
 }: LazyLoadSectionProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -60,7 +62,7 @@ export default function LazyLoadSection({
       ) : (
         <div
           aria-hidden
-          className={`w-full rounded-md bg-[#F7EFE2] section-shimmer ${minHeightClass}`}
+          className={`w-full rounded-md ${fallbackClassName} ${minHeightClass}`}
         />
       )}
     </div>
