@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 import mainLogo from "@/public/logo/main_logo.png";
+import mainlogowithtext from "@/public/logo/verunia-thumbnail-logo.svg";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -96,11 +97,11 @@ export default function Header() {
       <header className="flex  items-center justify-between max-w-[1440px]  mx-auto py-4 px-4 md:px-6">
         <Link href="/">
           <Image
-            src={mainLogo}
+            src={mainlogowithtext}
             alt="Verunia"
             width={100}
             height={100}
-            sizes="40px"
+            sizes="80px"
             priority
             className="w-10 h-10 object-contain"
           />

@@ -6,7 +6,7 @@ export default function AboutSections03() {
     return (
         <div>
             <SectionContainer>
-                <div className="w-full py-[60px] md:py-[112px]">
+                <div className="w-full">
                     {/* Main Heading */}
                     <h2 className="text-[#271E07] font-helvetica font-normal not-italic text-center
                         text-[28px] leading-[36px] tracking-[-0.02em]

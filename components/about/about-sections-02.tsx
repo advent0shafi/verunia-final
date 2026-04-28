@@ -5,7 +5,7 @@ export default function AboutSections02() {
     return (
         <div className="">
             <SectionContainer>
-                <div className="flex flex-col w-full py-[60px] md:py-[112px]">
+                <div className="flex flex-col w-full">
                     {/* Our Vision Section */}
                     <div className="flex flex-col md:flex-row w-full">
                         <div className="w-full md:w-[218px] mb-4 md:mb-0">

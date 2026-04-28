@@ -35,39 +35,65 @@ function PageSectionFallback({ minHeightClass }: { minHeightClass: string }) {
     />
   );
 }
+
 export const metadata: Metadata = {
-    title: 'About Us',
-    description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
-    keywords: ['Verunia About Us', 'interior design Dubai', 'architecture firm', 'Dubai design company', 'turnkey projects', 'innovative design solutions', 'Verunia Furniture Trading LLC'],
-    openGraph: {
-      title: 'About Verunia - Our Vision and Expertise',
-      description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
-      images: [{ url: `${frontendPoint}/opengraph-image.png` }],
-    },
-  } 
+  title: "About Us",
+  description:
+    "Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.",
+  keywords: [
+    "Verunia About Us",
+    "interior design Dubai",
+    "architecture firm",
+    "Dubai design company",
+    "turnkey projects",
+    "innovative design solutions",
+    "Verunia Furniture Trading LLC",
+  ],
+  openGraph: {
+    title: "About Verunia - Our Vision and Expertise",
+    description:
+      "Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.",
+    images: [{ url: `${frontendPoint}/opengraph-image.png` }],
+  },
+};
+
 export default function AboutPage() {
-    return (
-        <main>  
-            <Header />
-            <AboutHeroPage />
-            <LazyLoadSection minHeightClass="min-h-[520px]">
-              <AboutSections01 />
-            </LazyLoadSection>
-            <LazyLoadSection minHeightClass="min-h-[520px]">
-              <AboutSections02 />
-            </LazyLoadSection>
-            <LazyLoadSection minHeightClass="min-h-[700px]">
-              <AboutSections03 />
-            </LazyLoadSection>
-            <LazyLoadSection minHeightClass="min-h-[520px]">
-              <AnimatedSection variant="scale">
-                <GlobeDemo />
-              </AnimatedSection>
-              <AnimatedSection variant="scale">
-                <Sections05 />
-              </AnimatedSection>
-            </LazyLoadSection>
-            <Footer />
-        </main>
-    )
+  return (
+    <main>
+      <Header />
+      <AboutHeroPage />
+
+      <LazyLoadSection minHeightClass="min-h-[520px]">
+        <AnimatedSection variant="fade">
+          <AboutSections01 />
+        </AnimatedSection>
+      </LazyLoadSection>
+
+      <LazyLoadSection minHeightClass="min-h-[520px]">
+        <AnimatedSection variant="fade">
+          <AboutSections02 />
+        </AnimatedSection>
+      </LazyLoadSection>
+
+      <LazyLoadSection minHeightClass="min-h-[700px]">
+        <AnimatedSection variant="fade">
+          <AboutSections03 />
+        </AnimatedSection>
+      </LazyLoadSection>
+
+      <LazyLoadSection minHeightClass="min-h-[520px]">
+        <AnimatedSection variant="scale">
+          <GlobeDemo />
+        </AnimatedSection>
+      </LazyLoadSection>
+
+      <LazyLoadSection minHeightClass="min-h-[620px]">
+        <AnimatedSection variant="fade">
+          <Sections05 />
+        </AnimatedSection>
+      </LazyLoadSection>
+
+      <Footer />
+    </main>
+  );
 }

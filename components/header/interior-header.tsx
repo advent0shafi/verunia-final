@@ -107,7 +107,7 @@ export default function InteriorHeader() {
         <div className="md:absolute md:left-1/2 md:top-1/2  md:-translate-x-1/2 md:-translate-y-1/2">
           <Link href="/">
             <Image
-              src="/logo/main_logo.png"
+              src="/logo/verunia-thumbnail-logo.svg"
               alt="Verunia"
               width={100}
               height={100}
