@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import { frontendPoint } from "@/lib/getData";
 import dynamic from "next/dynamic";
 import LazyLoadSection from "@/components/ui/lazy-load-section";
+import Sections05 from "@/components/home/sections05";
 
 const AboutSections01 = dynamic(() => import("@/components/about/about-sections-01"), {
   loading: () => <PageSectionFallback minHeightClass="min-h-[520px]" />,
@@ -61,6 +62,9 @@ export default function AboutPage() {
             <LazyLoadSection minHeightClass="min-h-[520px]">
               <AnimatedSection variant="scale">
                 <GlobeDemo />
+              </AnimatedSection>
+              <AnimatedSection variant="scale">
+                <Sections05 />
               </AnimatedSection>
             </LazyLoadSection>
             <Footer />
