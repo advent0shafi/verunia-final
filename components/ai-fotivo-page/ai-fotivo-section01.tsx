@@ -50,12 +50,12 @@ export default function AiFotivoSection01() {
                         For projects that demand something truly unique, Al Fotivo offers bespoke design for furniture, finishes and crystal pieces. From custom dimensions and fabrics to entirely new designs, our studio works closely with clients, designers and architects to create one-of-a-kind pieces that live only in their spaces.
                     </TextReveal>
                 </p>
-                <div className="w-full h-full flex justify-center ">
+                {/* <div className="w-full h-full flex justify-center ">
 
                     <button className="border-t border-b border-[#FDFDFC] text-[#FDFDFC] text-start  py-3">
-                        <span className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-[0] text-[#FDFDFC]">About Al Fotivo</span> →
+                        <span className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-[0] text-[#FDFDFC]">About Bespoke</span> →
                     </button>
-                </div>
+                </div> */}
             </div>
         </section>
     );

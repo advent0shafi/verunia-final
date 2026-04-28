@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { StaticImageData } from "next/image";
 import { ImageReveal, TextReveal } from "@/components/home/animated-section";
 import imageAiFotiva06 from "@/public/ai-fotivo-page/image-ai-fotiva-06.png";
@@ -9,16 +8,11 @@ import imageAiFotiva09 from "@/public/ai-fotivo-page/image-ai-fotiva-09.png";
 type CollectionCardProps = {
     title: string;
     imageSrc: StaticImageData;
-    href?: string;
 };
 
-function CollectionCard({ title, imageSrc, href }: CollectionCardProps) {
-    const CardTag = href ? Link : "div";
-    const cardProps = href ? { href } : {};
-
+function CollectionCard({ title, imageSrc }: CollectionCardProps) {
     return (
-        <CardTag
-            {...(cardProps as any)}
+        <div
             className={[
                 "group relative overflow-hidden rounded-[6px] border border-white/10",
                 "bg-[#171412] ring-1 ring-white/10",
@@ -27,7 +21,6 @@ function CollectionCard({ title, imageSrc, href }: CollectionCardProps) {
                 "sm:h-[300px] sm:min-w-[360px]",
                 "md:h-[400px] md:min-w-[400px]",
                 "lg:h-[400px] lg:min-w-[400px]",
-                href ? "cursor-pointer" : "",
             ].join(" ")}
         >
             <ImageReveal className="w-full h-full">
@@ -60,7 +53,7 @@ function CollectionCard({ title, imageSrc, href }: CollectionCardProps) {
                     {title}
                 </h3>
             </div>
-        </CardTag>
+        </div>
     );
 }
 
@@ -69,29 +62,25 @@ export default function AiFotivoSection04() {
         {
             title: "Dining Collection",
             imageSrc: imageAiFotiva06,
-            href: "/ai-fotivo/category/outdoor-collection",
         },
         {
             title: "Living Collection",
             imageSrc: imageAiFotiva07,
-            href: "/ai-fotivo/category/outdoor-collection",
         },
         {
             title: "Luxury Collection",
             imageSrc: imageAiFotiva08,
-            href: "/ai-fotivo/category/outdoor-collection",
         },
         {
             title: "Outdoor Collection",
             imageSrc: imageAiFotiva09,
-            href: "/ai-fotivo/category/outdoor-collection",
         },
 
     ] as const;
 
     return (
-        <section className="items-center bg-[#171412] flex flex-col justify-center ">
-            <div className="w-full  h-full ">
+        <section className="items-center bg-[#171412] flex flex-col justify-center px-4 md:px-6 lg:px-8">
+            <div className="w-full max-w-[1440px] h-full mx-auto">
                 <div
                     className={[
                         "flex gap-4 md:gap-4",
@@ -107,12 +96,11 @@ export default function AiFotivoSection04() {
                             key={item.title}
                             title={item.title}
                             imageSrc={item.imageSrc}
-                            href={item.href}
                         />
                     ))}
                 </div>
             </div>
-            <div className="w-full h-full">
+            <div className="w-full max-w-[1440px] h-full mx-auto">
                 <h2
                     className="font-helvetica font-light text-[#F5C547] text-[48px] leading-[60px] text-center tracking-[-0.02em] mt-[112px] mb-[42px]"
                 >

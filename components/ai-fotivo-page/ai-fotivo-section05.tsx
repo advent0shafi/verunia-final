@@ -103,7 +103,7 @@ function LuxuryCollectionBanner({ imageSrc }: LuxuryCollectionBannerProps) {
                     type="button"
                     className="pb-2 font-instrument font-normal text-[#FFFDFA] not-italic text-[16px] leading-[24px] tracking-normal border-b border-[#FFFDFA]/70 hover:border-[#FFFDFA] transition-colors"
                 >
-                    About Al Fotivo <span aria-hidden>→</span>
+                    About Bespoke <span aria-hidden>→</span>
                 </button>
             </div>
         </div>
@@ -120,7 +120,7 @@ export default function AiFotivoSection05() {
         {
             title: "Penthouse dining",
             location: "Dubai, UAE",
-            imageSrc: "/ai-fotivo-page/ai-fotiva (5).png",
+            imageSrc: "/ai-fotivo-page/ai-fotiva (9).png",
         },
         {
             title: "Master suite corner",

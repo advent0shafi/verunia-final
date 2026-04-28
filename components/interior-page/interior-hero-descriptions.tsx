@@ -24,7 +24,7 @@ export default function InteriorHeroDescriptions() {
                         <button className="border-t border-b border-[#FDFDFC] text-[#FDFDFC] text-start mt-[32px] py-3">
                         <Link href={"/interior/all-projects"}>
 
-                            <span className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-[0] text-[#FDFDFC]">About Verunia Interiors</span> →
+                            <span className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-[0] text-[#FDFDFC]">All Projects</span> →
                             </Link>
                         </button>
                        
