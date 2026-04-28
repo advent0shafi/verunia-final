@@ -10,10 +10,10 @@ export default function AiFotivaHeader() {
 
     const mobileLinks = [
         { href: "/", label: "Home" },
+        { href: "/about", label: "About" },
         { href: "/interior", label: "Interiors" },
         { href: "/furniture", label: "Furnitures" },
         { href: "/bespoke", label: "Bespoke" },
-        { href: "/about", label: "About" },
         { href: "/contact", label: "Contact" },
     ];
 

@@ -12,11 +12,13 @@ export default function Header() {
   const prefersReducedMotion = useReducedMotion();
 
   const mobileLinks = [
+
     { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
     { href: "/interior", label: "Interiors" },
     { href: "/furniture", label: "Furnitures" },
     { href: "/bespoke", label: "Bespoke" },
-    { href: "/about", label: "About" },
+   
     { href: "/contact", label: "Contact" },
   ];
 
@@ -106,6 +108,12 @@ export default function Header() {
 
         <div className="flex items-center gap-4">
           <nav className="hidden md:flex items-center gap-4">
+          <Link
+              href="/about"
+              className="hover:text-gray-500 font-instrument text-[16px] font-medium"
+            >
+              About
+            </Link>
             <Link
               href="/interior"
               className="hover:text-gray-500 font-instrument text-[16px] font-medium"
@@ -124,12 +132,7 @@ export default function Header() {
             >
               Bespoke
             </Link>
-            <Link
-              href="/about"
-              className="hover:text-gray-500 font-instrument text-[16px] font-medium"
-            >
-              About
-            </Link>
+        
             <Link
               href="/contact"
               className="hover:text-gray-500 font-instrument text-[16px] font-medium"

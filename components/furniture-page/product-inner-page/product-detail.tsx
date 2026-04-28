@@ -181,7 +181,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                   href={productInfoHref}
                   className="block w-full bg-[#44403C] text-white px-8 py-4 rounded-[4px] font-instrument text-[16px] font-medium hover:bg-[#1C1917] transition-all duration-300 shadow-sm text-center"
                 >
-                  Request Product Info
+            Enquire Now
                 </Link>
               </motion.div>
               {product.product_info_url ? (
