@@ -103,10 +103,42 @@ export default function FurnitureCatalogNav() {
     return [];
   }, [activeGroup, searchParams]);
 
+  const displayCategories = useMemo(() => {
+    const preferredByGroup: Record<"chair" | "table" | "silent", string[]> = {
+      chair: ["chair", "office-chair"],
+      table: ["table", "desk", "office-desk"],
+      silent: ["silent-box", "silent-boxes", "storage"],
+    };
+
+    const labelByGroup: Record<"chair" | "table" | "silent", string> = {
+      chair: "Chair",
+      table: "Table",
+      silent: "Silent Box",
+    };
+
+    const orderedGroups: Array<"chair" | "table" | "silent"> = ["chair", "table", "silent"];
+
+    return orderedGroups
+      .map((group) => {
+        const preferred = preferredByGroup[group];
+        const selected =
+          categories.find((item) => preferred.includes(item.slug)) ||
+          categories.find((item) => item.group === group);
+
+        if (!selected) return null;
+
+        return {
+          ...selected,
+          name: labelByGroup[group],
+        };
+      })
+      .filter((item): item is NavCategory => item !== null);
+  }, [categories]);
+
   return (
     <nav className="sticky top-[82px] md:top-[92px] z-40 w-full border-b border-[#E8E3D8] bg-white">
       <div className="mx-auto flex w-full max-w-[1440px] flex-wrap items-center gap-3 px-4 py-3 md:px-6 lg:px-8">
-        {categories.map((item) => {
+        {displayCategories.map((item) => {
           const isActive = activeCategorySlug === item.slug;
           return (
             <Link
