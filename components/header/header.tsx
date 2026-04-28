@@ -101,9 +101,9 @@ export default function Header() {
             alt="Verunia"
             width={100}
             height={100}
-            sizes="80px"
+            sizes="55px"
             priority
-            className="w-10 h-10 object-contain"
+            className="md:w-[55px] w-10 h-10 md:h-[55px] object-contain"
           />
         </Link>
 

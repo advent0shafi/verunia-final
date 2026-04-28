@@ -111,8 +111,8 @@ export default function InteriorHeader() {
               alt="Verunia"
               width={100}
               height={100}
-              sizes="40px"
-              className="w-10 h-[48px] object-contain"
+              sizes="55px"
+              className="md:w-[55px] w-10 h-10 md:h-[55px] object-contain"
               priority
             />
           </Link>
