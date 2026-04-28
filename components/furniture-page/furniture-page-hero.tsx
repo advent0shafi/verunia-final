@@ -8,7 +8,7 @@ export default function FurniturePageHero() {
 
 
   return (
-    <section className="relative w-full bg-[#FAFAFA] overflow-hidden">
+    <section className="relative w-full bg-[#FAFAFA] overflow-x-hidden">
       <div className="max-w-[1440px] mx-auto mt-20 w-full">
         {/* Secondary header (catalog nav) */}
          <div className="px-4 md:px-6 lg:px-8 ">
@@ -55,7 +55,7 @@ export default function FurniturePageHero() {
               <div className="w-full lg:w-[45%] text-left mb-8 lg:mb-0 lg:pr-8">
                 {/* Label */}
                 <p className="text-sm md:text-base font-semibold tracking-wide text-[#1a1a1a] mb-4 md:mb-6">
-                  YD & YF Models
+                 Office Furniture
                 </p>
 
                 {/* Main Heading */}

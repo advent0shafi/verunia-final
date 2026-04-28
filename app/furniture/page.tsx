@@ -56,6 +56,7 @@ function PageSectionFallback({ minHeightClass }: { minHeightClass: string }) {
     />
   );
 }
+
 export const metadata: Metadata = {
     title: 'Furniture',
     description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting bespoke office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',

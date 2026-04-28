@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import CategoryNavHeader from "@/components/ui/category-nav-header";
 import ProductCategoryGrid from "./product-catogery-grid";
 import SidebarFilter from "./sidebar-filter";
 

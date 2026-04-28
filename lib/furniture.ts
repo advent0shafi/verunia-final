@@ -31,6 +31,26 @@ export async function getProductsByCategory(
   return json.data
 }
 
+export const FURNITURE_MENU_SLUGS = {
+  chairs: ["office-chair"],
+  desks: ["desk", "desks", "ty-models", "yd-yf-models", "xc-models", "ul-models"],
+  silentBox: ["silent-box", "silent-boxes", "storage"],
+} as const;
+
+export async function getProductsByCategorySlugs(categorySlugs: string[]): Promise<Product[]> {
+  const uniqueSlugs = Array.from(new Set(categorySlugs.filter(Boolean)));
+  const results = await Promise.all(uniqueSlugs.map((slug) => getProductsByCategory(slug)));
+
+  const deduped = new Map<number, Product>();
+  for (const group of results) {
+    for (const product of group) {
+      deduped.set(product.id, product);
+    }
+  }
+
+  return Array.from(deduped.values());
+}
+
 export async function getCategoryBySlug(
   slug: string
 ): Promise<Category | null> {
