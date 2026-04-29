@@ -13,14 +13,14 @@ export default function ProductCard({ product }: { product: Product }) {
 
       <div className="border border-[#E5E1D6] rounded-[6px] p-[16px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_30px_-24px_rgba(28,25,23,0.6)]">
         {/* Product Image */}
-        <div className="bg-[#F5F5F4] flex items-center justify-center rounded-[4px] min-w-[262px] w-full h-[262px] md:max-h-[262px]">
+        <div className="flex h-[220px] w-full min-w-0 max-w-full items-center justify-center rounded-[4px] bg-[#F5F5F4] sm:h-[240px] md:h-[262px] md:max-h-[262px]">
           {product.main_image?.url ? (
             <Image
               src={`https://api.veruniagroup.com${product.main_image.url}`}
               alt={product.name}
               width={262}
               height={262}
-              className="min-w-[262px] max-w-[262px] h-[262px] object-contain transition-transform duration-500 ease-out w-full rounded-[4px] group-hover:scale-[1.045]"
+              className="h-full w-full max-h-[262px] max-w-[262px] object-contain transition-transform duration-500 ease-out rounded-[4px] group-hover:scale-[1.045]"
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center rounded-[4px]">

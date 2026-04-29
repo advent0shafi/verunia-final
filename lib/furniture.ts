@@ -20,7 +20,7 @@ export async function getProductsByCategory(
 ): Promise<Product[]> {
   const res = await fetch(
     `https://api.veruniagroup.com/api/products?populate=*&filters[category][slug][$eq]=${categorySlug}`,
-    { cache: "no-store" }
+    { next: { revalidate: 120 } }
   )
 
   if (!res.ok) {
@@ -51,12 +51,20 @@ export async function getProductsByCategorySlugs(categorySlugs: string[]): Promi
   return Array.from(deduped.values());
 }
 
+/** Build absolute URL for Strapi upload paths or pass through http(s) URLs. */
+export function resolveStrapiUploadUrl(path?: string | null): string | null {
+  if (!path) return null;
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  const base = "https://api.veruniagroup.com";
+  return path.startsWith("/") ? `${base}${path}` : `${base}/${path}`;
+}
+
 export async function getCategoryBySlug(
   slug: string
 ): Promise<Category | null> {
   const res = await fetch(
     `https://api.veruniagroup.com/api/categories?populate=*&filters[slug][$eq]=${slug}`,
-    { cache: "no-store" }
+    { next: { revalidate: 120 } }
   )
 
   if (!res.ok) {
@@ -66,6 +74,17 @@ export async function getCategoryBySlug(
   const json = await res.json()
 
   return json.data.length ? json.data[0] : null
+}
+
+/** First matching category (CMS order) — used for grouped routes like Silent Box. */
+export async function getFirstCategoryBySlugs(
+  slugs: readonly string[]
+): Promise<Category | null> {
+  for (const slug of slugs) {
+    const cat = await getCategoryBySlug(slug);
+    if (cat) return cat;
+  }
+  return null;
 }
 
 

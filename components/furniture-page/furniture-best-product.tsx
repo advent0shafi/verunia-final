@@ -10,6 +10,9 @@ export default async function FurnitureBestProduct() {
     return null; // hide the section if no best sellers found
   }
 
+  const viewMoreSlug = products.find((p) => p.category?.slug)?.category?.slug;
+  const viewMoreHref = viewMoreSlug ? `/furniture/${viewMoreSlug}` : "/furniture";
+
   return (
     <section className="bg-white py-12 md:py-16 lg:py-20">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
@@ -22,7 +25,7 @@ export default async function FurnitureBestProduct() {
               Best Sellers
             </h2>
             <Link
-            href={`/furniture/${products[0].category.slug}`}
+              href={viewMoreHref}
               className="font-instrument font-medium text-[#1C1917] text-[20px] leading-[30px] tracking-normal hover:text-[#0E7490] transition-colors"
             >
               View More
