@@ -18,7 +18,7 @@ export default function FotivoProjectCard({
     slug,
 }: Props) {
     return (
-        <Link href={`/ai-fotivo/project/${slug}`} className="block group w-full h-full ">
+        <Link href={`/bespoke/project/${slug}`} className="block group w-full h-full ">
             <div className="py-[24px] bg-white  flex flex-col items-center justify-center min-h-[432px] border border-white/10 rounded-[6px]">
                 <div>
                     <Image
