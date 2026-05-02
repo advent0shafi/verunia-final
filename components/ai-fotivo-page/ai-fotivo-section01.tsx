@@ -47,7 +47,7 @@ export default function AiFotivoSection01() {
                 </h1>
                 <p className="font-instrument text-[#FFFDFA] font-normal text-[16px] leading-[24px] tracking-normal text-center max-w-[588.431640625px] mx-auto py-[32px]">
                     <TextReveal>
-                        For projects that demand something truly unique, Al Fotivo offers bespoke design for furniture, finishes and crystal pieces. From custom dimensions and fabrics to entirely new designs, our studio works closely with clients, designers and architects to create one-of-a-kind pieces that live only in their spaces.
+                        For projects that demand something truly unique, We offer bespoke design for furniture, finishes and crystal pieces. From custom dimensions and fabrics to entirely new designs, our studio works closely with clients, designers and architects to create one-of-a-kind pieces that live only in their spaces.
                     </TextReveal>
                 </p>
                 {/* <div className="w-full h-full flex justify-center ">

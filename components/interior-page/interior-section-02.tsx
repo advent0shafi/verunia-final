@@ -18,7 +18,7 @@ export default function InteriorSection02() {
                     <div className="w-full max-w-[422px]">
                         <p className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-[0] text-[#FDFDFC]">
                             <TextReveal>
-                                Verunia Interiors designs spaces for how people really live and work. From offices and hotels to private residences, we balance function, comfort and detail so every room feels considered, not decorated. Materials are chosen to age well, light is planned carefully, and every decision serves the people who use the space every day.
+                                 Interiors designs spaces for how people really live and work. From offices and hotels to private residences, we balance function, comfort and detail so every room feels considered, not decorated. Materials are chosen to age well, light is planned carefully, and every decision serves the people who use the space every day.
                             </TextReveal>
                         </p>
                         <button className="border-t border-b border-[#FDFDFC] text-[#FDFDFC] text-start mt-[32px] py-3">

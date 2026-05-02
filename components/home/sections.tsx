@@ -82,7 +82,7 @@ export default function Sections() {
                                 <TextReveal>Interior design and fit-out for offices, hospitality and residential spaces.</TextReveal>
                             </p>
                             <Link href="/interior" className="mt-4 md:mt-6 border-t w-full border-b text-start py-3 border-[#523E0F] text-[#523E0F] block hover:bg-[#523E0F]/5 transition-colors">
-                                <TextReveal>Enter Verunia Interiors →</TextReveal>
+                                <TextReveal>Enter Interiors →</TextReveal>
                             </Link>
 
                         </div>
@@ -145,7 +145,7 @@ export default function Sections() {
                                 <TextReveal>Office furniture systems and seating for modern workplaces.</TextReveal>
                             </p>
                             <Link href="/furniture" className="mt-4 md:mt-6 border-t w-full border-b text-start py-3 border-[#523E0F] text-[#523E0F] block hover:bg-[#523E0F]/5 transition-colors">
-                                <TextReveal>Enter Verunia Furnitures →</TextReveal>
+                                <TextReveal>Enter Furniture →</TextReveal>
                             </Link>
 
                         </div>
@@ -172,7 +172,7 @@ export default function Sections() {
                                 <TextReveal>Interior design and fit-out for offices, hospitality and residential spaces.</TextReveal>
                             </p>
                             <Link href="/interior" className="mt-4 md:mt-6 border-t w-full border-b text-start py-3 border-[#523E0F] text-[#523E0F] block hover:bg-[#523E0F]/5 transition-colors">
-                                <TextReveal>Enter Verunia Interiors →</TextReveal>
+                                <TextReveal>Enter Bespoke →</TextReveal>
                             </Link>
 
                         </div>

@@ -18,7 +18,7 @@ export default function InteriorHeroDescriptions() {
                     <div className="w-full max-w-[422px]">
                         <p className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-[0] text-[#FDFDFC]">
                             <TextReveal>
-                                Verunia Interiors creates complete environments for work, hospitality and private living. We shape each project around flow, comfort and long-term performance, combining technical precision with a refined visual language. From early concepts to final installation, every detail is coordinated to feel seamless and purposeful.
+                            Interior Design creates complete environments for work, hospitality and private living. We shape each project around flow, comfort and long-term performance, combining technical precision with a refined visual language. From early concepts to final installation, every detail is coordinated to feel seamless and purposeful.
                             </TextReveal>
                         </p>
                         <button className="border-t border-b border-[#FDFDFC] text-[#FDFDFC] text-start mt-[32px] py-3">

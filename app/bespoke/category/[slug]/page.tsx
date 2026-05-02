@@ -1,5 +1,4 @@
-
-
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import FotivoCategoryGrid from "@/components/ai-fotivo-page/fotivo-category-grid";
 import AiFotivaHeader from "@/components/header/ai-fotiva-header";
@@ -25,6 +24,25 @@ export default async function FotivoCategoryPage({ params }: CategoryPageProps) 
     return (
         <main className="bg-[#171412] min-h-screen text-[#FDFDFC]">
             <AiFotivaHeader />
+
+            <nav
+              aria-label="Breadcrumb"
+              className="max-w-[1440px] mx-auto px-4 md:px-8 pt-6 text-sm text-white/70"
+            >
+              <Link
+                href="/bespoke"
+                className="font-instrument underline decoration-white/25 underline-offset-4 hover:text-[#F5C547] hover:decoration-[#F5C547]/55 transition-colors"
+              >
+                Bespoke
+              </Link>
+              <span className="mx-2 text-white/40" aria-hidden>
+                /
+              </span>
+              <span className="font-instrument text-white/90">
+                {products[0].al_fotivo_category.name}
+              </span>
+            </nav>
+
   {/* Category Hero */}
             <section className="relative w-full h-[50vh] md:h-[60vh] " style={{
                 // fallback for clients not supporting Image as background
