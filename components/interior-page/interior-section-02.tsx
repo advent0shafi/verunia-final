@@ -7,11 +7,11 @@ export default function InteriorSection02() {
             <div className="w-full max-w-[1440px] h-full max-md:max-w-full py-8 md:py-[112px] relative overflow-hidden">
                 <h1 className="font-instrument text-[#FDFDFC] font-medium text-[48px] leading-[60px] [-letter-spacing:-0.02em]">
                     <TextReveal>
-                        Spaces that work beautifully,
+                    Beautifully Designed
                     </TextReveal>
                     <br />
                     <TextReveal>
-                        long after the first day.
+                         Spaces for Work and Living
                     </TextReveal>
                 </h1>
                 <div className="w-full h-full flex  md:mt-[32px]  justify-end">
@@ -24,7 +24,7 @@ export default function InteriorSection02() {
                         <button className="border-t border-b border-[#FDFDFC] text-[#FDFDFC] text-start mt-[32px] py-3">
                         <Link href={"/interior/all-projects"}>
 
-                            <span className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-[0] text-[#FDFDFC]">About Verunia Interiors</span> →
+                            <span className="font-instrument font-normal not-italic text-[16px] leading-[24px] tracking-[0] text-[#FDFDFC]">All Projects</span> →
                             </Link>
                         </button>
                        

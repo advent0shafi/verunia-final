@@ -90,7 +90,7 @@ export default function VeruniaFooter() {
 
                             {/* Contact Info */}
                             <div className="flex flex-col gap-2">
-                                <p className="text-white/80 font-instrument-sans font-normal text-base leading-6 tracking-normal align-middle">438 837-5531</p>
+                                <p className="text-white/80 font-instrument-sans font-normal text-base leading-6 tracking-normal align-middle">+971563288668</p>
                                 <p className="text-white/80 font-instrument-sans font-normal text-base leading-6 tracking-normal align-middle break-all md:break-normal">info@veruniagroup.com</p>
                                 <p className="text-white/80 font-instrument-sans font-normal text-base leading-6 tracking-normal align-middle">
                                     Block 3, Shop 18, 19, 20<br />

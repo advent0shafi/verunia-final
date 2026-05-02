@@ -53,10 +53,11 @@ function FeaturedWorkCard({ title, location, imageSrc }: FeaturedWorkCardProps) 
 
 type LuxuryCollectionBannerProps = {
     imageSrc: string;
+    title: string;
 };
 
 
-function LuxuryCollectionBanner({ imageSrc }: LuxuryCollectionBannerProps) {
+function LuxuryCollectionBanner({ imageSrc, title }: LuxuryCollectionBannerProps) {
     return (
         <div
             className={[
@@ -97,7 +98,7 @@ function LuxuryCollectionBanner({ imageSrc }: LuxuryCollectionBannerProps) {
                         drop-shadow
                     "
                 >
-                    Luxury Collection
+                    {title}
                 </h3>
 
                 <Link
@@ -133,7 +134,7 @@ export default function AiFotivoSection05() {
     return (
         <section className="items-center bg-[#171412] flex flex-col justify-center px-4 md:px-6 lg:px-8">
             <div className="w-full max-w-[1440px] h-full max-md:max-w-full py-10 md:py-12 relative overflow-hidden">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+                {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
                     {items.map((item) => (
                         <FeaturedWorkCard
                             key={item.title}
@@ -142,10 +143,10 @@ export default function AiFotivoSection05() {
                             imageSrc={item.imageSrc}
                         />
                     ))}
-                </div>
+                </div> */}
 
                 <div className="py-[16px]">
-                    <LuxuryCollectionBanner imageSrc="/ai-fotivo-page/image-ai-fotiva-10.png" />
+                    <LuxuryCollectionBanner imageSrc="/ai-fotivo-page/image-ai-fotiva-10.png" title="Bespoke Furniture" />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
                     {items.map((item) => (
@@ -158,7 +159,7 @@ export default function AiFotivoSection05() {
                     ))}
                 </div>
                 <div className="py-[16px]">
-                    <LuxuryCollectionBanner imageSrc="/ai-fotivo-page/image-luxuary.png" />
+                    <LuxuryCollectionBanner imageSrc="/ai-fotivo-page/image-luxuary.png" title="Luxury Collection" />
                 </div>
             </div>
         </section>

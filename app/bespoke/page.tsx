@@ -5,14 +5,14 @@ import { Metadata } from "next";
 import { frontendPoint } from "@/lib/getData";
 import dynamic from "next/dynamic";
 export const metadata: Metadata = {
-    title: 'AI Fotivo',
+  title: 'Bespoke',
+  description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting custom office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
+  keywords: ['Bespoke', 'Bespoke furniture', 'Verunia Furniture Trading LLC'],
+  openGraph: {
+    title: 'Bespoke - Verunia',
     description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting custom office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
-    keywords: ['AI Fotivo', 'AI-generated images', 'Verunia Furniture Trading LLC'],
-    openGraph: {
-        title: 'AI Fotivo - Verunia',
-        description: 'Ambitious furniture professional at Verunia Furniture Trading LLC — crafting custom office, hospitality and villa interiors in Dubai with a focus on design, precision engineering and installation.',
-        images: [{ url: `${frontendPoint}/opengraph-image.png` }],
-    },
+    images: [{ url: `${frontendPoint}/opengraph-image.png` }],
+  },
 }
 import AnimatedSection from "@/components/home/animated-section";
 import LazyLoadSection from "@/components/ui/lazy-load-section";
@@ -69,66 +69,66 @@ function PageSectionFallback({ minHeightClass }: { minHeightClass: string }) {
 }
 
 export default function AiFotivoPage() {
-    return (
-        <main>
-            <AiFotivaHeader />
-            <AiFotivoHero />
+  return (
+    <main>
+      <AiFotivaHeader />
+      <AiFotivoHero />
 
-            <LazyLoadSection
-                minHeightClass="min-h-[620px]"
-                fallbackClassName="bg-[#171412] ring-1 ring-white/10"
-            >
-                <AnimatedSection variant="slide-up">
-                    <AiFotivoSection01 />
-                </AnimatedSection>
-            </LazyLoadSection>
+      <LazyLoadSection
+        minHeightClass="min-h-[620px]"
+        fallbackClassName="bg-[#171412] ring-1 ring-white/10"
+      >
+        <AnimatedSection variant="slide-up">
+          <AiFotivoSection01 />
+        </AnimatedSection>
+      </LazyLoadSection>
 
-            <LazyLoadSection
-                minHeightClass="min-h-[620px]"
-                fallbackClassName="bg-[#171412] ring-1 ring-white/10"
-            >
-                <AnimatedSection variant="slide-up">
-                    <AiFotivoSection02 />
-                </AnimatedSection>
-            </LazyLoadSection>
+      <LazyLoadSection
+        minHeightClass="min-h-[620px]"
+        fallbackClassName="bg-[#171412] ring-1 ring-white/10"
+      >
+        <AnimatedSection variant="slide-up">
+          <AiFotivoSection02 />
+        </AnimatedSection>
+      </LazyLoadSection>
 
-            <LazyLoadSection
-                minHeightClass="min-h-[620px]"
-                fallbackClassName="bg-[#171412] ring-1 ring-white/10"
-            >
-                <AnimatedSection variant="scale">
-                    <AiFotivoSection03 />
-                </AnimatedSection>
-            </LazyLoadSection>
+      <LazyLoadSection
+        minHeightClass="min-h-[620px]"
+        fallbackClassName="bg-[#171412] ring-1 ring-white/10"
+      >
+        <AnimatedSection variant="scale">
+          <AiFotivoSection03 />
+        </AnimatedSection>
+      </LazyLoadSection>
 
-            <LazyLoadSection
-                minHeightClass="min-h-[620px]"
-                fallbackClassName="bg-[#171412] ring-1 ring-white/10"
-            >
-                <AnimatedSection variant="slide-up">
-                    <AiFotivoSection04 />
-                </AnimatedSection>
-            </LazyLoadSection>
+      <LazyLoadSection
+        minHeightClass="min-h-[620px]"
+        fallbackClassName="bg-[#171412] ring-1 ring-white/10"
+      >
+        <AnimatedSection variant="slide-up">
+          <AiFotivoSection04 />
+        </AnimatedSection>
+      </LazyLoadSection>
 
-            <LazyLoadSection
-                minHeightClass="min-h-[620px]"
-                fallbackClassName="bg-[#171412] ring-1 ring-white/10"
-            >
-                <AnimatedSection variant="fade">
-                    <AiFotivoSection05 />
-                </AnimatedSection>
-            </LazyLoadSection>
+      <LazyLoadSection
+        minHeightClass="min-h-[620px]"
+        fallbackClassName="bg-[#171412] ring-1 ring-white/10"
+      >
+        <AnimatedSection variant="fade">
+          <AiFotivoSection05 />
+        </AnimatedSection>
+      </LazyLoadSection>
 
-            <LazyLoadSection
-                minHeightClass="min-h-[420px]"
-                fallbackClassName="bg-[#171412] ring-1 ring-white/10"
-            >
-                <AnimatedSection variant="fade">
-                    <AiFotivoClients />
-                </AnimatedSection>
-            </LazyLoadSection>
+      <LazyLoadSection
+        minHeightClass="min-h-[420px]"
+        fallbackClassName="bg-[#171412] ring-1 ring-white/10"
+      >
+        <AnimatedSection variant="fade">
+          <AiFotivoClients />
+        </AnimatedSection>
+      </LazyLoadSection>
 
-            <Footer />
-        </main>
-    )
+      <Footer />
+    </main>
+  )
 }
