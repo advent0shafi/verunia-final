@@ -68,7 +68,7 @@ export default function ContactPage() {
                                             href="tel:+14388375531" 
                                             className="font-instrument text-[#271E07] font-normal text-[14px] sm:text-[15px] md:text-[16px] leading-[20px] md:leading-[24px] hover:underline break-all sm:break-normal"
                                         >
-                                            +971 42733155
+                                           +971 4 273 3155
                                         </a>
                                     </div>
                                 </AnimatedSection>
