@@ -26,17 +26,14 @@ function HoverImage({
     className: string;
 }) {
     const [isHovered, setIsHovered] = useState(false);
-    const [hasInteracted, setHasInteracted] = useState(false);
 
     return (
         <div
             className="relative w-full h-full"
-            onMouseEnter={() => {
-                setIsHovered(true);
-                setHasInteracted(true);
-            }}
+            onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
+            {/* Both layers always mounted so hover image is already loading before first hover. */}
             <div className="relative w-full h-full">
                 <Image
                     src={defaultSrc}
@@ -46,20 +43,19 @@ function HoverImage({
                     sizes={sizes}
                     quality={82}
                     loading="lazy"
-                    className={`${className} transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
+                    className={`relative z-0 ${className} ${isHovered ? "opacity-0" : "opacity-100"}`}
                 />
-                {hasInteracted && (
-                    <Image
-                        src={hoverSrc}
-                        alt={alt}
-                        width={width}
-                        height={height}
-                        sizes={sizes}
-                        quality={82}
-                        loading="lazy"
-                        className={`${className} absolute inset-0 transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-                    />
-                )}
+                <Image
+                    src={hoverSrc}
+                    alt=""
+                    aria-hidden
+                    width={width}
+                    height={height}
+                    sizes={sizes}
+                    quality={82}
+                    loading="lazy"
+                    className={`absolute inset-0 z-[1] ${className} pointer-events-none ${isHovered ? "opacity-100" : "opacity-0"}`}
+                />
             </div>
         </div>
     );

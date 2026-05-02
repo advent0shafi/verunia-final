@@ -1,13 +1,17 @@
 'use client'
+
 import { ImageReveal } from "@/components/home/animated-section";
 import Image from "next/image";
+import type { StaticImageData } from "next/image";
+import { InteriorProjectUI } from "@/lib/mapInteriors";
 import interior01 from "@/public/interior-page/image-interior-02.png";
 import interior02 from "@/public/interior-page/image-interior-03.png";
 import interior04 from "@/public/interior-page/image-interior-040.png";
-import { StaticImageData } from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
+
+/** One full loop through hover gallery repeats every 3s while pointer is over the card. */
+const HOVER_GALLERY_CYCLE_MS = 3000;
 
 type InteriorImageCardProps = {
     src: StaticImageData | string;
@@ -16,11 +20,10 @@ type InteriorImageCardProps = {
     title: string;
     year?: string;
     place?: string;
-    height?: number;
-    width?: number;
     minHeight?: string;
     maxHeight?: string;
-    onClickUrl?: string; // new optional prop for onClick destination
+    galleryImages?: string[];
+    onClickUrl?: string;
 };
 
 export function InteriorImageCard({
@@ -30,13 +33,32 @@ export function InteriorImageCard({
     title,
     year = "2024",
     place = "HolidayInn",
-    height = 1000,
-    width = 1000,
     minHeight = "min-h-[300px] md:min-h-[671px]",
     maxHeight = "",
-    onClickUrl = "/interior/project/holiday-inn" // default url matches old Link
+    galleryImages,
+    onClickUrl = "/interior/project/holiday-inn"
 }: InteriorImageCardProps) {
     const router = useRouter();
+
+    const [displaySrc, setDisplaySrc] = React.useState<StaticImageData | string>(src);
+    const hoverIntervalRef = React.useRef<ReturnType<typeof setInterval> | null>(null);
+
+    React.useEffect(() => {
+        setDisplaySrc(src);
+        if (hoverIntervalRef.current != null) {
+            clearInterval(hoverIntervalRef.current);
+            hoverIntervalRef.current = null;
+        }
+    }, [src]);
+
+    React.useEffect(() => {
+        return () => {
+            if (hoverIntervalRef.current != null) {
+                clearInterval(hoverIntervalRef.current);
+                hoverIntervalRef.current = null;
+            }
+        };
+    }, []);
 
     const handleClick = React.useCallback(() => {
         if (onClickUrl) {
@@ -44,33 +66,71 @@ export function InteriorImageCard({
         }
     }, [onClickUrl, router]);
 
+    const handleMouseLeave = React.useCallback(() => {
+        if (hoverIntervalRef.current != null) {
+            clearInterval(hoverIntervalRef.current);
+            hoverIntervalRef.current = null;
+        }
+        setDisplaySrc(src);
+    }, [src]);
+
+    const handleMouseEnter = React.useCallback(() => {
+        const list = galleryImages?.filter(Boolean) ?? [];
+        if (!list.length) return;
+
+        if (hoverIntervalRef.current != null) {
+            clearInterval(hoverIntervalRef.current);
+            hoverIntervalRef.current = null;
+        }
+
+        let idx = 0;
+        setDisplaySrc(list[0]);
+        const stepMs = Math.max(120, Math.floor(HOVER_GALLERY_CYCLE_MS / list.length));
+
+        hoverIntervalRef.current = setInterval(() => {
+            idx = (idx + 1) % list.length;
+            setDisplaySrc(list[idx]);
+        }, stepMs);
+    }, [galleryImages]);
+
     return (
         <div
             role="button"
             tabIndex={0}
             onClick={handleClick}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             onKeyDown={e => {
                 if (e.key === "Enter" || e.key === " ") handleClick();
             }}
-            className={`cursor-pointer w-full h-full object-cover ${minHeight} ${maxHeight} relative outline-none`}
+            className={`cursor-pointer w-full overflow-hidden outline-none relative ${minHeight} ${maxHeight}`}
             aria-label={alt}
         >
-            <ImageReveal className={`w-full h-full ${minHeight} ${maxHeight}`}>
-                <Image
-                    src={src}
-                    alt={alt}
-                    width={width}
-                    height={height}
-
-                    className={`w-full md:h-full h-[500px] object-cover`}
-                />
+            <ImageReveal
+                className={[
+                    "relative block w-full overflow-hidden shrink-0",
+                    "h-[500px] md:h-[671px]",
+                    maxHeight,
+                ]
+                    .filter(Boolean)
+                    .join(" ")}
+            >
+                <div className="absolute inset-0">
+                    <Image
+                        src={displaySrc}
+                        alt={alt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 55vw"
+                        className="object-cover"
+                    />
+                </div>
             </ImageReveal>
             <div
                 className={`
-                    absolute 
+                    absolute z-10
                     top-[6px] md:top-[14px] 
                     right-1/2 translate-x-1/2 md:right-[14px] md:translate-x-0
-                    bg-white rounded-[4px] opacity-100 flex gap-3 py-4 px-6
+                    bg-white rounded-[4px] opacity-100 flex gap-3 py-4 px-6 pointer-events-none
                 `}
                 style={{ boxShadow: "0px 2px 8px rgba(0,0,0,0.05)" }}
             >
@@ -99,8 +159,6 @@ export function InteriorImageCard({
     );
 }
 
-import { InteriorProjectUI } from "@/lib/mapInteriors";
-
 export default function InteriorSection01({ projects = [] }: { projects?: InteriorProjectUI[] }) {
     // We fall back to hardcoded data if API data is not available, to avoid empty spaces
     const proj1 = projects[0];
@@ -117,6 +175,7 @@ export default function InteriorSection01({ projects = [] }: { projects?: Interi
                             alt={proj1?.title || "Interior Section 01"}
                             title={proj1?.title || "HolidayInn"}
                             number="01"
+                            galleryImages={proj1?.galleryImages}
                             onClickUrl={proj1 ? `/interior/project/${proj1.slug}` : "/"}
                             year={proj1?.year || "2024"}
                             place={proj1?.place || "HolidayInn"}
@@ -128,6 +187,7 @@ export default function InteriorSection01({ projects = [] }: { projects?: Interi
                             alt={proj2?.title || "Interior"}
                             title={proj2?.title || "HolidayInn"}
                             number="02"
+                            galleryImages={proj2?.galleryImages}
                             onClickUrl={proj2 ? `/interior/project/${proj2.slug}` : undefined}
                             year={proj2?.year || undefined}
                             place={proj2?.place || undefined}
@@ -140,8 +200,8 @@ export default function InteriorSection01({ projects = [] }: { projects?: Interi
                         alt={proj3?.title || "Interior Section 01"}
                         title={proj3?.title || "HolidayInn"}
                         number="03"
-                        height={671}
                         maxHeight="max-h-[500px] md:max-h-[671px]"
+                        galleryImages={proj3?.galleryImages}
                         onClickUrl={proj3 ? `/interior/project/${proj3.slug}` : undefined}
                         year={proj3?.year || undefined}
                         place={proj3?.place || undefined}
