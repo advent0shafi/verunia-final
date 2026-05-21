@@ -19,11 +19,13 @@ type InteriorImageCardProps = {
     width?: number;
     minHeight?: string;
     maxHeight?: string;
+    galleryImages?: string[];
     onClickUrl?: string;
 };
 
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 function InteriorImageCard({
     src,
@@ -35,21 +37,73 @@ function InteriorImageCard({
     width = 1000,
     minHeight = "min-h-[300px] md:min-h-[671px]",
     maxHeight = "",
+    galleryImages,
     onClickUrl,
 }: InteriorImageCardProps) {
     const router = useRouter();
 
-    const handleClick = React.useCallback(() => {
+    const [displaySrc, setDisplaySrc] = useState<StaticImageData | string>(src);
+    const hoverIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+    useEffect(() => {
+        setDisplaySrc(src);
+        if (hoverIntervalRef.current != null) {
+            clearInterval(hoverIntervalRef.current);
+            hoverIntervalRef.current = null;
+        }
+    }, [src]);
+
+    useEffect(() => {
+        return () => {
+            if (hoverIntervalRef.current != null) {
+                clearInterval(hoverIntervalRef.current);
+                hoverIntervalRef.current = null;
+            }
+        };
+    }, []);
+
+    const handleClick = useCallback(() => {
         if (onClickUrl) {
             router.push(onClickUrl);
         }
     }, [onClickUrl, router]);
+
+    const handleMouseLeave = useCallback(() => {
+        if (hoverIntervalRef.current != null) {
+            clearInterval(hoverIntervalRef.current);
+            hoverIntervalRef.current = null;
+        }
+        setDisplaySrc(src);
+    }, [src]);
+
+    const handleMouseEnter = useCallback(() => {
+        const list = galleryImages?.filter(Boolean) ?? [];
+        if (!list.length) return;
+
+        if (hoverIntervalRef.current != null) {
+            clearInterval(hoverIntervalRef.current);
+            hoverIntervalRef.current = null;
+        }
+
+        let idx = list.length > 1 ? 1 : 0;
+        setDisplaySrc(list[idx] || src);
+        const stepMs = 2500;
+
+        hoverIntervalRef.current = setInterval(() => {
+            idx = (idx + 1) % list.length;
+            setDisplaySrc(list[idx] || src);
+        }, stepMs);
+    }, [galleryImages, src]);
+
+    const currentSrc = displaySrc || src;
 
     return (
         <div
             role="button"
             tabIndex={0}
             onClick={handleClick}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             onKeyDown={e => {
                 if (e.key === "Enter" || e.key === " ") handleClick();
             }}
@@ -57,14 +111,26 @@ function InteriorImageCard({
             aria-label={alt}
         >
             <ImageReveal className={`w-full h-full ${minHeight} ${maxHeight}`}>
-                <Image
-                    src={src}
-                    alt={alt}
-                    width={width}
-                    height={height}
-                    className={`w-full md:h-full h-[500px] object-cover`}
-
-                />
+                <div className="absolute inset-0 bg-[#171412] w-full h-full overflow-hidden">
+                    <AnimatePresence>
+                        <motion.div
+                            key={typeof currentSrc === 'string' ? currentSrc : currentSrc.src}
+                            initial={{ opacity: 0, scale: 1.02 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.8, ease: "easeInOut" }}
+                            className="absolute inset-0 w-full h-full"
+                        >
+                            <Image
+                                src={currentSrc}
+                                alt={alt}
+                                width={width}
+                                height={height}
+                                className={`w-full md:h-full h-[500px] object-cover`}
+                            />
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
             </ImageReveal>
             <div
                 className={`
@@ -120,6 +186,7 @@ export default function InteriorSection03({ projects = [] }: { projects?: Interi
                         number="03"
                         height={671}
                         maxHeight="max-h-[500px] md:max-h-[671px]"
+                        galleryImages={proj1?.galleryImages}
                         onClickUrl={proj1 ? `/interior/project/${proj1.slug}` : undefined}
                         year={proj1?.year || undefined}
                         place={proj1?.title || undefined}
@@ -131,6 +198,7 @@ export default function InteriorSection03({ projects = [] }: { projects?: Interi
                             src={proj2?.mainImage || interior05}
                             alt={proj2?.title || "Interior Section 03 Card 1"}
                             number="01"
+                            galleryImages={proj2?.galleryImages}
                             onClickUrl={proj2 ? `/interior/project/${proj2.slug}` : undefined}
                             year={proj2?.year || undefined}
                             place={proj2?.title || undefined}
@@ -141,6 +209,7 @@ export default function InteriorSection03({ projects = [] }: { projects?: Interi
                             src={proj3?.mainImage || interior06}
                             alt={proj3?.title || "Interior Section 03 Card 2"}
                             number="02"
+                            galleryImages={proj3?.galleryImages}
                             onClickUrl={proj3 ? `/interior/project/${proj3.slug}` : undefined}
                             year={proj3?.year || undefined}
                             place={proj3?.title || undefined}
@@ -154,6 +223,7 @@ export default function InteriorSection03({ projects = [] }: { projects?: Interi
                         number="03"
                         height={671}
                         maxHeight="max-h-[500px] md:max-h-[671px]"
+                        galleryImages={proj4?.galleryImages}
                         onClickUrl={proj4 ? `/interior/project/${proj4.slug}` : undefined}
                         year={proj4?.year || undefined}
                         place={proj4?.title || undefined}

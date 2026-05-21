@@ -9,6 +9,7 @@ import interior02 from "@/public/interior-page/image-interior-03.png";
 import interior04 from "@/public/interior-page/image-interior-040.png";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 /** One full loop through hover gallery repeats every 3s while pointer is over the card. */
 const HOVER_GALLERY_CYCLE_MS = 3000;
@@ -83,15 +84,18 @@ export function InteriorImageCard({
             hoverIntervalRef.current = null;
         }
 
-        let idx = 0;
-        setDisplaySrc(list[0]);
-        const stepMs = Math.max(120, Math.floor(HOVER_GALLERY_CYCLE_MS / list.length));
+        let idx = list.length > 1 ? 1 : 0;
+        setDisplaySrc(list[idx] || src);
+        // Slower interval for premium feel
+        const stepMs = 2500;
 
         hoverIntervalRef.current = setInterval(() => {
             idx = (idx + 1) % list.length;
-            setDisplaySrc(list[idx]);
+            setDisplaySrc(list[idx] || src);
         }, stepMs);
-    }, [galleryImages]);
+    }, [galleryImages, src]);
+
+    const currentSrc = displaySrc || src;
 
     return (
         <div
@@ -115,14 +119,25 @@ export function InteriorImageCard({
                     .filter(Boolean)
                     .join(" ")}
             >
-                <div className="absolute inset-0">
-                    <Image
-                        src={displaySrc}
-                        alt={alt}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 55vw"
-                        className="object-cover"
-                    />
+                <div className="absolute inset-0 bg-[#171412]">
+                    <AnimatePresence>
+                        <motion.div
+                            key={typeof currentSrc === 'string' ? currentSrc : currentSrc.src}
+                            initial={{ opacity: 0, scale: 1.02 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.8, ease: "easeInOut" }}
+                            className="absolute inset-0"
+                        >
+                            <Image
+                                src={currentSrc}
+                                alt={alt}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 55vw"
+                                className="object-cover"
+                            />
+                        </motion.div>
+                    </AnimatePresence>
                 </div>
             </ImageReveal>
             <div

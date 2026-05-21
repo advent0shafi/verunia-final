@@ -37,17 +37,16 @@ function ClientLogoImage({ entry, className }: { entry: ClientLogo; className?: 
 
 export default function AiFotivoClients() {
   const [api, setApi] = useState<CarouselApi>();
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    if (!api || isHovered) return;
+    if (!api) return;
 
     const autoPlay = window.setInterval(() => {
       api.scrollNext();
     }, 2200);
 
     return () => window.clearInterval(autoPlay);
-  }, [api, isHovered]);
+  }, [api]);
 
   return (
     <section className="bg-[#171412] px-4 md:px-6 lg:px-8 py-12 md:py-16">
@@ -68,11 +67,7 @@ export default function AiFotivoClients() {
           </p>
         </div>
 
-        <div
-          className="relative"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="relative">
           <Carousel
             setApi={setApi}
             opts={{
@@ -89,7 +84,7 @@ export default function AiFotivoClients() {
                   key={entry.id}
                   className="pl-3 md:pl-4 basis-[min(100%,280px)] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                 >
-                  <div className="flex h-[104px] md:h-[120px] items-center justify-center rounded-md border border-[#FAE09E]/40 bg-[#201C17] px-5 py-6 transition-colors hover:bg-[#2A241D]">
+                  <div className="flex h-[104px] md:h-[120px] items-center justify-center px-5 py-6">
                     <ClientLogoImage entry={entry} />
                   </div>
                 </CarouselItem>

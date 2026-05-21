@@ -74,18 +74,27 @@ The application uses the Next.js App Router. Review `app/` for the source of tru
     -   Wraps the app in `SmoothScroll` (Lenis).
     -   Applies global font variables.
 
-## 6. Key Components & Implementation Details
+## 6. Global UI Architecture & Key Components
 
-### Animations
--   **Wrapper**: `AnimatedSection` (`components/home/animated-section.tsx`) is used to wrap page sections. It accepts `variant` props (fade, slide-up, scale) to trigger Framer Motion animations on scroll.
--   **Smooth Scroll**: Implemented in `components/smooth-scroll.tsx` using `lenis`. CSS classes like `.lenis-smooth` control behavior.
--   **Initial Loader**: `LoadingUIWrapper` (`components/ui/loading-ui-wrapper.tsx`) blocks the UI for 3 seconds on initial load, showing `LoadingThumbnail` with an exit animation.
+### The Global Layout Shell (`app/layout.tsx`)
+The entire application is wrapped in several global providers to ensure a consistent, premium experience:
+1.  **`SmoothScroll`**: Initializes Lenis for global smooth scrolling.
+2.  **`LoadingUIWrapper`**: Acts as a global splash screen. It blocks the UI for the first 3 seconds on initial load, displaying a `LoadingThumbnail` (often the brand logo or an animation) that fades out.
+3.  **Fonts**: Sets up the CSS variables for the `Instrument Sans` and `Helvetica` fonts at the `<body>` level.
 
-### UI Architecture
--   **Sections**: Pages are built by composing large implementations sections (e.g., `Sections02`, `Hero`) rather than atomic composition in the page file itself.
--   **Header/Footer**:
-    -   `Header`: Located in `components/header/header.tsx`.
-    -   `Footer`: Located in `components/footer/footer.tsx`.
+### UI Composition & Sections
+-   **Section-Based Architecture**: Rather than building pages atomically within the route file, pages are composed of large, distinct sections (e.g., `Sections02`, `FurnitureBestProduct`).
+-   **`LazyLoadSection`**: Almost all components "below the fold" are wrapped in this global utility (`components/ui/lazy-load-section.tsx`) combined with `next/dynamic`. It enforces a minimum height (`minHeightClass`) and uses an `animate-pulse` background color to serve as a skeleton loader, preventing Cumulative Layout Shift (CLS).
+
+### Animation System
+The project uses a hybrid animation approach:
+-   **`AnimatedSection`**: A global wrapper (`components/home/animated-section.tsx`) used around lazily loaded sections. It leverages `framer-motion` to detect when a section enters the viewport (scroll-triggered) and applies standard `variant` animations such as `fade`, `slide-up`, or `scale`.
+-   **GSAP**: Used for more complex, high-performance timeline animations or pinned scroll effects within specific sections.
+-   **Micro-interactions**: Handled primarily through Tailwind CSS transitions on hover/focus states (e.g., button scales, color fades).
+
+### Global Navigation & Footers
+-   **Headers**: Context-aware. The general site uses `components/header/header.tsx`, while specific sections like Interior or Bespoke use specialized variants (`InteriorHeader`, `AiFotivaHeader`) that match their specific dark or premium themes.
+-   **Footer**: A unified global footer (`components/footer/footer.tsx`) placed at the bottom of all main pages.
 
 ### Data Fetching
 -   (Inferred) Data is likely fetched inside server components (`page.tsx`) or via specific hooks.

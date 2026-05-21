@@ -37,17 +37,16 @@ function ClientLogoImage({ entry, className }: { entry: ClientLogo; className?: 
 
 export default function Sections05() {
   const [api, setApi] = useState<CarouselApi>();
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    if (!api || isHovered) return;
+    if (!api) return;
 
     const autoPlay = window.setInterval(() => {
       api.scrollNext();
     }, 2200);
 
     return () => window.clearInterval(autoPlay);
-  }, [api, isHovered]);
+  }, [api]);
 
   return (
     <SectionContainer>
@@ -67,11 +66,7 @@ export default function Sections05() {
           </p>
         </div>
 
-        <div
-          className="relative"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="relative">
           <Carousel
             setApi={setApi}
             opts={{
@@ -88,7 +83,7 @@ export default function Sections05() {
                   key={entry.id}
                   className="pl-3 md:pl-4 basis-[min(100%,280px)] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                 >
-                  <div className="flex h-[104px] md:h-[120px] items-center justify-center rounded-md border border-[#FAE09E] bg-white/60 px-5 py-6 transition-colors hover:bg-[#523E0F]/5">
+                  <div className="flex h-[104px] md:h-[120px] items-center justify-center px-5 py-6">
                     <ClientLogoImage entry={entry} />
                   </div>
                 </CarouselItem>
