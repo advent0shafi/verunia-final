@@ -65,26 +65,6 @@ export async function getProductsByCategory(
   return json.data
 }
 
-export const FURNITURE_MENU_SLUGS = {
-  chairs: ["office-chair"],
-  desks: ["desk", "desks", "ty-models", "yd-yf-models", "xc-models", "ul-models"],
-  silentBox: ["silent-box", "silent-boxes", "storage"],
-} as const;
-
-export async function getProductsByCategorySlugs(categorySlugs: readonly string[]): Promise<Product[]> {
-  const uniqueSlugs = Array.from(new Set(categorySlugs.filter(Boolean)));
-  const results = await Promise.all(uniqueSlugs.map((slug) => getProductsByCategory(slug)));
-
-  const deduped = new Map<number, Product>();
-  for (const group of results) {
-    for (const product of group) {
-      deduped.set(product.id, product);
-    }
-  }
-
-  return Array.from(deduped.values());
-}
-
 /** Build absolute URL for Strapi upload paths or pass through http(s) URLs. */
 export function resolveStrapiUploadUrl(path?: string | null): string | null {
   if (!path) return null;
@@ -109,18 +89,6 @@ export async function getCategoryBySlug(
 
   return json.data.length ? json.data[0] : null
 }
-
-/** First matching category (CMS order) — used for grouped routes like Silent Box. */
-export async function getFirstCategoryBySlugs(
-  slugs: readonly string[]
-): Promise<Category | null> {
-  for (const slug of slugs) {
-    const cat = await getCategoryBySlug(slug);
-    if (cat) return cat;
-  }
-  return null;
-}
-
 
 export async function getProductBySlug(
   slug: string
