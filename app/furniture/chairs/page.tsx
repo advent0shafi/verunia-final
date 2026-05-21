@@ -2,21 +2,24 @@ import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
 import FurnitureCatalogNav from "@/components/furniture-page/furniture-catalog-nav";
 import ChairsFilterGrid from "@/components/furniture-page/product-category/chairs-filter-grid";
-import { FURNITURE_MENU_SLUGS, getProductsByCategorySlugs } from "@/lib/furniture";
+import { FURNITURE_MENU_SLUGS, getProductsByCategorySlugs, getFurnitureNavCategories } from "@/lib/furniture";
 
 export default async function ChairsPage({
   searchParams,
 }: {
   searchParams: Promise<{ type?: string }>;
 }) {
-  const products = await getProductsByCategorySlugs(FURNITURE_MENU_SLUGS.chairs);
+  const [products, navCategories] = await Promise.all([
+    getProductsByCategorySlugs(FURNITURE_MENU_SLUGS.chairs),
+    getFurnitureNavCategories(),
+  ]);
   const { type } = await searchParams;
 
   return (
     <main className="bg-[#FFFDFA]">
       <Header />
       <div className="h-[72px] md:h-[88px]" aria-hidden />
-      <FurnitureCatalogNav />
+      <FurnitureCatalogNav categories={navCategories} />
 
       <section className="border-b border-[#EEE8DD] bg-[#FFFDFA]">
         <div className="mx-auto w-full max-w-[1440px] px-4 py-10 md:px-6 md:py-14 lg:px-8">

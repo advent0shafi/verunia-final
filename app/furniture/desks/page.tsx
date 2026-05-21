@@ -2,19 +2,22 @@ import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
 import FurnitureCatalogNav from "@/components/furniture-page/furniture-catalog-nav";
 import ProductCategoryGrid from "@/components/furniture-page/product-category/product-catogery-grid";
-import { FURNITURE_MENU_SLUGS, getProductsByCategorySlugs } from "@/lib/furniture";
+import { FURNITURE_MENU_SLUGS, getProductsByCategorySlugs, getFurnitureNavCategories } from "@/lib/furniture";
 
 export default async function DesksPage({
   searchParams,
 }: {
   searchParams: Promise<{ cat?: string }>;
 }) {
-  const products = await getProductsByCategorySlugs(FURNITURE_MENU_SLUGS.desks);
+  const [products, navCategories] = await Promise.all([
+    getProductsByCategorySlugs(FURNITURE_MENU_SLUGS.desks),
+    getFurnitureNavCategories(),
+  ]);
   const { cat } = await searchParams;
 
   const normalizedCategoryFilter = cat?.trim();
   const filteredProducts =
-    normalizedCategoryFilter && FURNITURE_MENU_SLUGS.desks.includes(normalizedCategoryFilter)
+    normalizedCategoryFilter && (FURNITURE_MENU_SLUGS.desks as readonly string[]).includes(normalizedCategoryFilter)
       ? products.filter((product) => product.category?.slug === normalizedCategoryFilter)
       : products;
 
@@ -22,7 +25,7 @@ export default async function DesksPage({
     <main className="bg-[#FFFDFA]">
       <Header />
       <div className="h-[72px] md:h-[88px]" aria-hidden />
-      <FurnitureCatalogNav />
+      <FurnitureCatalogNav categories={navCategories} />
 
       <section className="border-b border-[#EEE8DD] bg-[#FFFDFA]">
         <div className="mx-auto w-full max-w-[1440px] px-4 py-10 md:px-6 md:py-14 lg:px-8">

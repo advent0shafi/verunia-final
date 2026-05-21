@@ -2,16 +2,10 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useMemo, useState } from "react";
-import {
-  getFurnitureNavCategories,
-  type FurnitureNavCategory,
-} from "@/lib/furniture";
+import { Suspense, useMemo } from "react";
+import type { FurnitureNavCategory } from "@/lib/furniture";
 
-/** Sticks directly below the fixed main navbar (~72px mobile / ~88px desktop). */
 const STICKY_OFFSET = "top-[72px] md:top-[88px]";
-
-/** Path segments under /furniture that are not category slugs. */
 const NON_CATEGORY_SEGMENTS = new Set(["product"]);
 
 function pillClass(active: boolean): string {
@@ -23,31 +17,13 @@ function pillClass(active: boolean): string {
   ].join(" ");
 }
 
-function FurnitureCatalogNavInner() {
+interface NavProps {
+  categories: FurnitureNavCategory[];
+}
+
+function FurnitureCatalogNavInner({ categories }: NavProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [categories, setCategories] = useState<FurnitureNavCategory[]>([]);
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    let mounted = true;
-
-    getFurnitureNavCategories()
-      .then((data) => {
-        if (!mounted) return;
-        setCategories(data);
-        setLoaded(true);
-      })
-      .catch(() => {
-        if (!mounted) return;
-        setCategories([]);
-        setLoaded(true);
-      });
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   const activeCategorySlug = useMemo(() => {
     const match = pathname.match(/^\/furniture\/([^/]+)$/);
@@ -69,30 +45,23 @@ function FurnitureCatalogNavInner() {
     >
       {/* Top row — main categories */}
       <div className="mx-auto flex w-full max-w-[1440px] items-center gap-1 overflow-x-auto px-4 py-3 md:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {!loaded
-          ? [0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className="mx-2 h-5 w-20 animate-pulse rounded bg-[#EFEADD]"
-              />
-            ))
-          : categories.map((cat) => {
-              const isActive = cat.slug === activeCategorySlug;
-              return (
-                <Link
-                  key={cat.id}
-                  href={`/furniture/${cat.slug}`}
-                  className={[
-                    "whitespace-nowrap border-b-2 px-3 py-1.5 font-instrument text-[13px] md:text-[14px] transition-colors",
-                    isActive
-                      ? "border-[#1C1917] text-[#1C1917]"
-                      : "border-transparent text-[#57534E] hover:text-[#1C1917]",
-                  ].join(" ")}
-                >
-                  {cat.name}
-                </Link>
-              );
-            })}
+        {categories.map((cat) => {
+          const isActive = cat.slug === activeCategorySlug;
+          return (
+            <Link
+              key={cat.id}
+              href={`/furniture/${cat.slug}`}
+              className={[
+                "whitespace-nowrap border-b-2 px-3 py-1.5 font-instrument text-[13px] md:text-[14px] transition-colors",
+                isActive
+                  ? "border-[#1C1917] text-[#1C1917]"
+                  : "border-transparent text-[#57534E] hover:text-[#1C1917]",
+              ].join(" ")}
+            >
+              {cat.name}
+            </Link>
+          );
+        })}
       </div>
 
       {/* Submenu — sub-categories of the active category */}
@@ -138,10 +107,10 @@ function FurnitureCatalogNavFallback() {
   );
 }
 
-export default function FurnitureCatalogNav() {
+export default function FurnitureCatalogNav({ categories }: NavProps) {
   return (
     <Suspense fallback={<FurnitureCatalogNavFallback />}>
-      <FurnitureCatalogNavInner />
+      <FurnitureCatalogNavInner categories={categories} />
     </Suspense>
   );
 }

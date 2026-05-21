@@ -1,13 +1,10 @@
-import Header from "@/components/header/header";
 import ProductCategoryInnerPage from "./product-detail";
 import VeruniaFooter from "@/components/footer/footer";
 
-
-export default function     ProductCategoryInnerLayout() {
+export default function ProductCategoryInnerLayout({ product }: { product: Product }) {
     return (
         <div>
-           
-            <ProductCategoryInnerPage />
+            <ProductCategoryInnerPage product={product} />
             <VeruniaFooter />
         </div>
     );

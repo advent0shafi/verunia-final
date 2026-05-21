@@ -71,7 +71,7 @@ export const FURNITURE_MENU_SLUGS = {
   silentBox: ["silent-box", "silent-boxes", "storage"],
 } as const;
 
-export async function getProductsByCategorySlugs(categorySlugs: string[]): Promise<Product[]> {
+export async function getProductsByCategorySlugs(categorySlugs: readonly string[]): Promise<Product[]> {
   const uniqueSlugs = Array.from(new Set(categorySlugs.filter(Boolean)));
   const results = await Promise.all(uniqueSlugs.map((slug) => getProductsByCategory(slug)));
 

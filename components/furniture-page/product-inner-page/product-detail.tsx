@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import ProductThumbnails from './product-thumbnails';
-import CategoryNavHeader from '@/components/ui/category-nav-header';
 
 const API_BASE_URL = 'https://api.veruniagroup.com';
 
@@ -85,10 +84,6 @@ export default function ProductDetail({ product }: { product: Product }) {
   return (
     <section className="py-12 md:py-16 lg:py-[90px]">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-[80px]">
-        <div className="mb-[40px]">
-          <CategoryNavHeader />
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Product Gallery */}
           <div className="w-full space-y-4">

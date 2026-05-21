@@ -6,6 +6,7 @@ import SilentBoxPageHero from "@/components/furniture-page/silent-box-page-hero"
 import {
   FURNITURE_MENU_SLUGS,
   getFirstCategoryBySlugs,
+  getFurnitureNavCategories,
   getProductsByCategorySlugs,
   resolveStrapiUploadUrl,
 } from "@/lib/furniture";
@@ -15,9 +16,10 @@ export default async function SilentBoxPage({
 }: {
   searchParams: Promise<{ model?: string }>;
 }) {
-  const [products, category] = await Promise.all([
+  const [products, category, navCategories] = await Promise.all([
     getProductsByCategorySlugs(FURNITURE_MENU_SLUGS.silentBox),
     getFirstCategoryBySlugs(FURNITURE_MENU_SLUGS.silentBox),
+    getFurnitureNavCategories(),
   ]);
   const { model } = await searchParams;
 
@@ -41,7 +43,7 @@ export default async function SilentBoxPage({
         imageAlt={heroAlt}
       />
 
-      <FurnitureCatalogNav />
+      <FurnitureCatalogNav categories={navCategories} />
 
       <SilentBoxFilterGrid products={products} initialModel={model} />
       <Footer />

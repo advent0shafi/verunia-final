@@ -4,6 +4,7 @@ import FurnitureCatalogNav from "@/components/furniture-page/furniture-catalog-n
 import Header from "@/components/header/header";
 import { Metadata } from "next";
 import { frontendPoint } from "@/lib/getData";
+import { getFurnitureNavCategories } from "@/lib/furniture";
 import dynamic from "next/dynamic";
 import LazyLoadSection from "@/components/ui/lazy-load-section";
 
@@ -68,12 +69,13 @@ export const metadata: Metadata = {
         images: [{ url: `${frontendPoint}/opengraph-image.png` }],
     },
 } 
-export default function FurniturePage() {
+export default async function FurniturePage() {
+  const categories = await getFurnitureNavCategories();
   return (
     <main>
       <Header />
       <FurniturePageHero />
-      <FurnitureCatalogNav />
+      <FurnitureCatalogNav categories={categories} />
 
       <LazyLoadSection minHeightClass="min-h-[700px]">
         <FurnitureBestProduct />

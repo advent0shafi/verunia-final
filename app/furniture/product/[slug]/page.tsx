@@ -3,7 +3,8 @@ import Footer from '@/components/footer/footer';
 import ProductDetail from '@/components/furniture-page/product-inner-page/product-detail';
 import RelatedProducts from '@/components/furniture-page/product-inner-page/related-products';
 import Header from '@/components/header/header';
-import { getProductBySlug, getProductsByCategory } from '@/lib/furniture';
+import FurnitureCatalogNav from '@/components/furniture-page/furniture-catalog-nav';
+import { getProductBySlug, getProductsByCategory, getFurnitureNavCategories } from '@/lib/furniture';
 
 export default async function ProductPage({
   params,
@@ -22,12 +23,16 @@ export default async function ProductPage({
     notFound();
   }
 
-  // Fetch related products from the same category
-  const related = await getProductsByCategory(product.category.slug);
+  const [related, navCategories] = await Promise.all([
+    getProductsByCategory(product.category.slug),
+    getFurnitureNavCategories(),
+  ]);
 
   return (
     <main className="bg-white">
       <Header />
+      <div className="h-[72px] md:h-[88px]" aria-hidden />
+      <FurnitureCatalogNav categories={navCategories} />
       <ProductDetail product={product} />
       <RelatedProducts products={related} />
       <Footer />

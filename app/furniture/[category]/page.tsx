@@ -4,8 +4,7 @@ import FurnitureCatalogNav from "@/components/furniture-page/furniture-catalog-n
 import ProductCategorySections from "@/components/furniture-page/product-category/product-catogery-sections"
 import ProductCategoryGridLayout from "@/components/furniture-page/product-category/product-category-grid-layout"
 
-import { getCategoryBySlug } from "@/lib/furniture"
-import { getProductsByCategory } from "@/lib/furniture"
+import { getCategoryBySlug, getProductsByCategory, getFurnitureNavCategories } from "@/lib/furniture"
 
 interface PageProps {
   params: Promise<{
@@ -20,9 +19,10 @@ export default async function ProductCategoryPage({ params, searchParams }: Page
   const { category } = await params
   const { sub } = await searchParams
 
-  const [categoryData, products] = await Promise.all([
+  const [categoryData, products, navCategories] = await Promise.all([
     getCategoryBySlug(category),
     getProductsByCategory(category),
+    getFurnitureNavCategories(),
   ])
 
   if (!categoryData) {
@@ -38,7 +38,7 @@ export default async function ProductCategoryPage({ params, searchParams }: Page
     <main>
       <Header />
       <div className="h-[72px] md:h-[88px]" aria-hidden />
-      <FurnitureCatalogNav />
+      <FurnitureCatalogNav categories={navCategories} />
 
       <ProductCategorySections
         title={categoryData.name}
