@@ -2,19 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 import deskHero from "@/public/furniture-page/desk-hero.png";
-import CategoryNavHeader from "../ui/category-nav-header";
 
 export default function FurniturePageHero() {
 
 
   return (
-    <section className="relative w-full bg-[#FAFAFA] overflow-x-hidden">
-      <div className="max-w-[1440px] mx-auto mt-20 w-full">
-        {/* Secondary header (catalog nav) */}
-         <div className="px-4 md:px-6 lg:px-8 ">
-     <CategoryNavHeader />
-     </div>
-      </div>
+    <section className="relative w-full bg-[#FAFAFA] overflow-x-hidden pt-20">
       {/* Background Chevron Pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <svg

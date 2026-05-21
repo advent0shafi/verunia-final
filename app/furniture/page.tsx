@@ -1,5 +1,6 @@
 import Footer from "@/components/footer/footer";
 import FurniturePageHero from "@/components/furniture-page/furniture-page-hero";
+import FurnitureCatalogNav from "@/components/furniture-page/furniture-catalog-nav";
 import Header from "@/components/header/header";
 import { Metadata } from "next";
 import { frontendPoint } from "@/lib/getData";
@@ -72,7 +73,8 @@ export default function FurniturePage() {
     <main>
       <Header />
       <FurniturePageHero />
-     
+      <FurnitureCatalogNav />
+
       <LazyLoadSection minHeightClass="min-h-[700px]">
         <FurnitureBestProduct />
       </LazyLoadSection>

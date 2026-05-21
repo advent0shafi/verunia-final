@@ -1,5 +1,4 @@
 import Image from "next/image";
-import CategoryNavHeader from "@/components/ui/category-nav-header";
 
 const API_BASE_URL = 'https://api.veruniagroup.com';
 
@@ -21,8 +20,6 @@ export default function ProductCategorySections({
     return (
         <section className="bg-white py-12 md:py-16 lg:py-20">
             <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
-                <CategoryNavHeader />
-
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center  min-h-[584px]">
                     {/* Left heading */}
                     <div className="flex flex-col justify-center h-full">

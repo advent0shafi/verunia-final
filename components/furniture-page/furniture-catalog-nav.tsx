@@ -2,48 +2,46 @@
 
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import {
-  getCategoriesClient,
+  getFurnitureNavCategories,
+  type FurnitureNavCategory,
 } from "@/lib/furniture";
 
-type NavCategory = { id: number; name: string; slug: string; href: string; group: "chair" | "table" | "silent" | "other" };
+/** Sticks directly below the fixed main navbar (~72px mobile / ~88px desktop). */
+const STICKY_OFFSET = "top-[72px] md:top-[88px]";
 
-function resolveGroup(slug: string): NavCategory["group"] {
-  const s = slug.toLowerCase();
-  if (["chair", "office-chair"].includes(s)) return "chair";
-  if (["table", "desk", "office-desk"].includes(s)) return "table";
-  if (["silent-box", "silent-boxes", "storage"].includes(s)) return "silent";
-  return "other";
+/** Path segments under /furniture that are not category slugs. */
+const NON_CATEGORY_SEGMENTS = new Set(["product"]);
+
+function pillClass(active: boolean): string {
+  return [
+    "whitespace-nowrap rounded-full border px-3 py-1.5 font-instrument text-[12px] md:text-[13px] transition-colors",
+    active
+      ? "border-[#1C1917] bg-[#1C1917] text-white"
+      : "border-[#D8D2C4] bg-white text-[#3B3429] hover:bg-[#F4EFE4]",
+  ].join(" ");
 }
 
-function resolveHref(slug: string) {
-  return `/furniture/${slug}`;
-}
-
-export default function FurnitureCatalogNav() {
+function FurnitureCatalogNavInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [categories, setCategories] = useState<NavCategory[]>([]);
+  const [categories, setCategories] = useState<FurnitureNavCategory[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     let mounted = true;
 
-    getCategoriesClient()
-      .then((apiCategories) => {
+    getFurnitureNavCategories()
+      .then((data) => {
         if (!mounted) return;
-
-        const mapped = apiCategories.map((category) => ({
-          ...category,
-          href: resolveHref(category.slug),
-          group: resolveGroup(category.slug),
-        }));
-
-        setCategories(mapped);
+        setCategories(data);
+        setLoaded(true);
       })
       .catch(() => {
         if (!mounted) return;
         setCategories([]);
+        setLoaded(true);
       });
 
     return () => {
@@ -51,131 +49,99 @@ export default function FurnitureCatalogNav() {
     };
   }, []);
 
-  const activeGroup = useMemo<NavCategory["group"] | null>(() => {
-    const categoryMatch = pathname.match(/^\/furniture\/([^/]+)$/);
-    if (categoryMatch?.[1]) {
-      return resolveGroup(categoryMatch[1]);
-    }
-    if (pathname.startsWith("/furniture/chairs")) return "chair";
-    if (pathname.startsWith("/furniture/desks")) return "table";
-    if (pathname.startsWith("/furniture/silent-box")) return "silent";
-    return null;
+  const activeCategorySlug = useMemo(() => {
+    const match = pathname.match(/^\/furniture\/([^/]+)$/);
+    const segment = match?.[1];
+    if (!segment || NON_CATEGORY_SEGMENTS.has(segment)) return null;
+    return segment;
   }, [pathname]);
 
-  const activeCategorySlug = useMemo(() => {
-    const categoryMatch = pathname.match(/^\/furniture\/([^/]+)$/);
-    if (categoryMatch?.[1]) return categoryMatch[1];
+  const activeCategory = useMemo(
+    () => categories.find((cat) => cat.slug === activeCategorySlug) ?? null,
+    [categories, activeCategorySlug]
+  );
 
-    const groupFallbackMap: Record<"chair" | "table" | "silent", string[]> = {
-      chair: ["office-chair", "chair"],
-      table: ["table", "office-desk", "desk"],
-      silent: ["silent-box", "silent-boxes", "storage"],
-    };
-
-    if (!activeGroup || activeGroup === "other") return "";
-    const preferred = groupFallbackMap[activeGroup];
-    return (
-      preferred.find((slug) => categories.some((item) => item.slug === slug)) ||
-      categories.find((item) => item.group === activeGroup)?.slug ||
-      ""
-    );
-  }, [pathname, categories, activeGroup]);
-
-  const activeSubmenu = useMemo(() => {
-    if (activeGroup === "chair") {
-      return [
-        { label: "Mesh", href: "/furniture/chairs?type=mesh", active: searchParams.get("type") === "mesh" },
-        { label: "Leather", href: "/furniture/chairs?type=leather", active: searchParams.get("type") === "leather" },
-        { label: "Other Chair", href: "/furniture/chairs?type=other", active: searchParams.get("type") === "other" },
-      ];
-    }
-
-    if (activeGroup === "table") {
-      const current = searchParams.get("cat");
-      return [
-        { label: "TY Models", href: "/furniture/desks?cat=ty-models", active: current === "ty-models" },
-        { label: "YD & YF Models", href: "/furniture/desks?cat=yd-yf-models", active: current === "yd-yf-models" },
-        { label: "XC Models", href: "/furniture/desks?cat=xc-models", active: current === "xc-models" },
-        { label: "UL Models", href: "/furniture/desks?cat=ul-models", active: current === "ul-models" },
-      ];
-    }
-
-    return [];
-  }, [activeGroup, searchParams]);
-
-  const displayCategories = useMemo(() => {
-    const preferredByGroup: Record<"chair" | "table" | "silent", string[]> = {
-      chair: ["chair", "office-chair"],
-      table: ["table", "desk", "office-desk"],
-      silent: ["silent-box", "silent-boxes", "storage"],
-    };
-
-    const labelByGroup: Record<"chair" | "table" | "silent", string> = {
-      chair: "Chair",
-      table: "Table",
-      silent: "Silent Box",
-    };
-
-    const orderedGroups: Array<"chair" | "table" | "silent"> = ["chair", "table", "silent"];
-
-    return orderedGroups
-      .map((group) => {
-        const preferred = preferredByGroup[group];
-        const selected =
-          categories.find((item) => preferred.includes(item.slug)) ||
-          categories.find((item) => item.group === group);
-
-        if (!selected) return null;
-
-        return {
-          ...selected,
-          name: labelByGroup[group],
-        };
-      })
-      .filter((item): item is NavCategory => item !== null);
-  }, [categories]);
+  const activeSub = searchParams.get("sub");
 
   return (
-    <nav className="sticky top-[82px] md:top-[92px] z-40 w-full border-b border-[#E8E3D8] bg-white">
-      <div className="mx-auto flex w-full max-w-[1440px] flex-wrap items-center gap-3 px-4 py-3 md:px-6 lg:px-8">
-        {displayCategories.map((item) => {
-          const isActive = activeCategorySlug === item.slug;
-          return (
-            <Link
-              key={`${item.id}-${item.slug}`}
-              href={item.href}
-              className={[
-                "px-2 py-1 font-instrument text-[13px] md:text-[14px] border-b transition-colors",
-                isActive
-                  ? "border-[#1C1917] text-[#1C1917]"
-                  : "border-transparent text-[#57534E] hover:text-[#1C1917]",
-              ].join(" ")}
-            >
-              {item.name}
-            </Link>
-          );
-        })}
+    <nav
+      className={`sticky ${STICKY_OFFSET} z-50 w-full border-b border-[#E8E3D8] bg-white`}
+    >
+      {/* Top row — main categories */}
+      <div className="mx-auto flex w-full max-w-[1440px] items-center gap-1 overflow-x-auto px-4 py-3 md:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {!loaded
+          ? [0, 1, 2].map((i) => (
+              <div
+                key={i}
+                className="mx-2 h-5 w-20 animate-pulse rounded bg-[#EFEADD]"
+              />
+            ))
+          : categories.map((cat) => {
+              const isActive = cat.slug === activeCategorySlug;
+              return (
+                <Link
+                  key={cat.id}
+                  href={`/furniture/${cat.slug}`}
+                  className={[
+                    "whitespace-nowrap border-b-2 px-3 py-1.5 font-instrument text-[13px] md:text-[14px] transition-colors",
+                    isActive
+                      ? "border-[#1C1917] text-[#1C1917]"
+                      : "border-transparent text-[#57534E] hover:text-[#1C1917]",
+                  ].join(" ")}
+                >
+                  {cat.name}
+                </Link>
+              );
+            })}
       </div>
-      {activeSubmenu.length > 0 && (
-        <div className="border-t border-[#EEE8DD]/80">
-          <div className="mx-auto flex w-full max-w-[1440px] flex-wrap items-center gap-2 px-4 py-2.5 md:px-6 lg:px-8">
-            {activeSubmenu.map((item) => (
+
+      {/* Submenu — sub-categories of the active category */}
+      {activeCategory && activeCategory.sub_categories.length > 0 && (
+        <div className="border-t border-[#EEE8DD]/80 bg-[#FCFAF5]">
+          <div className="mx-auto flex w-full max-w-[1440px] items-center gap-2 overflow-x-auto px-4 py-2.5 md:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <Link
+              href={`/furniture/${activeCategory.slug}`}
+              className={pillClass(!activeSub)}
+            >
+              All
+            </Link>
+            {activeCategory.sub_categories.map((sub) => (
               <Link
-                key={item.href}
-                href={item.href}
-                className={[
-                  "rounded-full border px-3 py-1.5 text-[12px] md:text-[13px] font-instrument transition-colors",
-                  item.active
-                    ? "border-[#1C1917] bg-[#1C1917] text-white"
-                    : "border-[#D8D2C4] bg-white text-[#3B3429] hover:bg-[#F4EFE4]",
-                ].join(" ")}
+                key={sub.id}
+                href={`/furniture/${activeCategory.slug}?sub=${sub.slug}`}
+                className={pillClass(activeSub === sub.slug)}
               >
-                {item.label}
+                {sub.name}
               </Link>
             ))}
           </div>
         </div>
       )}
     </nav>
+  );
+}
+
+function FurnitureCatalogNavFallback() {
+  return (
+    <nav
+      className={`sticky ${STICKY_OFFSET} z-50 w-full border-b border-[#E8E3D8] bg-white`}
+    >
+      <div className="mx-auto flex w-full max-w-[1440px] items-center gap-3 px-4 py-3 md:px-6 lg:px-8">
+        {[0, 1, 2].map((i) => (
+          <div
+            key={i}
+            className="h-5 w-20 animate-pulse rounded bg-[#EFEADD]"
+          />
+        ))}
+      </div>
+    </nav>
+  );
+}
+
+export default function FurnitureCatalogNav() {
+  return (
+    <Suspense fallback={<FurnitureCatalogNavFallback />}>
+      <FurnitureCatalogNavInner />
+    </Suspense>
   );
 }

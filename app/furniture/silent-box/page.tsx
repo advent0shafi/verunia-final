@@ -1,5 +1,6 @@
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
+import FurnitureCatalogNav from "@/components/furniture-page/furniture-catalog-nav";
 import SilentBoxFilterGrid from "@/components/furniture-page/product-category/silent-box-filter-grid";
 import SilentBoxPageHero from "@/components/furniture-page/silent-box-page-hero";
 import {
@@ -39,6 +40,8 @@ export default async function SilentBoxPage({
         imageUrl={heroImageUrl}
         imageAlt={heroAlt}
       />
+
+      <FurnitureCatalogNav />
 
       <SilentBoxFilterGrid products={products} initialModel={model} />
       <Footer />

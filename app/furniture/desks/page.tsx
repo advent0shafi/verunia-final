@@ -21,9 +21,8 @@ export default async function DesksPage({
   return (
     <main className="bg-[#FFFDFA]">
       <Header />
-      <div className="pt-20">
-        <FurnitureCatalogNav />
-      </div>
+      <div className="h-[72px] md:h-[88px]" aria-hidden />
+      <FurnitureCatalogNav />
 
       <section className="border-b border-[#EEE8DD] bg-[#FFFDFA]">
         <div className="mx-auto w-full max-w-[1440px] px-4 py-10 md:px-6 md:py-14 lg:px-8">

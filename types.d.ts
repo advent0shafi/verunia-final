@@ -145,6 +145,15 @@ type ProductSummary = {
 // Category
 // =========================
 
+type SubCategory = {
+  id: number
+  name: string
+  slug: string
+  description: string | null
+  image: StrapiImage | null
+  category?: CategoryNavItem | null
+}
+
 type Category = {
   id: number
   name: string
@@ -153,6 +162,7 @@ type Category = {
   headerImage: StrapiImage
   seo: Seo[]
   product?: ProductSummary
+  sub_categories?: SubCategory[]
 }
 
 // =========================
@@ -214,6 +224,7 @@ type Product = {
   isBestSeller: boolean
   product_info_url: string | null
   category: ProductCategory
+  sub_category?: SubCategory | null
   main_image: ProductMedia
   images: ProductMedia[]
   product_variant: ProductVariant[]
@@ -234,15 +245,6 @@ type ProductApiResponse = {
     }
   }
 }
-
-type Category = {
-  id: number
-  name: string
-  slug: string
-  headerDescription: string
-  headerImage?: Media
-}
-
 
 type AIFotivoCategory = {
   id: number;

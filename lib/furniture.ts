@@ -1,3 +1,37 @@
+import { backendAPI } from "./getData";
+
+export type FurnitureNavSubCategory = { id: number; name: string; slug: string };
+
+export type FurnitureNavCategory = {
+  id: number;
+  name: string;
+  slug: string;
+  sub_categories: FurnitureNavSubCategory[];
+};
+
+/** Categories with their sub-categories — drives the furniture catalog nav. */
+export async function getFurnitureNavCategories(): Promise<FurnitureNavCategory[]> {
+  try {
+    const res = await fetch(
+      `${backendAPI}/api/categories?populate=sub_categories`,
+      { next: { revalidate: 120 } }
+    );
+    if (!res.ok) return [];
+
+    const json = await res.json();
+    return (json.data ?? []).map((cat: any) => ({
+      id: cat.id,
+      name: cat.name,
+      slug: cat.slug,
+      sub_categories: (cat.sub_categories ?? [])
+        .map((sub: any) => ({ id: sub.id, name: sub.name, slug: sub.slug }))
+        .filter((sub: FurnitureNavSubCategory) => Boolean(sub.slug)),
+    }));
+  } catch {
+    return [];
+  }
+}
+
 export async function getCategoriesClient(): Promise<CategoryNavItem[]> {
   const res = await fetch(
     `https://api.veruniagroup.com/api/categories?populate=*`,

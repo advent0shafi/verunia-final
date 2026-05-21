@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import fallbackHero from "@/public/furniture-page/gaming-chair.png";
-import FurnitureCatalogNav from "@/components/furniture-page/furniture-catalog-nav";
 
 type SilentBoxPageHeroProps = {
   title: string;
@@ -20,13 +19,7 @@ export default function SilentBoxPageHero({
   const useRemote = Boolean(imageUrl?.startsWith("https://"));
 
   return (
-    <section className="relative w-full overflow-x-hidden bg-[#FAFAFA]">
-      <div className="mx-auto mt-20 w-full max-w-[1440px]">
-        <div className="px-4 md:px-6 lg:px-8">
-          <FurnitureCatalogNav />
-        </div>
-      </div>
-
+    <section className="relative w-full overflow-x-hidden bg-[#FAFAFA] pt-20">
       <div className="pointer-events-none absolute inset-0">
         <svg
           className="absolute right-0 top-1/2 h-[600px] w-[600px] -translate-y-1/2 opacity-[0.08] md:h-[800px] md:w-[800px]"
